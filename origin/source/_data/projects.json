@@ -3,5 +3,10 @@
        "name":"doob",
        "url":"https://github.com/fudali113/doob",
        "desc":"A fast, simple & powerful go web lib"
+    },
+    {
+      "name":"dockerUI",
+      "url":"https://github.com/fudali113/dockerUI",
+      "desc":"A simple docker manage UI"
     }
 ]
