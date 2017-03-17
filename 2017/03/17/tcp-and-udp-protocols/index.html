@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>tcp和udp网络协议 | fudali | do one`s best</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="学习,网络,tcp/ip">
+    <meta name="description" content="简介TCP和UDP协议是IP网络中不同终端间通讯的两种传输协议。在OSI模型中，TCP、UDP是传输层协议，其中TCP是面向连接的协议，UDP是无连接的协议。
+什么是TCP
+是传输层的一种面向连接的协议
+处理下层的不可靠数据使之变得可靠(确定通过网络发送的数据报的状态并且如果部分已被丢弃则处理信息的重发的任务并按正确的顺序重新组合成消息以提供可靠性)
+TCP驻留在传输层中，并仅驻留在实际处理数据报">
+<meta property="og:type" content="article">
+<meta property="og:title" content="tcp和udp网络协议">
+<meta property="og:url" content="http://fudali.cc/2017/03/17/tcp-and-udp-protocols/index.html">
+<meta property="og:site_name" content="fudali">
+<meta property="og:description" content="简介TCP和UDP协议是IP网络中不同终端间通讯的两种传输协议。在OSI模型中，TCP、UDP是传输层协议，其中TCP是面向连接的协议，UDP是无连接的协议。
+什么是TCP
+是传输层的一种面向连接的协议
+处理下层的不可靠数据使之变得可靠(确定通过网络发送的数据报的状态并且如果部分已被丢弃则处理信息的重发的任务并按正确的顺序重新组合成消息以提供可靠性)
+TCP驻留在传输层中，并仅驻留在实际处理数据报">
+<meta property="og:image" content="https://upload.wikimedia.org/wikibooks/en/4/40/Fig1_net_tcp.jpg">
+<meta property="og:updated_time" content="2017-03-17T17:00:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="tcp和udp网络协议">
+<meta name="twitter:description" content="简介TCP和UDP协议是IP网络中不同终端间通讯的两种传输协议。在OSI模型中，TCP、UDP是传输层协议，其中TCP是面向连接的协议，UDP是无连接的协议。
+什么是TCP
+是传输层的一种面向连接的协议
+处理下层的不可靠数据使之变得可靠(确定通过网络发送的数据报的状态并且如果部分已被丢弃则处理信息的重发的任务并按正确的顺序重新组合成消息以提供可靠性)
+TCP驻留在传输层中，并仅驻留在实际处理数据报">
+<meta name="twitter:image" content="https://upload.wikimedia.org/wikibooks/en/4/40/Fig1_net_tcp.jpg">
+    
+        <link rel="alternative" href="/atom.xml" title="fudali" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/logo.jpg">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.11">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">fudali</h5>
+          <a href="mailto:fudali113@gmail.com" title="fudali113@gmail.com" class="mail">fudali113@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/note" target="_blank" >
+                <i class="icon icon-lg icon-sun"></i>
+                笔记
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/doob" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                doob
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/fudali113" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">tcp和udp网络协议</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">tcp和udp网络协议</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-03-16T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2017-03-17
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/简介/">简介</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#简介"><span class="post-toc-number">1.</span> <span class="post-toc-text">简介</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#什么是TCP"><span class="post-toc-number">2.</span> <span class="post-toc-text">什么是TCP</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#TCP的特点"><span class="post-toc-number">3.</span> <span class="post-toc-text">TCP的特点</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-tcp-and-udp-protocols"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">tcp和udp网络协议</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017年03月17日 0:00" datetime="2017-03-16T16:00:00.000Z"  itemprop="datePublished">2017-03-17</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/简介/">简介</a></li></ul>
+
+
+
+            
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>TCP和UDP协议是IP网络中不同终端间通讯的两种传输协议。<br>在OSI模型中，TCP、UDP是传输层协议，其中TCP是面向连接的协议，UDP是无连接的协议。</p>
+<h2 id="什么是TCP"><a href="#什么是TCP" class="headerlink" title="什么是TCP"></a>什么是TCP</h2><ul>
+<li>是传输层的一种面向连接的协议</li>
+<li>处理下层的不可靠数据使之变得可靠(确定通过网络发送的数据报的状态并且如果部分已被丢弃则处理信息的重发的任务并按正确的顺序重新组合成消息以提供可靠性)</li>
+<li>TCP驻留在传输层中，并仅驻留在实际处理数据报的机器上，确保数据报已从源机器到目标机器；它不驻留在简单路由数据报的设备上，因此网关中没有TCP层。<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://upload.wikimedia.org/wikibooks/en/4/40/Fig1_net_tcp.jpg" alt="加载失败" title="">
+                </div>
+                <div class="image-caption">加载失败</div>
+            </figure>
+</li>
+</ul>
+<h2 id="TCP的特点"><a href="#TCP的特点" class="headerlink" title="TCP的特点"></a>TCP的特点</h2><ul>
+<li><p>单播协议:<br>TCP基于单播网络模型，支持两方之间的数据交换。它不支持广播或多播网络模型。</p>
+</li>
+<li><p>连接状态:<br>TCP使用两个端点之间的同步状态，而不是在网络内强加一个状态来支持连接。<br>该同步状态被设置为初始连接过程的一部分，因此TCP可以被认为是面向连接的协议。<br>许多协议设计旨在确保每个本地状态转换被传送到远程方并由其确认。</p>
+</li>
+<li><p>可靠性:</p>
+<p>可靠性意味着在连接的一端传递给TCP驱动程序的八位字节流将通过网络传输，使得流作为相同的八位字节序列呈现给远程进程，顺序与生成的由发送方。这意味着协议检测数据流的分段何时已被网络丢弃，重新排序，复制或损坏。<br>在必要的情况下，发送器将重传损坏的段，以便允许接收器重建原始数据流。<br>这意味着TCP发送方必须保持所有发送数据的本地副本，直到它接收到接收方已经完成数据的准确传送的指示为止。</p>
+</li>
+<li><p>全双工:</p>
+<p>TCP是全双工协议; 它允许双方在单个TCP连接的上下文内发送和接收数据。</p>
+</li>
+<li><p>流:</p>
+<p>虽然TCP使用分组结构用于网络传输，但TCP是真正的流传输协议，并且应用级网络操作不透明。一些协议明确地封装每个应用事务;<br>对于每一次写，都必须有一个匹配的读。以这种方式，在网络上保留数据流到逻辑记录结构的应用派生分段。<br>TCP不保留施加在数据流上的这种隐式结构，使得在网络协议内的写和读操作之间不存在配对。<br>例如，TCP应用可以将三个数据块按顺序写入网络连接，其可以由远程读取器在单个读取操作中收集。TCP会话中使用的数据块（段）的大小在会话开始时协商。<br>发送器尝试在接收器的最大段大小，配置的发送器的最大段大小和最大可支持的非分段分组大小的限制内使用它可以用于数据传输的最大段大小网络路径（路径最大传输单元[MTU]）。<br>路径MTU周期性地刷新以适应在TCP连接活动时可能发生在网络内的任何改变。</p>
+</li>
+<li><p>速率适配:</p>
+<p>TCP也是速率自适应协议，因为数据传输速率旨在适应网络内的主要负载条件并适应接收机的处理能力。<br>没有预定的TCP数据传输速率; 如果网络和接收器都具有额外的可用容量，则TCP发送器将尝试向网络注入更多数据以占用此可用空间。<br>相反，如果有拥塞，TCP发送方将降低其发送速率以允许网络恢复。该适配功能试图实现最高可能的数据传输速率，而不触发一致的数据丢失。</p>
+</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-03-17T17:00:35.000Z" itemprop="dateUpdated">2017年3月18日 1:00</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="http://fudali.cc">
+            <img src="/img/logo.jpg" alt="fudali">
+            fudali
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tcp-ip/">tcp/ip</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习/">学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/网络/">网络</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2017/03/17/tcp-and-udp-protocols/&title=《tcp和udp网络协议》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2017/03/17/tcp-and-udp-protocols/&title=《tcp和udp网络协议》 — fudali&source=do one`s best" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://fudali.cc/2017/03/17/tcp-and-udp-protocols/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《tcp和udp网络协议》 — fudali&url=http://fudali.cc/2017/03/17/tcp-and-udp-protocols/&via=http://fudali.cc" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://fudali.cc/2017/03/17/tcp-and-udp-protocols/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/03/15/shell-sort/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">排序-希尔排序</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="tcp-and-udp-protocols" data-title="tcp和udp网络协议" data-url="http://fudali.cc/2017/03/17/tcp-and-udp-protocols/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'fudali', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.11');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top" style="height:50px">
+        <p>
+            <span>do one`s best APE</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>fudali &copy; 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2017/03/17/tcp-and-udp-protocols/&title=《tcp和udp网络协议》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2017/03/17/tcp-and-udp-protocols/&title=《tcp和udp网络协议》 — fudali&source=do one`s best" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://fudali.cc/2017/03/17/tcp-and-udp-protocols/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《tcp和udp网络协议》 — fudali&url=http://fudali.cc/2017/03/17/tcp-and-udp-protocols/&via=http://fudali.cc" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://fudali.cc/2017/03/17/tcp-and-udp-protocols/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKElEQVR42u3aQXLDIAwF0Nz/0u4BkpAvgWdqeKwyjQ28LFQJ9HrF43obyZO92cbvTg0MDIzHMq7hGD8zXvjbDONvk3U/rIiBgXEAI9nEfeFyvNb4eQwMDIxvz0RBMAim1XUxMDAwqkGwmjLmCSgGBgZGr4jNA3FyDDfzM2FgYJzGWFVk3vH5lvsNDAyMRzGu4hiHzjwRzENqtCsMDIytGXmAy7e+NnAXWjowMDC2ZlSzrN4WqyVrEsqnkkUMDIyHMPLtjtO+fMleK9iPoz0MDIytGdXgeMc158wFAAYGxpmMvEmil1D25ol2goGBsSljHNSqyVkyTzJD+R8ABgbGMYzeFpPlZ642o7IWAwNja0a126rKqLZ59do4MDAw9mZUD/F76WB0WBZ826zCMTAwHs7IX+gFzVWpXtQzgoGBsSmjepSWt2LkDWe9Ro0PtTgGBsbBjFXtFPl2y8klBgbG1oyZ68zkArJ3DVBNEzEwMM5hzJSjMwf91aBfxmBgYGzB6DWe9hog5hsyfhy6YWBgHMOolpFJQllN6co/FgYGxgGM/C8zm5tB/gjBGBgYmzKu4qheIfTSvnLxjIGBsTWjFxxnLhp7z/fmwcDA2Imx6hBtVejM38LAwDiNkQe+vKztwZqlLwYGBkZcuPYSxLwr5OsqGBgYGMUErtoQ1ruLXBxwMTAw/j0jP6zvNUbkgGaTBwYGxtaMvHTMAXkQr142TF1kYmBgPI/xB9Yv0T8gscN+AAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.11"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.11" async></script>
+
+
+
+
+
+
+
+</body>
+</html>
