@@ -69,21 +69,21 @@
             <li class="waves-block waves-effect">
               <a href="/archives"  >
                 <i class="icon icon-lg icon-archives"></i>
-                Archives
+                文章
               </a>
             </li>
         
             <li class="waves-block waves-effect">
               <a href="/tags"  >
                 <i class="icon icon-lg icon-tags"></i>
-                Tags
+                标签
               </a>
             </li>
         
             <li class="waves-block waves-effect">
               <a href="/categories"  >
                 <i class="icon icon-lg icon-th-list"></i>
-                Categories
+                分类
               </a>
             </li>
         
@@ -144,7 +144,7 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
-            <article id="post-算法-希尔排序"
+            <article id="post-shell-sort"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
@@ -164,7 +164,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2017/03/15/算法-希尔排序/">shell sort</a>
+      <a class="post-title-link" href="/2017/03/15/shell-sort/">排序-希尔排序</a>
     </h3>
   
 
@@ -175,11 +175,10 @@
 
     
         前言个人认为希尔排序是对插入排序的一种优化，他利用一定的算法来决定每趟遍历比较两个元素之前的距离，最后的比较距离为1(此时等同于插入排序)。所以希尔排序也称为缩减增量排序他相比插入排序所在的优势是，他可以一次交换两个较远距离的元素，而插入排序交换两个相聚n的元素位子需要n次交换。
-因为他根据一个算法来决定每趟比较的距离，所以该算法的好坏也会在一定程度上决定希尔排序的性能
-代码go123456...
+因为他根据一个算法来决定每趟比较...
     
 
-        <a href="/2017/03/15/算法-希尔排序/" class="post-more waves-effect waves-button">
+        <a href="/2017/03/15/shell-sort/" class="post-more waves-effect waves-button">
             阅读全文...
         </a>
     </div>
@@ -195,7 +194,7 @@
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-算法-插入排序"
+            <article id="post-insertion-sort"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
@@ -215,7 +214,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2017/03/13/算法-插入排序/">insertion sort</a>
+      <a class="post-title-link" href="/2017/03/13/insertion-sort/">排序-插入排序</a>
     </h3>
   
 
@@ -225,10 +224,10 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        前言  -  今天感觉受到了一些打击，感觉自己基础知识过于缺乏，顾决定从今日起，有空就写一篇博客，加强自己在算法与数据结构、网络、设计模式方面的知识  -  今天就想来理解一下排序算法中最简单的插入排序：  插入排序思路为顺序遍历数组，并在遍历中从顺序遍历到的元素倒序遍历回  倒序遍历是判断相邻两个元素是否符合排序规则  如果符合则停止倒序遍历  如果不符合则交换相邻两个元素位置并继续倒序遍...
+        前言  -  今天感觉受到了一些打击，感觉自己基础知识过于缺乏，顾决定从今日起，有空就写一篇博客，加强自己在算法与数据结构、网络、设计模式方面的知识  -  今天就想来理解一下排序算法中最简单的插入排序：  插入排序思路为顺序遍历数组，并在遍历中从顺序遍历到的元素倒序遍历回  倒序遍历是判断相邻两个元素是否符合排...
     
 
-        <a href="/2017/03/13/算法-插入排序/" class="post-more waves-effect waves-button">
+        <a href="/2017/03/13/insertion-sort/" class="post-more waves-effect waves-button">
             阅读全文...
         </a>
     </div>
@@ -251,7 +250,7 @@
         <time class="post-time" title="2016年12月13日 0:00" datetime="2016-12-12T16:00:00.000Z"  itemprop="datePublished">2016-12-13</time>
 
         
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/前言/">前言</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/前言/object-Object/">[object Object]</a></li></ul></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/前言/">前言</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/前言/code-mysql-postgresql/">code - mysql - postgresql</a></li></ul></li></ul>
 
 
 
@@ -264,7 +263,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/12/13/beego-upsert-method/">beego upsert</a>
+      <a class="post-title-link" href="/2016/12/13/beego-upsert-method/">beego upsert 方法原理</a>
     </h3>
   
 
@@ -275,7 +274,7 @@
 
     
         前言
-在beego1.6.1版本orm中并未提供insertOrUpdate，但是自己做项目时遇到了这个需求，顾写了一个自己的实现，暂只支持mysql与postgres。实现原理是数据自带可实现insertorupdate的功能语句。mysql：ON DUPLICATE KEY UPDATEpostgres : ON CONFLICT DO UPDATE SET然后去orm实现中自己拼装sq...
+在beego1.6.1版本orm中并未提供insertOrUpdate，但是自己做项目时遇到了这个需求，顾写了一个自己的实现，暂只支持mysql与postgres。实现原理是数据自带可实现insertorupdate的功能语句。mysql：ON DUPLICATE KEY UPDATEpostgres : ...
     
 
         <a href="/2016/12/13/beego-upsert-method/" class="post-more waves-effect waves-button">
@@ -312,7 +311,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/12/13/go1.6.2-strings-split/">go 1.6.2 strings split bug</a>
+      <a class="post-title-link" href="/2016/12/13/go1.6.2-strings-split/">go 1.6.2 strings split 方法改造</a>
     </h3>
   
 
@@ -322,7 +321,7 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        当调用strings.Split(s,seq string)时,如果seq连续出现，比如s=&quot; dfdgdfg              （多个空格）        dfdg   （多个空格）   hghyjkjuyk      &quot;。调用slice:=strings.Split(s,&quot; &quot;)将会出现len(slice)!=3，我认为这并不是大家希望看到...
+        当调用strings.Split(s,seq string)时,如果seq连续出现，比如s=&quot; dfdgdfg              （多个空格）        dfdg   （多个空格）   hghyjkjuyk      &quot;。调用slice:=strings.Split(s,&quot...
     
 
         <a href="/2016/12/13/go1.6.2-strings-split/" class="post-more waves-effect waves-button">
@@ -376,7 +375,7 @@ logstash基于jvm平台，所以安装前确认已安装jre
 最新的logstash 5.*版本至少需要java8以上jre
 对于Debian平台或者Redhat平台,官方推荐配置软件仓库并安装
 
-Debian/Ubuntu 平台123456wget -O - http://packages.elasticsearch.org/GPG-KEY-elasticsearch | apt-...
+Debian/Ubuntu 平台123456wget -O - http://packages.elasti...
     
 
         <a href="/2016/02/16/ELK_install_logstash/" class="post-more waves-effect waves-button">

@@ -13,7 +13,7 @@
     
     
     
-    <title>insertion sort | fudali | do one`s best</title>
+    <title>排序-插入排序 | fudali | do one`s best</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
@@ -23,14 +23,14 @@
     <meta name="description" content="前言  -  今天感觉受到了一些打击，感觉自己基础知识过于缺乏，顾决定从今日起，有空就写一篇博客，加强自己在算法与数据结构、网络、设计模式方面的知识  -  今天就想来理解一下排序算法中最简单的插入排序：  插入排序思路为顺序遍历数组，并在遍历中从顺序遍历到的元素倒序遍历回  倒序遍历是判断相邻两个元素是否符合排序规则  如果符合则停止倒序遍历  如果不符合则交换相邻两个元素位置并继续倒序遍历
 代">
 <meta property="og:type" content="article">
-<meta property="og:title" content="insertion sort">
-<meta property="og:url" content="http://fudali.cc/2017/03/13/算法-插入排序/index.html">
+<meta property="og:title" content="排序-插入排序">
+<meta property="og:url" content="http://fudali.cc/2017/03/13/insertion-sort/index.html">
 <meta property="og:site_name" content="fudali">
 <meta property="og:description" content="前言  -  今天感觉受到了一些打击，感觉自己基础知识过于缺乏，顾决定从今日起，有空就写一篇博客，加强自己在算法与数据结构、网络、设计模式方面的知识  -  今天就想来理解一下排序算法中最简单的插入排序：  插入排序思路为顺序遍历数组，并在遍历中从顺序遍历到的元素倒序遍历回  倒序遍历是判断相邻两个元素是否符合排序规则  如果符合则停止倒序遍历  如果不符合则交换相邻两个元素位置并继续倒序遍历
 代">
-<meta property="og:updated_time" content="2017-03-17T07:23:41.000Z">
+<meta property="og:updated_time" content="2017-03-17T09:36:43.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="insertion sort">
+<meta name="twitter:title" content="排序-插入排序">
 <meta name="twitter:description" content="前言  -  今天感觉受到了一些打击，感觉自己基础知识过于缺乏，顾决定从今日起，有空就写一篇博客，加强自己在算法与数据结构、网络、设计模式方面的知识  -  今天就想来理解一下排序算法中最简单的插入排序：  插入排序思路为顺序遍历数组，并在遍历中从顺序遍历到的元素倒序遍历回  倒序遍历是判断相邻两个元素是否符合排序规则  如果符合则停止倒序遍历  如果不符合则交换相邻两个元素位置并继续倒序遍历
 代">
     
@@ -73,21 +73,21 @@
             <li class="waves-block waves-effect">
               <a href="/archives"  >
                 <i class="icon icon-lg icon-archives"></i>
-                Archives
+                文章
               </a>
             </li>
         
             <li class="waves-block waves-effect">
               <a href="/tags"  >
                 <i class="icon icon-lg icon-tags"></i>
-                Tags
+                标签
               </a>
             </li>
         
             <li class="waves-block waves-effect">
               <a href="/categories"  >
                 <i class="icon icon-lg icon-th-list"></i>
-                Categories
+                分类
               </a>
             </li>
         
@@ -109,7 +109,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">insertion sort</div>
+        <div class="flex-col header-title ellipsis">排序-插入排序</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -131,7 +131,7 @@
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">insertion sort</h1>
+        <h1 class="title">排序-插入排序</h1>
         <h5 class="subtitle">
             
                 <time datetime="2017-03-12T16:00:00.000Z" itemprop="datePublished" class="page-time">
@@ -159,11 +159,11 @@
         </nav>
     </aside>
     
-<article id="post-算法-插入排序"
+<article id="post-insertion-sort"
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">insertion sort</h1>
+        <h1 class="post-card-title">排序-插入排序</h1>
         <div class="post-meta">
             <time class="post-time" title="2017年03月13日 0:00" datetime="2017-03-12T16:00:00.000Z"  itemprop="datePublished">2017-03-13</time>
 
@@ -191,7 +191,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2017-03-17T07:23:41.000Z" itemprop="dateUpdated">2017年3月17日 15:23</time>
+    最后更新时间：<time datetime="2017-03-17T09:36:43.000Z" itemprop="dateUpdated">2017年3月17日 17:36</time>
 </span><br>
 
 
@@ -224,7 +224,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2017/03/13/算法-插入排序/&title=《insertion sort》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2017/03/13/insertion-sort/&title=《排序-插入排序》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -234,22 +234,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2017/03/13/算法-插入排序/&title=《insertion sort》 — fudali&source=do one`s best" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2017/03/13/insertion-sort/&title=《排序-插入排序》 — fudali&source=do one`s best" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://fudali.cc/2017/03/13/算法-插入排序/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://fudali.cc/2017/03/13/insertion-sort/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《insertion sort》 — fudali&url=http://fudali.cc/2017/03/13/算法-插入排序/&via=http://fudali.cc" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《排序-插入排序》 — fudali&url=http://fudali.cc/2017/03/13/insertion-sort/&via=http://fudali.cc" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://fudali.cc/2017/03/13/算法-插入排序/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://fudali.cc/2017/03/13/insertion-sort/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -272,9 +272,9 @@
 <nav class="post-nav flex-row flex-justify-between">
   
     <div class="waves-block waves-effect prev">
-      <a href="/2017/03/15/算法-希尔排序/" id="post-prev" class="post-nav-link">
+      <a href="/2017/03/15/shell-sort/" id="post-prev" class="post-nav-link">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">shell sort</h4>
+        <h4 class="title">排序-希尔排序</h4>
       </a>
     </div>
   
@@ -283,7 +283,7 @@
     <div class="waves-block waves-effect next">
       <a href="/2016/12/13/beego-upsert-method/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">beego upsert</h4>
+        <h4 class="title">beego upsert 方法原理</h4>
       </a>
     </div>
   
@@ -294,7 +294,7 @@
     
 
 <div class="comments" id="comments">
-    <div class="ds-thread" data-thread-key="算法-插入排序" data-title="insertion sort" data-url="http://fudali.cc/2017/03/13/算法-插入排序/"></div>
+    <div class="ds-thread" data-thread-key="insertion-sort" data-title="排序-插入排序" data-url="http://fudali.cc/2017/03/13/insertion-sort/"></div>
 </div>
 <script>
 lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
@@ -363,7 +363,7 @@ lazyScripts.push('/js/embed.min.js?v=1.4.11');
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2017/03/13/算法-插入排序/&title=《insertion sort》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2017/03/13/insertion-sort/&title=《排序-插入排序》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -373,22 +373,22 @@ lazyScripts.push('/js/embed.min.js?v=1.4.11');
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2017/03/13/算法-插入排序/&title=《insertion sort》 — fudali&source=do one`s best" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2017/03/13/insertion-sort/&title=《排序-插入排序》 — fudali&source=do one`s best" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://fudali.cc/2017/03/13/算法-插入排序/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://fudali.cc/2017/03/13/insertion-sort/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《insertion sort》 — fudali&url=http://fudali.cc/2017/03/13/算法-插入排序/&via=http://fudali.cc" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《排序-插入排序》 — fudali&url=http://fudali.cc/2017/03/13/insertion-sort/&via=http://fudali.cc" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://fudali.cc/2017/03/13/算法-插入排序/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://fudali.cc/2017/03/13/insertion-sort/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -399,7 +399,7 @@ lazyScripts.push('/js/embed.min.js?v=1.4.11');
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACN0lEQVR42u3a0WrDMAwF0P3/T3ewp8GW5EpKx2IfP4W0jX1SEJbkj494vL7Gzzvf71evj55/9J0bBgYGxmMZr9NxzjiHnS/06M75/cNZMDAwNmDkQfD8+nyyfOn52jAwMDCSYJoEx4twWdwmYmBgYCSPS1LNaqKbbEkxMDB2ZiRJbHWafLNY3W5iYGDsxqg2Bv7y+o39DQwMjIcwXq0xCZRJI6G8HgwMjKUZeSmtF4KrcTLfMkYZMwYGxhKMyWGvvLiWv6ZmmoqBgbEBI29VJhvBXhkuf9G/zIiBgbE0465WZfLbZOn5ayqf0cDAwHg4Y3IwohooJ7MX/hMMDIyFGL1yf17Ez5PbERsDA2MDxvzRvWCdJ6gXZUEMDIylGdXks9dUSMJ08iovynkYGBhLM/KA21viDedB8jYnBgbGBoyL7dc40e3NVaBiYGAsx7hr6XlZrVfPv2h5YmBgLM3oAXp9w+rRit7xDgwMjPUYSQMyTyB7Afd86VGpDgMDY2lGUkqbH57oXefNAwwMjB0Yk4JaciwjWWIScC+2jBgYGJsxkk8nSW+CKeMxMDCWZlQD5TuaoPko/woDA+PhjFdx5Bu+dzQ+D9eAgYGxNGMS5iYpbq9h0GtzYmBgrMGoppS9Ut0k3Y0CLgYGxgaM+bGtZOs22d5dpL4YGBgYxSRzVMoPjlxgYGBg5EtPpuydU8vDOgYGxj6MfCnVkFp9fvMIGgYGxtKMSWPgrqJ/rxV6WwsTAwPj/zI+ASN+Qc8KKpX5AAAAAElFTkSuQmCC" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACLklEQVR42u3awXKrMAwF0P7/T6fbN/MKuZKdTpEPq0wCmMNCkWR9fcXH67/j3+/zc66uuvp184GBgfFYxuv2uD/nHpA/dHXdH6gYGBgHMK4i2Mo5bxYO7pOsi4GBgZGna9XA3UscMTAwMHqlZhW5UgBjYGCczEgCZa/3df/QyevbXItjYGA8kJE/1u9//sj+BgYGxqMYr+JRvWpveL1cBQMDYzRjvZWWp4ZRIbpQEmNgYExl7BrqSka78rXyYF2+NQYGxsMZecgrLxM34JovFAMDYzSjt5GZFKXJr0m6WX7RGBgY4xh5I6zXOMvx+et40zXEwMAYx8iX7yVwvTK1l3piYGDMZqwvvysQV+//pojFwMAYwcibX3tDdl4AR2diYGCMZlQX641cJOBqCX35j4GBgXEMY/3Rk7QvhxVqcQwMjHGMvPWflJfVa5Mw2pwZwcDAGMSopmLVxtkHZ0MwMDCOYVS3EqspZu+b6pgaBgbGbEYz/Sq2z3pjYeVCGgMD4xhGNU2sFqVL8yD3iSMGBsYBjN6j91psvbSyub+BgYExlJF/00soeynjhpkRDAyMBzI+0cpfH+CojmhgYGDMZqw0vPY+etLC64V1DAyMGYy8idYbwqi+lOTOhd0DDAyMQYze9mQeFvMgu1TKYmBgYCzHt/UiuTBsgYGBcTwjL1+TrYVk1OOX/jcwMDD+MCNv1icjGtXwWt3UxMDAOI2Rl44rxec9spcUYmBgHMD4Bij/S6ktwzV3AAAAAElFTkSuQmCC" alt="微信分享二维码">
 </div>
 
 

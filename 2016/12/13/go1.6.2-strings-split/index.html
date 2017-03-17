@@ -13,7 +13,7 @@
     
     
     
-    <title>go 1.6.2 strings split bug | fudali | do one`s best</title>
+    <title>go 1.6.2 strings split 方法改造 | fudali | do one`s best</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
@@ -22,13 +22,13 @@
     <meta name="keywords" content="golang">
     <meta name="description" content="当调用strings.Split(s,seq string)时,如果seq连续出现，比如s=&amp;quot; dfdgdfg              （多个空格）        dfdg   （多个空格）   hghyjkjuyk      &amp;quot;。调用slice:=strings.Split(s,&amp;quot; &amp;quot;)将会出现len(slice)!=3，我认为这并不是大家希望看到的结果">
 <meta property="og:type" content="article">
-<meta property="og:title" content="go 1.6.2 strings split bug">
+<meta property="og:title" content="go 1.6.2 strings split 方法改造">
 <meta property="og:url" content="http://fudali.cc/2016/12/13/go1.6.2-strings-split/index.html">
 <meta property="og:site_name" content="fudali">
 <meta property="og:description" content="当调用strings.Split(s,seq string)时,如果seq连续出现，比如s=&amp;quot; dfdgdfg              （多个空格）        dfdg   （多个空格）   hghyjkjuyk      &amp;quot;。调用slice:=strings.Split(s,&amp;quot; &amp;quot;)将会出现len(slice)!=3，我认为这并不是大家希望看到的结果">
-<meta property="og:updated_time" content="2016-12-13T08:11:37.000Z">
+<meta property="og:updated_time" content="2017-03-17T09:38:50.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="go 1.6.2 strings split bug">
+<meta name="twitter:title" content="go 1.6.2 strings split 方法改造">
 <meta name="twitter:description" content="当调用strings.Split(s,seq string)时,如果seq连续出现，比如s=&amp;quot; dfdgdfg              （多个空格）        dfdg   （多个空格）   hghyjkjuyk      &amp;quot;。调用slice:=strings.Split(s,&amp;quot; &amp;quot;)将会出现len(slice)!=3，我认为这并不是大家希望看到的结果">
     
         <link rel="alternative" href="/atom.xml" title="fudali" type="application/atom+xml">
@@ -70,21 +70,21 @@
             <li class="waves-block waves-effect">
               <a href="/archives"  >
                 <i class="icon icon-lg icon-archives"></i>
-                Archives
+                文章
               </a>
             </li>
         
             <li class="waves-block waves-effect">
               <a href="/tags"  >
                 <i class="icon icon-lg icon-tags"></i>
-                Tags
+                标签
               </a>
             </li>
         
             <li class="waves-block waves-effect">
               <a href="/categories"  >
                 <i class="icon icon-lg icon-th-list"></i>
-                Categories
+                分类
               </a>
             </li>
         
@@ -106,7 +106,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">go 1.6.2 strings split bug</div>
+        <div class="flex-col header-title ellipsis">go 1.6.2 strings split 方法改造</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -128,7 +128,7 @@
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">go 1.6.2 strings split bug</h1>
+        <h1 class="title">go 1.6.2 strings split 方法改造</h1>
         <h5 class="subtitle">
             
                 <time datetime="2016-12-12T16:00:00.000Z" itemprop="datePublished" class="page-time">
@@ -151,7 +151,7 @@
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">go 1.6.2 strings split bug</h1>
+        <h1 class="post-card-title">go 1.6.2 strings split 方法改造</h1>
         <div class="post-meta">
             <time class="post-time" title="2016年12月13日 0:00" datetime="2016-12-12T16:00:00.000Z"  itemprop="datePublished">2016-12-13</time>
 
@@ -177,7 +177,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2016-12-13T08:11:37.000Z" itemprop="dateUpdated">2016年12月13日 16:11</time>
+    最后更新时间：<time datetime="2017-03-17T09:38:50.000Z" itemprop="dateUpdated">2017年3月17日 17:38</time>
 </span><br>
 
 
@@ -210,7 +210,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2016/12/13/go1.6.2-strings-split/&title=《go 1.6.2 strings split bug》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2016/12/13/go1.6.2-strings-split/&title=《go 1.6.2 strings split 方法改造》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -220,7 +220,7 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2016/12/13/go1.6.2-strings-split/&title=《go 1.6.2 strings split bug》 — fudali&source=do one`s best" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2016/12/13/go1.6.2-strings-split/&title=《go 1.6.2 strings split 方法改造》 — fudali&source=do one`s best" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -230,7 +230,7 @@
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《go 1.6.2 strings split bug》 — fudali&url=http://fudali.cc/2016/12/13/go1.6.2-strings-split/&via=http://fudali.cc" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《go 1.6.2 strings split 方法改造》 — fudali&url=http://fudali.cc/2016/12/13/go1.6.2-strings-split/&via=http://fudali.cc" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
@@ -260,7 +260,7 @@
     <div class="waves-block waves-effect prev">
       <a href="/2016/12/13/beego-upsert-method/" id="post-prev" class="post-nav-link">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">beego upsert</h4>
+        <h4 class="title">beego upsert 方法原理</h4>
       </a>
     </div>
   
@@ -280,7 +280,7 @@
     
 
 <div class="comments" id="comments">
-    <div class="ds-thread" data-thread-key="go1.6.2-strings-split" data-title="go 1.6.2 strings split bug" data-url="http://fudali.cc/2016/12/13/go1.6.2-strings-split/"></div>
+    <div class="ds-thread" data-thread-key="go1.6.2-strings-split" data-title="go 1.6.2 strings split 方法改造" data-url="http://fudali.cc/2016/12/13/go1.6.2-strings-split/"></div>
 </div>
 <script>
 lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
@@ -349,7 +349,7 @@ lazyScripts.push('/js/embed.min.js?v=1.4.11');
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2016/12/13/go1.6.2-strings-split/&title=《go 1.6.2 strings split bug》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2016/12/13/go1.6.2-strings-split/&title=《go 1.6.2 strings split 方法改造》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -359,7 +359,7 @@ lazyScripts.push('/js/embed.min.js?v=1.4.11');
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2016/12/13/go1.6.2-strings-split/&title=《go 1.6.2 strings split bug》 — fudali&source=do one`s best" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2016/12/13/go1.6.2-strings-split/&title=《go 1.6.2 strings split 方法改造》 — fudali&source=do one`s best" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -369,7 +369,7 @@ lazyScripts.push('/js/embed.min.js?v=1.4.11');
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《go 1.6.2 strings split bug》 — fudali&url=http://fudali.cc/2016/12/13/go1.6.2-strings-split/&via=http://fudali.cc" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《go 1.6.2 strings split 方法改造》 — fudali&url=http://fudali.cc/2016/12/13/go1.6.2-strings-split/&via=http://fudali.cc" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>

@@ -1,4 +1,4 @@
-title: go 1.6.2 strings split bug
+title: go 1.6.2 strings split 方法改造
 date: 2016-12-13
 tags: ["golang"]
 ---

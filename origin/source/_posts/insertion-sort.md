@@ -1,4 +1,4 @@
-title: insertion sort
+title: 排序-插入排序
 date: 2017-03-13
 tags: ["golang","排序","学习"]
 categories:

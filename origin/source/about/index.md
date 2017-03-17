@@ -1,4 +1,4 @@
-title: About me
+title: 关于我
 date: 2016-12-13
 tags: ["blog"]
 ---

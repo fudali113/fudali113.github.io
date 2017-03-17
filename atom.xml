@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://fudali.cc/"/>
-  <updated>2017-03-17T07:20:29.000Z</updated>
+  <updated>2017-03-17T09:38:34.000Z</updated>
   <id>http://fudali.cc/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>shell sort</title>
-    <link href="http://fudali.cc/2017/03/15/%E7%AE%97%E6%B3%95-%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/"/>
-    <id>http://fudali.cc/2017/03/15/算法-希尔排序/</id>
+    <title>排序-希尔排序</title>
+    <link href="http://fudali.cc/2017/03/15/shell-sort/"/>
+    <id>http://fudali.cc/2017/03/15/shell-sort/</id>
     <published>2017-03-14T16:00:00.000Z</published>
-    <updated>2017-03-17T07:20:29.000Z</updated>
+    <updated>2017-03-17T09:38:34.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>个人认为希尔排序是对插入排序的一种优化，<br>他利用一定的算法来决定每趟遍历比较两个元素之前的距离，最后的比较距离为1(此时等同于插入排序)。<br>所以希尔排序也称为缩减增量排序<br>他相比插入排序所在的优势是，他可以一次交换两个较远距离的元素，而插入排序交换两个相聚n的元素位子需要n次交换。</p>
 <p>因为他根据一个算法来决定每趟比较的距离，所以该算法的好坏也会在一定程度上决定希尔排序的性能</p>
@@ -50,11 +50,11 @@
   </entry>
   
   <entry>
-    <title>insertion sort</title>
-    <link href="http://fudali.cc/2017/03/13/%E7%AE%97%E6%B3%95-%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/"/>
-    <id>http://fudali.cc/2017/03/13/算法-插入排序/</id>
+    <title>排序-插入排序</title>
+    <link href="http://fudali.cc/2017/03/13/insertion-sort/"/>
+    <id>http://fudali.cc/2017/03/13/insertion-sort/</id>
     <published>2017-03-12T16:00:00.000Z</published>
-    <updated>2017-03-17T07:23:41.000Z</updated>
+    <updated>2017-03-17T09:36:43.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>  -<br>  今天感觉受到了一些打击，感觉自己基础知识过于缺乏，顾决定从今日起，有空就写一篇博客，加强自己在算法与数据结构、网络、设计模式方面的知识<br>  -<br>  今天就想来理解一下排序算法中最简单的插入排序：<br>  插入排序思路为顺序遍历数组，并在遍历中从顺序遍历到的元素倒序遍历回<br>  倒序遍历是判断相邻两个元素是否符合排序规则<br>  如果符合则停止倒序遍历<br>  如果不符合则交换相邻两个元素位置并继续倒序遍历</p>
 <h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><h3 id="go"><a href="#go" class="headerlink" title="go"></a>go</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">ppackage main</div><div class="line"></div><div class="line">func sort(array []int) &#123;</div><div class="line">	n := 0</div><div class="line">	// 从1开始遍历,因为0前面没有数值</div><div class="line">	for i := 1; i &lt; len(array); i++ &#123;</div><div class="line">		// 在此处放置与在 代码1 处放置效果一样</div><div class="line">		// 因为若 jv &gt; iv 的话 ， j 与 j-1 调换位置， 下一次循环时 array[j] 依然是当初的 iv</div><div class="line">		iv := array[i]</div><div class="line">		for j := i; j &gt;= 0 &amp;&amp; array[j-1] &gt;= iv; j-- &#123;</div><div class="line">			// 代码1  iv := array[j]</div><div class="line"></div><div class="line">			// 如果 jv &gt; iv , 调换两个元素之间的位置</div><div class="line">			n++</div><div class="line">			array[j], array[j-1] = array[j-1], iv</div><div class="line"></div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	println(&quot;----------------&quot;, n)</div><div class="line">&#125;</div><div class="line"></div><div class="line">func main() &#123;</div><div class="line">	array := []int&#123;10, 14, 73, 25, 23, 13, 27, 94, 33, 39, 25, 59, 94, 65, 82, 45&#125;</div><div class="line">	sort(array)</div><div class="line">	for _, v := range array &#123;</div><div class="line">		println(v)</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -86,11 +86,11 @@
   </entry>
   
   <entry>
-    <title>beego upsert</title>
+    <title>beego upsert 方法原理</title>
     <link href="http://fudali.cc/2016/12/13/beego-upsert-method/"/>
     <id>http://fudali.cc/2016/12/13/beego-upsert-method/</id>
     <published>2016-12-12T16:00:00.000Z</published>
-    <updated>2016-12-13T06:43:50.000Z</updated>
+    <updated>2017-03-17T09:39:02.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
 <li>在beego1.6.1版本orm中并未提供insertOrUpdate，但是自己做项目时遇到了这个需求，顾写了一个自己的实现，暂只支持mysql与postgres。实现原理是数据自带可实现insertorupdate的功能语句。<br>mysql：<strong><code>ON DUPLICATE KEY UPDATE</code></strong><br>postgres : <strong><code>ON CONFLICT DO UPDATE SET</code></strong><br>然后去orm实现中自己拼装sql语句</li>
@@ -130,7 +130,7 @@
     
       <category term="前言" scheme="http://fudali.cc/categories/%E5%89%8D%E8%A8%80/"/>
     
-      <category term="[object Object]" scheme="http://fudali.cc/categories/%E5%89%8D%E8%A8%80/object-Object/"/>
+      <category term="code - mysql - postgresql" scheme="http://fudali.cc/categories/%E5%89%8D%E8%A8%80/code-mysql-postgresql/"/>
     
     
       <category term="golang" scheme="http://fudali.cc/tags/golang/"/>
@@ -140,11 +140,11 @@
   </entry>
   
   <entry>
-    <title>go 1.6.2 strings split bug</title>
+    <title>go 1.6.2 strings split 方法改造</title>
     <link href="http://fudali.cc/2016/12/13/go1.6.2-strings-split/"/>
     <id>http://fudali.cc/2016/12/13/go1.6.2-strings-split/</id>
     <published>2016-12-12T16:00:00.000Z</published>
-    <updated>2016-12-13T08:11:37.000Z</updated>
+    <updated>2017-03-17T09:38:50.000Z</updated>
     
     <content type="html"><![CDATA[<p>当调用<code>strings.Split(s,seq string)</code>时,如果seq连续出现，比如<code>s=&quot; dfdgdfg              （多个空格）        dfdg   （多个空格）   hghyjkjuyk      &quot;</code>。调用<code>slice:=strings.Split(s,&quot; &quot;)</code>将会出现<code>len(slice)!=3</code>，我认为这并不是大家希望看到的结果。</p>
 <p>查看<code>strings.Split(s,seq string)</code>源码：<br><code>func Split(s, sep string) []string { return genSplit(s, sep, 0, -1) }</code></p>

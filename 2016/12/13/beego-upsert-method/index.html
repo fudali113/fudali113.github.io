@@ -13,7 +13,7 @@
     
     
     
-    <title>beego upsert | fudali | do one`s best</title>
+    <title>beego upsert 方法原理 | fudali | do one`s best</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
@@ -23,14 +23,14 @@
     <meta name="description" content="前言
 在beego1.6.1版本orm中并未提供insertOrUpdate，但是自己做项目时遇到了这个需求，顾写了一个自己的实现，暂只支持mysql与postgres。实现原理是数据自带可实现insertorupdate的功能语句。mysql：ON DUPLICATE KEY UPDATEpostgres : ON CONFLICT DO UPDATE SET然后去orm实现中自己拼装sql语句">
 <meta property="og:type" content="article">
-<meta property="og:title" content="beego upsert">
+<meta property="og:title" content="beego upsert 方法原理">
 <meta property="og:url" content="http://fudali.cc/2016/12/13/beego-upsert-method/index.html">
 <meta property="og:site_name" content="fudali">
 <meta property="og:description" content="前言
 在beego1.6.1版本orm中并未提供insertOrUpdate，但是自己做项目时遇到了这个需求，顾写了一个自己的实现，暂只支持mysql与postgres。实现原理是数据自带可实现insertorupdate的功能语句。mysql：ON DUPLICATE KEY UPDATEpostgres : ON CONFLICT DO UPDATE SET然后去orm实现中自己拼装sql语句">
-<meta property="og:updated_time" content="2016-12-13T06:43:50.000Z">
+<meta property="og:updated_time" content="2017-03-17T09:39:02.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="beego upsert">
+<meta name="twitter:title" content="beego upsert 方法原理">
 <meta name="twitter:description" content="前言
 在beego1.6.1版本orm中并未提供insertOrUpdate，但是自己做项目时遇到了这个需求，顾写了一个自己的实现，暂只支持mysql与postgres。实现原理是数据自带可实现insertorupdate的功能语句。mysql：ON DUPLICATE KEY UPDATEpostgres : ON CONFLICT DO UPDATE SET然后去orm实现中自己拼装sql语句">
     
@@ -73,21 +73,21 @@
             <li class="waves-block waves-effect">
               <a href="/archives"  >
                 <i class="icon icon-lg icon-archives"></i>
-                Archives
+                文章
               </a>
             </li>
         
             <li class="waves-block waves-effect">
               <a href="/tags"  >
                 <i class="icon icon-lg icon-tags"></i>
-                Tags
+                标签
               </a>
             </li>
         
             <li class="waves-block waves-effect">
               <a href="/categories"  >
                 <i class="icon icon-lg icon-th-list"></i>
-                Categories
+                分类
               </a>
             </li>
         
@@ -109,7 +109,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">beego upsert</div>
+        <div class="flex-col header-title ellipsis">beego upsert 方法原理</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -131,7 +131,7 @@
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">beego upsert</h1>
+        <h1 class="title">beego upsert 方法原理</h1>
         <h5 class="subtitle">
             
                 <time datetime="2016-12-12T16:00:00.000Z" itemprop="datePublished" class="page-time">
@@ -139,7 +139,7 @@
 </time>
 
 
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/前言/">前言</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/前言/object-Object/">[object Object]</a></li></ul></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/前言/">前言</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/前言/code-mysql-postgresql/">code - mysql - postgresql</a></li></ul></li></ul>
 
             
         </h5>
@@ -163,12 +163,12 @@
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">beego upsert</h1>
+        <h1 class="post-card-title">beego upsert 方法原理</h1>
         <div class="post-meta">
             <time class="post-time" title="2016年12月13日 0:00" datetime="2016-12-12T16:00:00.000Z"  itemprop="datePublished">2016-12-13</time>
 
             
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/前言/">前言</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/前言/object-Object/">[object Object]</a></li></ul></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/前言/">前言</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/前言/code-mysql-postgresql/">code - mysql - postgresql</a></li></ul></li></ul>
 
 
 
@@ -212,7 +212,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2016-12-13T06:43:50.000Z" itemprop="dateUpdated">2016年12月13日 14:43</time>
+    最后更新时间：<time datetime="2017-03-17T09:39:02.000Z" itemprop="dateUpdated">2017年3月17日 17:39</time>
 </span><br>
 
 
@@ -245,7 +245,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2016/12/13/beego-upsert-method/&title=《beego upsert》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2016/12/13/beego-upsert-method/&title=《beego upsert 方法原理》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -255,7 +255,7 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2016/12/13/beego-upsert-method/&title=《beego upsert》 — fudali&source=do one`s best" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2016/12/13/beego-upsert-method/&title=《beego upsert 方法原理》 — fudali&source=do one`s best" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -265,7 +265,7 @@
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《beego upsert》 — fudali&url=http://fudali.cc/2016/12/13/beego-upsert-method/&via=http://fudali.cc" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《beego upsert 方法原理》 — fudali&url=http://fudali.cc/2016/12/13/beego-upsert-method/&via=http://fudali.cc" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
@@ -293,9 +293,9 @@
 <nav class="post-nav flex-row flex-justify-between">
   
     <div class="waves-block waves-effect prev">
-      <a href="/2017/03/13/算法-插入排序/" id="post-prev" class="post-nav-link">
+      <a href="/2017/03/13/insertion-sort/" id="post-prev" class="post-nav-link">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">insertion sort</h4>
+        <h4 class="title">排序-插入排序</h4>
       </a>
     </div>
   
@@ -304,7 +304,7 @@
     <div class="waves-block waves-effect next">
       <a href="/2016/12/13/go1.6.2-strings-split/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">go 1.6.2 strings split bug</h4>
+        <h4 class="title">go 1.6.2 strings split 方法改造</h4>
       </a>
     </div>
   
@@ -315,7 +315,7 @@
     
 
 <div class="comments" id="comments">
-    <div class="ds-thread" data-thread-key="beego-upsert-method" data-title="beego upsert" data-url="http://fudali.cc/2016/12/13/beego-upsert-method/"></div>
+    <div class="ds-thread" data-thread-key="beego-upsert-method" data-title="beego upsert 方法原理" data-url="http://fudali.cc/2016/12/13/beego-upsert-method/"></div>
 </div>
 <script>
 lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
@@ -384,7 +384,7 @@ lazyScripts.push('/js/embed.min.js?v=1.4.11');
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2016/12/13/beego-upsert-method/&title=《beego upsert》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2016/12/13/beego-upsert-method/&title=《beego upsert 方法原理》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -394,7 +394,7 @@ lazyScripts.push('/js/embed.min.js?v=1.4.11');
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2016/12/13/beego-upsert-method/&title=《beego upsert》 — fudali&source=do one`s best" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2016/12/13/beego-upsert-method/&title=《beego upsert 方法原理》 — fudali&source=do one`s best" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -404,7 +404,7 @@ lazyScripts.push('/js/embed.min.js?v=1.4.11');
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《beego upsert》 — fudali&url=http://fudali.cc/2016/12/13/beego-upsert-method/&via=http://fudali.cc" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《beego upsert 方法原理》 — fudali&url=http://fudali.cc/2016/12/13/beego-upsert-method/&via=http://fudali.cc" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>

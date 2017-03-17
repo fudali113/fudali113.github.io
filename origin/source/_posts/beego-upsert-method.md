@@ -1,9 +1,9 @@
-title: beego upsert
+title: beego upsert 方法原理
 date: 2016-12-13
 tags: ["golang","beego"]
 categories:
   - 前言
-  - code:
+  - code
     - mysql
     - postgresql
 ---

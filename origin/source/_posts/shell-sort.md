@@ -1,4 +1,4 @@
-title: shell sort
+title: 排序-希尔排序
 date: 2017-03-15
 tags: ["golang","排序","学习"]
 categories:
