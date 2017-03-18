@@ -13,29 +13,23 @@
     
     
     
-    <title>排序-希尔排序 | fudali | do one`s best</title>
+    <title>排序-归并排序 | fudali | do one`s best</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
     
     
     <meta name="keywords" content="golang,排序,学习">
-    <meta name="description" content="前言个人认为希尔排序是对插入排序的一种优化，他利用一定的算法来决定每趟遍历比较两个元素之前的距离，最后的比较距离为1(此时等同于插入排序)。所以希尔排序也称为缩减增量排序他相比插入排序所在的优势是，他可以一次交换两个较远距离的元素，而插入排序交换两个相聚n的元素位子需要n次交换。
-因为他根据一个算法来决定每趟比较的距离，所以该算法的好坏也会在一定程度上决定希尔排序的性能
-代码go123456789">
+    <meta name="description" content="代码123456789101112131415161718192021222324252627282930313233343536373839404142434445package mergefunc mergeSort(array []int) []int &amp;#123;	middle := len(array) / 2	if middle == 1 &amp;#123;		return array	&amp;#">
 <meta property="og:type" content="article">
-<meta property="og:title" content="排序-希尔排序">
-<meta property="og:url" content="http://fudali.cc/2017/03/15/shell-sort/index.html">
+<meta property="og:title" content="排序-归并排序">
+<meta property="og:url" content="http://fudali.cc/2017/03/17/merge-sort/index.html">
 <meta property="og:site_name" content="fudali">
-<meta property="og:description" content="前言个人认为希尔排序是对插入排序的一种优化，他利用一定的算法来决定每趟遍历比较两个元素之前的距离，最后的比较距离为1(此时等同于插入排序)。所以希尔排序也称为缩减增量排序他相比插入排序所在的优势是，他可以一次交换两个较远距离的元素，而插入排序交换两个相聚n的元素位子需要n次交换。
-因为他根据一个算法来决定每趟比较的距离，所以该算法的好坏也会在一定程度上决定希尔排序的性能
-代码go123456789">
-<meta property="og:updated_time" content="2017-03-18T04:53:06.000Z">
+<meta property="og:description" content="代码123456789101112131415161718192021222324252627282930313233343536373839404142434445package mergefunc mergeSort(array []int) []int &amp;#123;	middle := len(array) / 2	if middle == 1 &amp;#123;		return array	&amp;#">
+<meta property="og:updated_time" content="2017-03-18T05:30:18.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="排序-希尔排序">
-<meta name="twitter:description" content="前言个人认为希尔排序是对插入排序的一种优化，他利用一定的算法来决定每趟遍历比较两个元素之前的距离，最后的比较距离为1(此时等同于插入排序)。所以希尔排序也称为缩减增量排序他相比插入排序所在的优势是，他可以一次交换两个较远距离的元素，而插入排序交换两个相聚n的元素位子需要n次交换。
-因为他根据一个算法来决定每趟比较的距离，所以该算法的好坏也会在一定程度上决定希尔排序的性能
-代码go123456789">
+<meta name="twitter:title" content="排序-归并排序">
+<meta name="twitter:description" content="代码123456789101112131415161718192021222324252627282930313233343536373839404142434445package mergefunc mergeSort(array []int) []int &amp;#123;	middle := len(array) / 2	if middle == 1 &amp;#123;		return array	&amp;#">
     
         <link rel="alternative" href="/atom.xml" title="fudali" type="application/atom+xml">
     
@@ -112,7 +106,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">排序-希尔排序</div>
+        <div class="flex-col header-title ellipsis">排序-归并排序</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -134,11 +128,11 @@
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">排序-希尔排序</h1>
+        <h1 class="title">排序-归并排序</h1>
         <h5 class="subtitle">
             
-                <time datetime="2017-03-14T16:00:00.000Z" itemprop="datePublished" class="page-time">
-  2017-03-15
+                <time datetime="2017-03-16T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2017-03-17
 </time>
 
 
@@ -158,17 +152,17 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#代码"><span class="post-toc-number">2.</span> <span class="post-toc-text">代码</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#go"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">go</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-number">3.</span> <span class="post-toc-text">总结</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#代码"><span class="post-toc-number">1.</span> <span class="post-toc-text">代码</span></a></li></ol>
         </nav>
     </aside>
     
-<article id="post-shell-sort"
+<article id="post-merge-sort"
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">排序-希尔排序</h1>
+        <h1 class="post-card-title">排序-归并排序</h1>
         <div class="post-meta">
-            <time class="post-time" title="2017年03月15日 0:00" datetime="2017-03-14T16:00:00.000Z"  itemprop="datePublished">2017-03-15</time>
+            <time class="post-time" title="2017年03月17日 0:00" datetime="2017-03-16T16:00:00.000Z"  itemprop="datePublished">2017-03-17</time>
 
             
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
@@ -181,18 +175,16 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>个人认为希尔排序是对插入排序的一种优化，<br>他利用一定的算法来决定每趟遍历比较两个元素之前的距离，最后的比较距离为1(此时等同于插入排序)。<br>所以希尔排序也称为缩减增量排序<br>他相比插入排序所在的优势是，他可以一次交换两个较远距离的元素，而插入排序交换两个相聚n的元素位子需要n次交换。</p>
-<p>因为他根据一个算法来决定每趟比较的距离，所以该算法的好坏也会在一定程度上决定希尔排序的性能</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="go"><a href="#go" class="headerlink" title="go"></a>go</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">package main</div><div class="line"></div><div class="line">// 利用每次除以2的等比增量数列来决定每趟比较距离</div><div class="line">func sort(array []int) &#123;</div><div class="line">	n := 0</div><div class="line">	arrayLen := len(array)</div><div class="line">	for gap := arrayLen / 2; gap &gt; 0; gap /= 2 &#123;</div><div class="line">		for i := gap; i &lt; arrayLen; i++ &#123;</div><div class="line">			iv := array[i]</div><div class="line">			for j := i; j-gap &gt; 0 &amp;&amp; array[j-gap] &gt; iv; j -= gap &#123;</div><div class="line">				n++</div><div class="line">				array[j-gap], array[j] = iv, array[j-gap]</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	println(&quot;---------------&quot;, n)</div><div class="line">&#125;</div><div class="line">func main() &#123;</div><div class="line">	array := []int&#123;10, 14, 73, 25, 23, 13, 27, 94, 33, 39, 25, 59, 94, 65, 82, 45&#125;</div><div class="line">	sort(array)</div><div class="line">	for _, v := range array &#123;</div><div class="line">		println(v)</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><a href="https://github.com/fudali113/learn-basic/blob/master/sort/shell/shell.go" target="_blank" rel="external">golang code in github</a></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2>
+            <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">package merge</div><div class="line"></div><div class="line">func mergeSort(array []int) []int &#123;</div><div class="line">	middle := len(array) / 2</div><div class="line">	if middle == 1 &#123;</div><div class="line">		return array</div><div class="line">	&#125;</div><div class="line">	return merge(mergeSort(array[:middle]), mergeSort(array[middle:]))</div><div class="line">&#125;</div><div class="line"></div><div class="line">func merge(a1 []int, a2 []int) []int &#123;</div><div class="line">	a1Index := 0</div><div class="line">	a2Index := 0</div><div class="line">	resIndex := 0</div><div class="line">	resLen := len(a1) + len(a2)</div><div class="line">	res := make([]int, resLen)</div><div class="line">	for i := 0; i &lt; resLen; i++ &#123;</div><div class="line"></div><div class="line">		if a1Index == len(a1)-1 &#123;</div><div class="line">			for ; a2Index &lt; len(a2); a2Index++ &#123;</div><div class="line">				res[resIndex] = a2[a2Index]</div><div class="line">				resIndex++</div><div class="line">			&#125;</div><div class="line">			break</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		if a2Index == len(a1)-1 &#123;</div><div class="line">			for ; a1Index &lt; len(a1); a1Index++ &#123;</div><div class="line">				res[resIndex] = a1[a1Index]</div><div class="line">				resIndex++</div><div class="line">			&#125;</div><div class="line">			break</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		if a1[a1Index] &lt; a2[a2Index] &#123;</div><div class="line">			res[resIndex] = a1[a1Index]</div><div class="line">			a1Index++</div><div class="line">		&#125; else &#123;</div><div class="line">			res[resIndex] = a2[a2Index]</div><div class="line">			a2Index++</div><div class="line">		&#125;</div><div class="line">		resIndex++</div><div class="line">	&#125;</div><div class="line">	return res</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><a href="https://github.com/fudali113/learn-basic/blob/master/sort/merge/merge.go" target="_blank" rel="external">golang code in github</a><br>待改善</p>
+
         </div>
 
         <blockquote class="post-copyright">
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2017-03-18T04:53:06.000Z" itemprop="dateUpdated">2017年3月18日 12:53</time>
+    最后更新时间：<time datetime="2017-03-18T05:30:18.000Z" itemprop="dateUpdated">2017年3月18日 13:30</time>
 </span><br>
 
 
@@ -225,7 +217,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2017/03/15/shell-sort/&title=《排序-希尔排序》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2017/03/17/merge-sort/&title=《排序-归并排序》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -235,22 +227,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2017/03/15/shell-sort/&title=《排序-希尔排序》 — fudali&source=do one`s best" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2017/03/17/merge-sort/&title=《排序-归并排序》 — fudali&source=do one`s best" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://fudali.cc/2017/03/15/shell-sort/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://fudali.cc/2017/03/17/merge-sort/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《排序-希尔排序》 — fudali&url=http://fudali.cc/2017/03/15/shell-sort/&via=http://fudali.cc" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《排序-归并排序》 — fudali&url=http://fudali.cc/2017/03/17/merge-sort/&via=http://fudali.cc" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://fudali.cc/2017/03/15/shell-sort/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://fudali.cc/2017/03/17/merge-sort/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -273,18 +265,18 @@
 <nav class="post-nav flex-row flex-justify-between">
   
     <div class="waves-block waves-effect prev">
-      <a href="/2017/03/17/merge-sort/" id="post-prev" class="post-nav-link">
+      <a href="/2017/03/17/tcp-and-udp-protocols/" id="post-prev" class="post-nav-link">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">排序-归并排序</h4>
+        <h4 class="title">tcp和udp网络协议</h4>
       </a>
     </div>
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2017/03/13/insertion-sort/" id="post-next" class="post-nav-link">
+      <a href="/2017/03/15/shell-sort/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">排序-插入排序</h4>
+        <h4 class="title">排序-希尔排序</h4>
       </a>
     </div>
   
@@ -295,7 +287,7 @@
     
 
 <div class="comments" id="comments">
-    <div class="ds-thread" data-thread-key="shell-sort" data-title="排序-希尔排序" data-url="http://fudali.cc/2017/03/15/shell-sort/"></div>
+    <div class="ds-thread" data-thread-key="merge-sort" data-title="排序-归并排序" data-url="http://fudali.cc/2017/03/17/merge-sort/"></div>
 </div>
 <script>
 lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
@@ -364,7 +356,7 @@ lazyScripts.push('/js/embed.min.js?v=1.4.11');
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2017/03/15/shell-sort/&title=《排序-希尔排序》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2017/03/17/merge-sort/&title=《排序-归并排序》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -374,22 +366,22 @@ lazyScripts.push('/js/embed.min.js?v=1.4.11');
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2017/03/15/shell-sort/&title=《排序-希尔排序》 — fudali&source=do one`s best" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2017/03/17/merge-sort/&title=《排序-归并排序》 — fudali&source=do one`s best" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://fudali.cc/2017/03/15/shell-sort/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://fudali.cc/2017/03/17/merge-sort/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《排序-希尔排序》 — fudali&url=http://fudali.cc/2017/03/15/shell-sort/&via=http://fudali.cc" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《排序-归并排序》 — fudali&url=http://fudali.cc/2017/03/17/merge-sort/&via=http://fudali.cc" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://fudali.cc/2017/03/15/shell-sort/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://fudali.cc/2017/03/17/merge-sort/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -400,7 +392,7 @@ lazyScripts.push('/js/embed.min.js?v=1.4.11');
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAAByUlEQVR42u3ay4rDMAwF0P7/T6cwq4FS50p+TAaOV6GN7ZONkCW/XvG4fsb439/vfD6Pf1k8cHFxp7nXcOTc5Jfx+uN3cHFxz3PHiCRUjWflK9zYcHFxH8adSXrylAgXF/d/cZMPyI80uLi4z+dWDydjYv55G89quLi4E9yZoLPqeWN9FxcXt8i9iqOa3CSHn8LuuLi4R7jVkkevHVJNcW7CHC4u7nHu/CWJZFZebL2p4uDi4m7g7jhF5Ze0yqkSLi7ucW6v/ZknQ3kg+7o+Li7uEW6e1lQ3yNcphzZcXNzN3GTRmSsX+RGo3A3GxcXdzF3b36wWQwuHLlxc3CPcXpqSdzd6qU+5rYKLi7uNmzdR8uubqy5z4OLinuTmhdFe0Old0Sh3fnBxcZdyqwXTXpDqERfUd3FxcVvcqzjyT5q5zvV1L1xc3IPcPJWpFkB7xdmbQIaLi3uEWw1k+Ta94LWgn4OLi7smxyhv3wtz1QbMVPMVFxd3gjtznWImCFZbMri4uOe5SaBJSqK9xm1hFi4u7sO4UWemmDCN597cE8HFxX0MdyaoVY9JuLi4f8vd0VhNDkLlMIqLi3uEu7ZgmgSv6pu4uLgHuW+VyeceThUklwAAAABJRU5ErkJggg==" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAAByklEQVR42u3aMW7DMAwF0Nz/0i3QqUOtfJKy4gLPk+EI0lMGQiT1esXP18/z+/3qWY+/+rL5wcXFHXMny18tfPVlPX8yMy4u7kluHrzmIe9q5Ho2XFzcZ3Jz+nrMmo6Li/u/uHtTGlxc3Odze8lJHsjWCdItuRouLu6AOwk6u95vr+/i4uJu6kr0iqf54am8Oi4u7hFucvhIih3VTebJ1SvJh3BxcW/g5ueKyffk70iCIy4u7hluHsiSoDM/Er3x4OLiHuFWjzW9a1j53xEFRFxc3IPcXgDK2y29jb3p/+Di4m7lJuGpesWqelQqNHFxcXGPcKtDq+2WvBlTKJLi4uLezM2XyauteaOl3FbBxcX9EHcSMeaXOXBxcZ/DrTY75yEpmfmPOXFxcY9wq82S6vLVGaKyCy4u7s3caoEjKWpElZjeZnBxcQ9yq1cxJlc8J9vAxcU9ye0VMqrXLPLgVe754OLibuVWA0q1tJEkNut0qxkEcXFxx9xqw6NQcYnH5+kWLi7uSe78SmXemOkFTVxc3Gdye2elXli8/BUXF/fB3ElLtdrcxcXF/RS3WuzIjy+9g9GGXA0XF3fArRZMe82YakkFFxf3Q9xv+0wlC4pgpw8AAAAASUVORK5CYII=" alt="微信分享二维码">
 </div>
 
 
