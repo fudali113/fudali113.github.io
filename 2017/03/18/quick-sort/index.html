@@ -20,19 +20,31 @@
     
     
     <meta name="keywords" content="golang,排序,学习">
-    <meta name="description" content="前言代码go12
-总结">
+    <meta name="description" content="前言快速排序是实践中一种快速的排序方式；他的平均运行时间是O(NlogN)，最坏运行时间是O(N^2)，但稍加努力可使最坏情形极难出现。并且可通过与堆排序的结果，可以使几乎所有的输入都能达到快速排序的快速运行时间。
+简介快速排序可划分为简单的四个步骤(设输入数组为array)：
+
+如果array中元素是0或者1，直接返回
+取array中任一元素pivot，称之为枢纽元(pivot)
+将array中">
 <meta property="og:type" content="article">
 <meta property="og:title" content="排序-快速排序">
-<meta property="og:url" content="http://fudali.cc/2017/03/17/quick-sort/index.html">
+<meta property="og:url" content="http://fudali.cc/2017/03/18/quick-sort/index.html">
 <meta property="og:site_name" content="fudali">
-<meta property="og:description" content="前言代码go12
-总结">
-<meta property="og:updated_time" content="2017-03-18T08:54:37.000Z">
+<meta property="og:description" content="前言快速排序是实践中一种快速的排序方式；他的平均运行时间是O(NlogN)，最坏运行时间是O(N^2)，但稍加努力可使最坏情形极难出现。并且可通过与堆排序的结果，可以使几乎所有的输入都能达到快速排序的快速运行时间。
+简介快速排序可划分为简单的四个步骤(设输入数组为array)：
+
+如果array中元素是0或者1，直接返回
+取array中任一元素pivot，称之为枢纽元(pivot)
+将array中">
+<meta property="og:updated_time" content="2017-03-18T14:14:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="排序-快速排序">
-<meta name="twitter:description" content="前言代码go12
-总结">
+<meta name="twitter:description" content="前言快速排序是实践中一种快速的排序方式；他的平均运行时间是O(NlogN)，最坏运行时间是O(N^2)，但稍加努力可使最坏情形极难出现。并且可通过与堆排序的结果，可以使几乎所有的输入都能达到快速排序的快速运行时间。
+简介快速排序可划分为简单的四个步骤(设输入数组为array)：
+
+如果array中元素是0或者1，直接返回
+取array中任一元素pivot，称之为枢纽元(pivot)
+将array中">
     
         <link rel="alternative" href="/atom.xml" title="fudali" type="application/atom+xml">
     
@@ -134,8 +146,8 @@
         <h1 class="title">排序-快速排序</h1>
         <h5 class="subtitle">
             
-                <time datetime="2017-03-16T16:00:00.000Z" itemprop="datePublished" class="page-time">
-  2017-03-17
+                <time datetime="2017-03-17T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2017-03-18
 </time>
 
 
@@ -155,7 +167,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#代码"><span class="post-toc-number">2.</span> <span class="post-toc-text">代码</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#go"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">go</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-number">3.</span> <span class="post-toc-text">总结</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#简介"><span class="post-toc-number">2.</span> <span class="post-toc-text">简介</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#代码"><span class="post-toc-number">3.</span> <span class="post-toc-text">代码</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#go"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">go</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-number">4.</span> <span class="post-toc-text">总结</span></a></li></ol>
         </nav>
     </aside>
     
@@ -165,7 +177,7 @@
     <div class="post-card">
         <h1 class="post-card-title">排序-快速排序</h1>
         <div class="post-meta">
-            <time class="post-time" title="2017年03月17日 0:00" datetime="2017-03-16T16:00:00.000Z"  itemprop="datePublished">2017-03-17</time>
+            <time class="post-time" title="2017年03月18日 0:00" datetime="2017-03-17T16:00:00.000Z"  itemprop="datePublished">2017-03-18</time>
 
             
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
@@ -178,7 +190,15 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="go"><a href="#go" class="headerlink" title="go"></a>go</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>快速排序是实践中一种快速的排序方式；他的平均运行时间是O(NlogN)，最坏运行时间是O(N^2)，但稍加努力可使最坏情形极难出现。<br>并且可通过与堆排序的结果，可以使几乎所有的输入都能达到快速排序的快速运行时间。</p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>快速排序可划分为简单的四个步骤(设输入数组为array)：</p>
+<ul>
+<li>如果array中元素是0或者1，直接返回</li>
+<li>取array中任一元素pivot，称之为枢纽元(pivot)</li>
+<li>将array中不包含pivot按与pivot的比较大小划分成连个不相交的集合</li>
+<li>递归对划分的两个合集进行该四步走并获得返回值与pivot合并成返回数组</li>
+</ul>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="go"><a href="#go" class="headerlink" title="go"></a>go</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2>
         </div>
 
@@ -186,7 +206,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2017-03-18T08:54:37.000Z" itemprop="dateUpdated">2017年3月18日 16:54</time>
+    最后更新时间：<time datetime="2017-03-18T14:14:24.000Z" itemprop="dateUpdated">2017年3月18日 22:14</time>
 </span><br>
 
 
@@ -219,7 +239,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2017/03/17/quick-sort/&title=《排序-快速排序》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2017/03/18/quick-sort/&title=《排序-快速排序》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -229,22 +249,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2017/03/17/quick-sort/&title=《排序-快速排序》 — fudali&source=do one`s best APE" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2017/03/18/quick-sort/&title=《排序-快速排序》 — fudali&source=do one`s best APE" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://fudali.cc/2017/03/17/quick-sort/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://fudali.cc/2017/03/18/quick-sort/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《排序-快速排序》 — fudali&url=http://fudali.cc/2017/03/17/quick-sort/&via=http://fudali.cc" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《排序-快速排序》 — fudali&url=http://fudali.cc/2017/03/18/quick-sort/&via=http://fudali.cc" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://fudali.cc/2017/03/17/quick-sort/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://fudali.cc/2017/03/18/quick-sort/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -264,21 +284,14 @@
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2017/03/17/merge-sort/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">排序-归并排序</h4>
-      </a>
-    </div>
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2017/03/15/shell-sort/" id="post-next" class="post-nav-link">
+      <a href="/2017/03/17/tcp-and-udp-protocols/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">排序-希尔排序</h4>
+        <h4 class="title">tcp和udp网络协议</h4>
       </a>
     </div>
   
@@ -289,7 +302,7 @@
     
 
 <div class="comments" id="comments">
-    <div class="ds-thread" data-thread-key="quick-sort" data-title="排序-快速排序" data-url="http://fudali.cc/2017/03/17/quick-sort/"></div>
+    <div class="ds-thread" data-thread-key="quick-sort" data-title="排序-快速排序" data-url="http://fudali.cc/2017/03/18/quick-sort/"></div>
 </div>
 <script>
 lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
@@ -358,7 +371,7 @@ lazyScripts.push('/js/embed.min.js?v=1.4.11');
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2017/03/17/quick-sort/&title=《排序-快速排序》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2017/03/18/quick-sort/&title=《排序-快速排序》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -368,22 +381,22 @@ lazyScripts.push('/js/embed.min.js?v=1.4.11');
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2017/03/17/quick-sort/&title=《排序-快速排序》 — fudali&source=do one`s best APE" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2017/03/18/quick-sort/&title=《排序-快速排序》 — fudali&source=do one`s best APE" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://fudali.cc/2017/03/17/quick-sort/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://fudali.cc/2017/03/18/quick-sort/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《排序-快速排序》 — fudali&url=http://fudali.cc/2017/03/17/quick-sort/&via=http://fudali.cc" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《排序-快速排序》 — fudali&url=http://fudali.cc/2017/03/18/quick-sort/&via=http://fudali.cc" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://fudali.cc/2017/03/17/quick-sort/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://fudali.cc/2017/03/18/quick-sort/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -394,7 +407,7 @@ lazyScripts.push('/js/embed.min.js?v=1.4.11');
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABuUlEQVR42u3aSW7DMAwAwPz/0+61QGuZi0QkwehkCIg8zoEQl9crvK5f6+9+5Hm9s3nh4uK2uddyRV5wB6190p0BFxd3nptFRCJM/3xcXNzP5d4Fr/XJuLi438rdlfzg4uK+JzeS/NSuMvHP25yr4eLiNrjxKuW55yP1XVxc3BL3Sq7+aa234+LijnA7xdBI23VvERYXF3ee2y9uxkcr4ic85Gq4uLgHuOtSZqKImcxcIgHu4UaGi4t7mJu91tQo2fGvf0InLi7uODdewtibGiXei4uLO8KttT/XB2VbtsXSCS4u7jFuNmDtatDWEiFcXNwZ7jo+rINOPIHJXn0eAh8uLu5hbvYiki1kxFmhc3BxcUe42bQnm/DU2rQPbRtcXNxBbn/AIltUrQ1/4OLiTnJrmVM2BdowCoaLizvIjZRKsw3RSJM1PfiFi4t7mHslV/ZCE2Elmje4uLgj3GyjtNOU7TdscHFxJ7mdUapas6R2YcLFxZ3nRgakIq3W+E52kAsXF/dTuMURinCYS1RNcHFx34wbYWUTrdsdXFzcQW4nUekURrN/Fi4u7gy3H1xqjZPsr3BxcUe4P+KBw0I11/sMAAAAAElFTkSuQmCC" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAAB1UlEQVR42u3aQW6EQAxEUe5/aSJlFWlE88vGPSj6vYoSZnhkYeGyjwOf8/dc/f7vX8+Ps77ymDhy5cptc8/lWV/zeeP0AbhBrly5+7nr4sXpV2hOv7HJlSv3ZdzgS/EDy5Ur939w17epNT9y5cp9J5e3N7VXli/0anLlym1w08B04ufBfFeuXLkh9ywdEozylim4r1y5crdweZOTjlo7selNsZMrV+4wl3wRR/fj13i8Kleu3DEuCSD4QkZt8QI9vFy5crdweQjSX9Xi71xxbCpXrtxhbrpmkS5epIMZ9H+VK1fuGDctWLyE1eKSeKwiV67ch7i8bJGIhC9t8HD2sleTK1fuGJevTKWtCw9TeLmUK1fufi5vZvgwhl/DS6dcuXKnuaQr4qMO3mnVxrdy5crdw03D0CBlSW+fblnIlSt3jJu+aqQDEv5ZtNIhV67cLdxaDpkWqU45u/wGuXLljnHP8MRLEqUyd/kpuXLlbuF2ygqPSjtrnXLlyv0WNy1eHM3XtoJXKLly5W7kThSvWswazITlypX7Gm6wRIXHtPHKply5cl/DTaPVWuF77BVHrly5bW6n+SFj2tpj3yxhyJUrd4xbG5R21i/IcsZj+a5cuXIz7g9nUt1EfN4v/gAAAABJRU5ErkJggg==" alt="微信分享二维码">
 </div>
 
 
