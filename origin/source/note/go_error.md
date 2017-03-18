@@ -2,7 +2,7 @@ title: go错误类型
 date: 2016-03-16
 tags: ["golang","error"]
 categories:
-  - 引包错误
+  golang笔记
 ---
 
 ## 引包错误 ##

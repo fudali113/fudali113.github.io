@@ -1,6 +1,8 @@
 title: go 1.6.2 strings split 方法改造
 date: 2016-12-13
 tags: ["golang"]
+categories:
+  golang笔记
 ---
 
 当调用`strings.Split(s,seq string)`时,如果seq连续出现，比如`s=" dfdgdfg              （多个空格）        dfdg   （多个空格）   hghyjkjuyk      "`。调用`slice:=strings.Split(s," ")`将会出现`len(slice)!=3`，我认为这并不是大家希望看到的结果。

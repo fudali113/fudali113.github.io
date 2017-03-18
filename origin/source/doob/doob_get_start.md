@@ -2,10 +2,7 @@ title: doob入门
 date: 2016-01-13
 tags: ["golang","doob","web"]
 categories:
-  - 快速开始
-    - 下载依赖
-    - 创建main函数文件
-    - 编译运行
+  doob文档
 ---
 ## 快速开始 ##
 

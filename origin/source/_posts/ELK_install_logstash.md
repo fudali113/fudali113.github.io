@@ -2,8 +2,7 @@ title: ELK学习之安装logstash
 date: 2016-02-16
 tags: ["ELK","logstash"]
 categories:
-  - 下载安装
-  - 运行
+  日志收集
 ---
 
 ## 下载安装 ##
