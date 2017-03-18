@@ -13,27 +13,24 @@
     
     
     
-    <title>doob入门 | fudali | do one`s best</title>
+    <title>go错误类型 | fudali | do one`s best</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="golang,doob,web">
-    <meta name="description" content="快速开始下载依赖1go get github.com/fudali113/doob
-创建main函数文件demo.go1234567891011121314package mainimport &amp;quot;github.com/fudali113/doob&amp;quot;func main() &amp;#123;	doob.Start(8888)&amp;#125;func init()&amp;#123;  router">
+    <meta name="keywords" content="golang,error">
+    <meta name="description" content="引包错误12use of package sort without selector该错误出现在引入报名与当前包中定义的变量或函数重名">
 <meta name="keywords">
 <meta property="og:type" content="website">
-<meta property="og:title" content="doob入门">
-<meta property="og:url" content="http://fudali.cc/doob/doob_get_start.html">
+<meta property="og:title" content="go错误类型">
+<meta property="og:url" content="http://fudali.cc/note/go-error.html">
 <meta property="og:site_name" content="fudali">
-<meta property="og:description" content="快速开始下载依赖1go get github.com/fudali113/doob
-创建main函数文件demo.go1234567891011121314package mainimport &amp;quot;github.com/fudali113/doob&amp;quot;func main() &amp;#123;	doob.Start(8888)&amp;#125;func init()&amp;#123;  router">
-<meta property="og:updated_time" content="2017-03-18T04:53:32.000Z">
+<meta property="og:description" content="引包错误12use of package sort without selector该错误出现在引入报名与当前包中定义的变量或函数重名">
+<meta property="og:updated_time" content="2017-03-18T08:21:51.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="doob入门">
-<meta name="twitter:description" content="快速开始下载依赖1go get github.com/fudali113/doob
-创建main函数文件demo.go1234567891011121314package mainimport &amp;quot;github.com/fudali113/doob&amp;quot;func main() &amp;#123;	doob.Start(8888)&amp;#125;func init()&amp;#123;  router">
+<meta name="twitter:title" content="go错误类型">
+<meta name="twitter:description" content="引包错误12use of package sort without selector该错误出现在引入报名与当前包中定义的变量或函数重名">
     
         <link rel="alternative" href="/atom.xml" title="fudali" type="application/atom+xml">
     
@@ -110,7 +107,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">doob入门</div>
+        <div class="flex-col header-title ellipsis">go错误类型</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -132,7 +129,7 @@
 <header class="content-header page-header">
 
     <div class="container fade-scale">
-        <h1 class="title">doob入门</h1>
+        <h1 class="title">go错误类型</h1>
         <h5 class="subtitle">
             
         </h5>
@@ -146,11 +143,7 @@
 <div class="container body-wrap">
     <article class="page-article fade" itemprop="blogPage">
         <div class="post-content page-content" id="page-content" itemprop="pageContent">
-            <h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h2><h3 id="下载依赖"><a href="#下载依赖" class="headerlink" title="下载依赖"></a>下载依赖</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">go get github.com/fudali113/doob</div></pre></td></tr></table></figure>
-<h3 id="创建main函数文件demo-go"><a href="#创建main函数文件demo-go" class="headerlink" title="创建main函数文件demo.go"></a>创建main函数文件demo.go</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">package main</div><div class="line"></div><div class="line">import &quot;github.com/fudali113/doob&quot;</div><div class="line"></div><div class="line">func main() &#123;</div><div class="line">	doob.Start(8888)</div><div class="line">&#125;</div><div class="line"></div><div class="line">func init()&#123;</div><div class="line">  router := doob.DefaultRouter()</div><div class="line">  router.Get(&quot;/test&quot;, func (ctx *doob.Context) interface&#123;&#125; &#123;</div><div class="line">    return &quot;test&quot;</div><div class="line">  &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="编译运行"><a href="#编译运行" class="headerlink" title="编译运行"></a>编译运行</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">go run demo.go</div></pre></td></tr></table></figure>
-<p>浏览效果<br>打开浏览器并访问 <a href="http://localhost:8888/test" target="_blank" rel="external">http://localhost:8888/test</a></p>
-
+            <h2 id="引包错误"><a href="#引包错误" class="headerlink" title="引包错误"></a>引包错误</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">use of package sort without selector</div><div class="line">该错误出现在引入报名与当前包中定义的变量或函数重名</div></pre></td></tr></table></figure>
         </div>
 
         
@@ -169,7 +162,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/doob/doob_get_start.html&title=《doob入门》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/note/go-error.html&title=《go错误类型》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -179,22 +172,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/doob/doob_get_start.html&title=《doob入门》 — fudali&source=do one`s best" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/note/go-error.html&title=《go错误类型》 — fudali&source=do one`s best APE" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://fudali.cc/doob/doob_get_start.html" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://fudali.cc/note/go-error.html" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《doob入门》 — fudali&url=http://fudali.cc/doob/doob_get_start.html&via=http://fudali.cc" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《go错误类型》 — fudali&url=http://fudali.cc/note/go-error.html&via=http://fudali.cc" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://fudali.cc/doob/doob_get_start.html" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://fudali.cc/note/go-error.html" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -223,7 +216,7 @@
         
 
 <div class="comments" id="comments">
-    <div class="ds-thread" data-thread-key="hexo-page-doob-doob_get_start.html" data-title="doob入门" data-url="http://fudali.cc/doob/doob_get_start.html"></div>
+    <div class="ds-thread" data-thread-key="hexo-page-note-go-error.html" data-title="go错误类型" data-url="http://fudali.cc/note/go-error.html"></div>
 </div>
 <script>
 lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
@@ -291,7 +284,7 @@ lazyScripts.push('/js/embed.min.js?v=1.4.11');
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/doob/doob_get_start.html&title=《doob入门》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/note/go-error.html&title=《go错误类型》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -301,22 +294,22 @@ lazyScripts.push('/js/embed.min.js?v=1.4.11');
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/doob/doob_get_start.html&title=《doob入门》 — fudali&source=do one`s best" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/note/go-error.html&title=《go错误类型》 — fudali&source=do one`s best APE" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://fudali.cc/doob/doob_get_start.html" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://fudali.cc/note/go-error.html" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《doob入门》 — fudali&url=http://fudali.cc/doob/doob_get_start.html&via=http://fudali.cc" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《go错误类型》 — fudali&url=http://fudali.cc/note/go-error.html&via=http://fudali.cc" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://fudali.cc/doob/doob_get_start.html" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://fudali.cc/note/go-error.html" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -327,7 +320,7 @@ lazyScripts.push('/js/embed.min.js?v=1.4.11');
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABvUlEQVR42u3aO47DMAwFwNz/0tkm5Vp+FC0iAcZVkI80SkGQFF+v+Hkvn+SbV2u+Tjy4uLhtbkK5eme9cbJm9e/AxcWd5K4DzR7oqfVxcXG/n7tOXNaZSRIWcXFxf5F7Fcjyw+Di4v4Kt1qoVBF5cfVYrYaLi9vg7iUoz74+0t/FxcXd4r6LT3+1vX0/v8XFxR3h5gGl2gzda61G++Li4o5wrzbuhJtOthUdCRcX9xi3s301MOVDWq2MDBcX9yFuv3maFzn5Ncw/O+Li4g5yO+MXSfDqrHYZd3FxcY9x94YwnhqtqB4SFxd3kttpZVbbqfkYx01/FxcX9xg3SXH6F7H9w+Pi4s5zk0X3ip+8/ZE0VnBxcWe4e9AkrekMatz8ChcXd5xbHbSqHjsKVevD4+LiDnI7Cz07vHXzTVxc3HFu9TqkFZLytCavpXBxcdvcTgDKw19/jAMXF3eSW21PdJbuXLiWd8TFxW1zq4XK3mDWurVa+BQXF3eQm1+ilBsZJ2o1XFzcL+MmAShfv9pOxcXF/X5uJ4nZvL7FxcUd5FabpDmoGvhuEixcXNwRbjW47AWs9d+Rl1W4uLiHuX+mGMNCQ/brWwAAAABJRU5ErkJggg==" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABvklEQVR42u3aQY7CMBAEQP7/6fAAlNAzE5sglU9IC2yFQ8vu8esVr+Nknf3187Nn3/lasXBxccfc43Il3OojfXITAy4u7n7uddDMX18HXCHscHFxH8ntxVAeari4uP/IzQ8t19+Mi4v7fG4eQ1XWz85quLi4A241kla8XtLv4uLitrhHcSURlhSpzf+Oi4u7hZsHSrLpyUvSfPuCi4u7n9srRJKyY7LbKkcYLi7urdxkU1INpsl7ovfj4uL+iJvHSj4Oya9qfdlO4eLibuRWDzZ5tTE5Dp0GGS4u7jJur75MImwyMokSFxcXdzE3D518fJIcY8qXNnBxcbdw82KiV3AkD1+9woWLi7uaWy0mJkPTG45MuLi4W7jzQnPyqNWDEC4u7n7unuNN76AVzYRxcXEXcHuRVJ7bFH+CwpAVFxd3C7c3Cq3Wo/lj4OLi7uEexZWPOnr1a/QcuLi4i7nVeqJadlQr1Ojwg4uLu4U736CUJ7qTgxMuLu5Gbh401bqkmqBf6lpcXNw/4U4uZJSjExcX9/HcfFgyKUxvCzJcXNwit3rpaj5c6f1YuLi4e7jVcOmVpHn83dbv4uLidrhvDcC5aJgEe3sAAAAASUVORK5CYII=" alt="微信分享二维码">
 </div>
 
 

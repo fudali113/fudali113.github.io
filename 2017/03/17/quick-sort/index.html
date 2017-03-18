@@ -13,26 +13,26 @@
     
     
     
-    <title>排序-归并排序 | fudali | do one`s best</title>
+    <title>排序-快速排序 | fudali | do one`s best</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
     
     
     <meta name="keywords" content="golang,排序,学习">
-    <meta name="description" content="前言归并排序体现了递归分治的策略思想是将数组拆分为两段，在对两段进行想通操作，直到数组元素为1，在对数组进行排序合并
-代码go12345678910111213141516171819202122232425262728293031323334353637383940414243444546package mergefunc mergeSort(array []int) []int &amp;#123;">
+    <meta name="description" content="前言代码go12
+总结">
 <meta property="og:type" content="article">
-<meta property="og:title" content="排序-归并排序">
-<meta property="og:url" content="http://fudali.cc/2017/03/17/merge-sort/index.html">
+<meta property="og:title" content="排序-快速排序">
+<meta property="og:url" content="http://fudali.cc/2017/03/17/quick-sort/index.html">
 <meta property="og:site_name" content="fudali">
-<meta property="og:description" content="前言归并排序体现了递归分治的策略思想是将数组拆分为两段，在对两段进行想通操作，直到数组元素为1，在对数组进行排序合并
-代码go12345678910111213141516171819202122232425262728293031323334353637383940414243444546package mergefunc mergeSort(array []int) []int &amp;#123;">
-<meta property="og:updated_time" content="2017-03-18T08:53:30.000Z">
+<meta property="og:description" content="前言代码go12
+总结">
+<meta property="og:updated_time" content="2017-03-18T08:54:37.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="排序-归并排序">
-<meta name="twitter:description" content="前言归并排序体现了递归分治的策略思想是将数组拆分为两段，在对两段进行想通操作，直到数组元素为1，在对数组进行排序合并
-代码go12345678910111213141516171819202122232425262728293031323334353637383940414243444546package mergefunc mergeSort(array []int) []int &amp;#123;">
+<meta name="twitter:title" content="排序-快速排序">
+<meta name="twitter:description" content="前言代码go12
+总结">
     
         <link rel="alternative" href="/atom.xml" title="fudali" type="application/atom+xml">
     
@@ -109,7 +109,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">排序-归并排序</div>
+        <div class="flex-col header-title ellipsis">排序-快速排序</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -131,7 +131,7 @@
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">排序-归并排序</h1>
+        <h1 class="title">排序-快速排序</h1>
         <h5 class="subtitle">
             
                 <time datetime="2017-03-16T16:00:00.000Z" itemprop="datePublished" class="page-time">
@@ -159,11 +159,11 @@
         </nav>
     </aside>
     
-<article id="post-merge-sort"
+<article id="post-quick-sort"
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">排序-归并排序</h1>
+        <h1 class="post-card-title">排序-快速排序</h1>
         <div class="post-meta">
             <time class="post-time" title="2017年03月17日 0:00" datetime="2017-03-16T16:00:00.000Z"  itemprop="datePublished">2017-03-17</time>
 
@@ -178,22 +178,15 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>归并排序体现了递归分治的策略<br>思想是将数组拆分为两段，在对两段进行想通操作，直到数组元素为1，在对数组进行排序合并</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="go"><a href="#go" class="headerlink" title="go"></a>go</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">package merge</div><div class="line"></div><div class="line">func mergeSort(array []int) []int &#123;</div><div class="line">	middle := len(array) / 2</div><div class="line">	if middle == 1 &#123;</div><div class="line">		return array</div><div class="line">	&#125;</div><div class="line">	return merge(mergeSort(array[:middle]), mergeSort(array[middle:]))</div><div class="line">&#125;</div><div class="line"></div><div class="line">// TODO 待改善</div><div class="line">func merge(a1 []int, a2 []int) []int &#123;</div><div class="line">	a1Index := 0</div><div class="line">	a2Index := 0</div><div class="line">	resIndex := 0</div><div class="line">	resLen := len(a1) + len(a2)</div><div class="line">	res := make([]int, resLen)</div><div class="line">	for i := 0; i &lt; resLen; i++ &#123;</div><div class="line"></div><div class="line">		if a1Index == len(a1)-1 &#123;</div><div class="line">			for ; a2Index &lt; len(a2); a2Index++ &#123;</div><div class="line">				res[resIndex] = a2[a2Index]</div><div class="line">				resIndex++</div><div class="line">			&#125;</div><div class="line">			break</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		if a2Index == len(a1)-1 &#123;</div><div class="line">			for ; a1Index &lt; len(a1); a1Index++ &#123;</div><div class="line">				res[resIndex] = a1[a1Index]</div><div class="line">				resIndex++</div><div class="line">			&#125;</div><div class="line">			break</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		if a1[a1Index] &lt; a2[a2Index] &#123;</div><div class="line">			res[resIndex] = a1[a1Index]</div><div class="line">			a1Index++</div><div class="line">		&#125; else &#123;</div><div class="line">			res[resIndex] = a2[a2Index]</div><div class="line">			a2Index++</div><div class="line">		&#125;</div><div class="line">		resIndex++</div><div class="line">	&#125;</div><div class="line">	return res</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><a href="https://github.com/fudali113/learn-basic/blob/master/sort/merge/merge.go" target="_blank" rel="external">golang code in github</a></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>虽然归并排序的运行时间是O(NlogN)，但是他合并两个已排序数组到一个附加数组会更占用内存。</p>
-<p>与其他O(NlogN)的流行算法相比，归并排序是比较元素最少的，且运行时间严重依赖于比较元素和在数组(已经临时数组)中移动元素的开销。</p>
-<p>这些开销是于语言相关的(java中泛型数组中的元素是引用类型的，顾移动元素开销不大，所以归并排序是java泛型数组的默认排序方式。</p>
-<p>快速排序作为基础类型的排序方式，java基础类型是值传递的，因为比较与数据移动的开销是类似的，快排使用少得多的数据移动足以补偿那些附加的比较而且还有盈余)。</p>
-<p>在go中也存在相同的问题，所以在不同的输入数据选择不同的排序方式再能得到最好的性能。</p>
-
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="go"><a href="#go" class="headerlink" title="go"></a>go</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2>
         </div>
 
         <blockquote class="post-copyright">
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2017-03-18T08:53:30.000Z" itemprop="dateUpdated">2017年3月18日 16:53</time>
+    最后更新时间：<time datetime="2017-03-18T08:54:37.000Z" itemprop="dateUpdated">2017年3月18日 16:54</time>
 </span><br>
 
 
@@ -226,7 +219,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2017/03/17/merge-sort/&title=《排序-归并排序》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2017/03/17/quick-sort/&title=《排序-快速排序》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -236,22 +229,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2017/03/17/merge-sort/&title=《排序-归并排序》 — fudali&source=do one`s best APE" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2017/03/17/quick-sort/&title=《排序-快速排序》 — fudali&source=do one`s best APE" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://fudali.cc/2017/03/17/merge-sort/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://fudali.cc/2017/03/17/quick-sort/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《排序-归并排序》 — fudali&url=http://fudali.cc/2017/03/17/merge-sort/&via=http://fudali.cc" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《排序-快速排序》 — fudali&url=http://fudali.cc/2017/03/17/quick-sort/&via=http://fudali.cc" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://fudali.cc/2017/03/17/merge-sort/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://fudali.cc/2017/03/17/quick-sort/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -274,18 +267,18 @@
 <nav class="post-nav flex-row flex-justify-between">
   
     <div class="waves-block waves-effect prev">
-      <a href="/2017/03/17/tcp-and-udp-protocols/" id="post-prev" class="post-nav-link">
+      <a href="/2017/03/17/merge-sort/" id="post-prev" class="post-nav-link">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">tcp和udp网络协议</h4>
+        <h4 class="title">排序-归并排序</h4>
       </a>
     </div>
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2017/03/17/quick-sort/" id="post-next" class="post-nav-link">
+      <a href="/2017/03/15/shell-sort/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">排序-快速排序</h4>
+        <h4 class="title">排序-希尔排序</h4>
       </a>
     </div>
   
@@ -296,7 +289,7 @@
     
 
 <div class="comments" id="comments">
-    <div class="ds-thread" data-thread-key="merge-sort" data-title="排序-归并排序" data-url="http://fudali.cc/2017/03/17/merge-sort/"></div>
+    <div class="ds-thread" data-thread-key="quick-sort" data-title="排序-快速排序" data-url="http://fudali.cc/2017/03/17/quick-sort/"></div>
 </div>
 <script>
 lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
@@ -365,7 +358,7 @@ lazyScripts.push('/js/embed.min.js?v=1.4.11');
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2017/03/17/merge-sort/&title=《排序-归并排序》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2017/03/17/quick-sort/&title=《排序-快速排序》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -375,22 +368,22 @@ lazyScripts.push('/js/embed.min.js?v=1.4.11');
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2017/03/17/merge-sort/&title=《排序-归并排序》 — fudali&source=do one`s best APE" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2017/03/17/quick-sort/&title=《排序-快速排序》 — fudali&source=do one`s best APE" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://fudali.cc/2017/03/17/merge-sort/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://fudali.cc/2017/03/17/quick-sort/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《排序-归并排序》 — fudali&url=http://fudali.cc/2017/03/17/merge-sort/&via=http://fudali.cc" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《排序-快速排序》 — fudali&url=http://fudali.cc/2017/03/17/quick-sort/&via=http://fudali.cc" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://fudali.cc/2017/03/17/merge-sort/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://fudali.cc/2017/03/17/quick-sort/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -401,7 +394,7 @@ lazyScripts.push('/js/embed.min.js?v=1.4.11');
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAAByklEQVR42u3aMW7DMAwF0Nz/0i3QqUOtfJKy4gLPk+EI0lMGQiT1esXP18/z+/3qWY+/+rL5wcXFHXMny18tfPVlPX8yMy4u7kluHrzmIe9q5Ho2XFzcZ3Jz+nrMmo6Li/u/uHtTGlxc3Odze8lJHsjWCdItuRouLu6AOwk6u95vr+/i4uJu6kr0iqf54am8Oi4u7hFucvhIih3VTebJ1SvJh3BxcW/g5ueKyffk70iCIy4u7hluHsiSoDM/Er3x4OLiHuFWjzW9a1j53xEFRFxc3IPcXgDK2y29jb3p/+Di4m7lJuGpesWqelQqNHFxcXGPcKtDq+2WvBlTKJLi4uLezM2XyauteaOl3FbBxcX9EHcSMeaXOXBxcZ/DrTY75yEpmfmPOXFxcY9wq82S6vLVGaKyCy4u7s3caoEjKWpElZjeZnBxcQ9yq1cxJlc8J9vAxcU9ye0VMqrXLPLgVe754OLibuVWA0q1tJEkNut0qxkEcXFxx9xqw6NQcYnH5+kWLi7uSe78SmXemOkFTVxc3Gdye2elXli8/BUXF/fB3ElLtdrcxcXF/RS3WuzIjy+9g9GGXA0XF3fArRZMe82YakkFFxf3Q9xv+0wlC4pgpw8AAAAASUVORK5CYII=" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABuUlEQVR42u3aSW7DMAwAwPz/0+61QGuZi0QkwehkCIg8zoEQl9crvK5f6+9+5Hm9s3nh4uK2uddyRV5wB6190p0BFxd3nptFRCJM/3xcXNzP5d4Fr/XJuLi438rdlfzg4uK+JzeS/NSuMvHP25yr4eLiNrjxKuW55yP1XVxc3BL3Sq7+aa234+LijnA7xdBI23VvERYXF3ee2y9uxkcr4ic85Gq4uLgHuOtSZqKImcxcIgHu4UaGi4t7mJu91tQo2fGvf0InLi7uODdewtibGiXei4uLO8KttT/XB2VbtsXSCS4u7jFuNmDtatDWEiFcXNwZ7jo+rINOPIHJXn0eAh8uLu5hbvYiki1kxFmhc3BxcUe42bQnm/DU2rQPbRtcXNxBbn/AIltUrQ1/4OLiTnJrmVM2BdowCoaLizvIjZRKsw3RSJM1PfiFi4t7mHslV/ZCE2Elmje4uLgj3GyjtNOU7TdscHFxJ7mdUapas6R2YcLFxZ3nRgakIq3W+E52kAsXF/dTuMURinCYS1RNcHFx34wbYWUTrdsdXFzcQW4nUekURrN/Fi4u7gy3H1xqjZPsr3BxcUe4P+KBw0I11/sMAAAAAElFTkSuQmCC" alt="微信分享二维码">
 </div>
 
 
