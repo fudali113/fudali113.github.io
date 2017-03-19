@@ -14,50 +14,40 @@ categories:
 ```
 package merge
 
-func mergeSort(array []int) []int {
+// MergeSort 归并排序
+func MergeSort(array []int) []int {
 	middle := len(array) / 2
-	if middle == 1 {
+	if middle < 1 {
 		return array
 	}
-	return merge(mergeSort(array[:middle]), mergeSort(array[middle:]))
+	return merge(MergeSort(array[:middle]), MergeSort(array[middle:]))
 }
 
-// TODO 待改善
+// merge 合并两个排好序的数组唯一组合两个元素并排好序的数组
 func merge(a1 []int, a2 []int) []int {
 	a1Index := 0
 	a2Index := 0
-	resIndex := 0
-	resLen := len(a1) + len(a2)
-	res := make([]int, resLen)
-	for i := 0; i < resLen; i++ {
-
-		if a1Index == len(a1)-1 {
-			for ; a2Index < len(a2); a2Index++ {
-				res[resIndex] = a2[a2Index]
-				resIndex++
+	res := make([]int, 0, len(a1)+len(a2))
+	for {
+		if a1[a1Index] <= a2[a2Index] {
+			res = append(res, a1[a1Index])
+			if a1Index == len(a1)-1 {
+				res = append(res, a2[a2Index:]...)
+				break
 			}
-			break
-		}
-
-		if a2Index == len(a1)-1 {
-			for ; a1Index < len(a1); a1Index++ {
-				res[resIndex] = a1[a1Index]
-				resIndex++
-			}
-			break
-		}
-
-		if a1[a1Index] < a2[a2Index] {
-			res[resIndex] = a1[a1Index]
 			a1Index++
 		} else {
-			res[resIndex] = a2[a2Index]
+			res = append(res, a2[a2Index])
+			if a2Index == len(a1)-1 {
+				res = append(res, a1[a1Index:]...)
+				break
+			}
 			a2Index++
 		}
-		resIndex++
 	}
 	return res
 }
+
 ```
 [golang code in github](https://github.com/fudali113/learn-basic/blob/master/sort/merge/merge.go)
 
@@ -72,4 +62,8 @@ func merge(a1 []int, a2 []int) []int {
 快速排序作为基础类型的排序方式，java基础类型是值传递的，因为比较与数据移动的开销是类似的，快排使用少得多的数据移动足以补偿那些附加的比较而且还有盈余)。
 
 在go中也存在相同的问题，所以在不同的输入数据选择不同的排序方式再能得到最好的性能。
+
+平均运行时间：O(NlogN)
+最坏运行时间：O(NlogN)
+是否稳定：稳定
 
