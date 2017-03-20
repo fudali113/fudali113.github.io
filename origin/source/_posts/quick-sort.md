@@ -86,7 +86,7 @@ func swap(array []int, left, right, medianIndex int) (nowMedianIndex int) {
 // 比较数组开头，结尾和中间位置的值，放回处于中间的值得数组下标
 // return 中位值数组下标
 func median3(array []int, left, right int) int {
-	index := (right - left - 1) / 2
+	index := (right + left - 1) / 2
 	start := array[left]
 	median := array[index]
 	end := array[right-1]

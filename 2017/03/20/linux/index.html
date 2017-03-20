@@ -13,28 +13,23 @@
     
     
     
-    <title>排序 | fudali | do one`s best</title>
+    <title>linux常用知识 | fudali | do one`s best</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="golang,排序,学习">
-    <meta name="description" content="排序算法稳定性假定在待排序的记录序列中，存在多个具有相同的关键字的记录，若经过排序，这些记录的相对次序保持不变，即在原序列中，ri=rj，且ri在rj之前，而在排序后的序列中，ri仍在rj之前，则称这种排序算法是稳定的；否则称为不稳定的。
-对于不稳定的排序算法，只要举出一个实例，即可说明它的不稳定性；而对于稳定的排序算法，必须对算法进行分析从而得到稳定的特性。需要注意的是，排序算法是否为稳定的是由">
+    <meta name="keywords" content="linux">
+    <meta name="description" content="内核日志1cat /var/log/messages">
 <meta property="og:type" content="article">
-<meta property="og:title" content="排序">
-<meta property="og:url" content="http://fudali.cc/2017/03/20/sort/index.html">
+<meta property="og:title" content="linux常用知识">
+<meta property="og:url" content="http://fudali.cc/2017/03/20/linux/index.html">
 <meta property="og:site_name" content="fudali">
-<meta property="og:description" content="排序算法稳定性假定在待排序的记录序列中，存在多个具有相同的关键字的记录，若经过排序，这些记录的相对次序保持不变，即在原序列中，ri=rj，且ri在rj之前，而在排序后的序列中，ri仍在rj之前，则称这种排序算法是稳定的；否则称为不稳定的。
-对于不稳定的排序算法，只要举出一个实例，即可说明它的不稳定性；而对于稳定的排序算法，必须对算法进行分析从而得到稳定的特性。需要注意的是，排序算法是否为稳定的是由">
-<meta property="og:image" content="http://fudali.cc/images/sort.jpg">
-<meta property="og:updated_time" content="2017-03-19T16:32:33.000Z">
+<meta property="og:description" content="内核日志1cat /var/log/messages">
+<meta property="og:updated_time" content="2017-03-20T07:26:07.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="排序">
-<meta name="twitter:description" content="排序算法稳定性假定在待排序的记录序列中，存在多个具有相同的关键字的记录，若经过排序，这些记录的相对次序保持不变，即在原序列中，ri=rj，且ri在rj之前，而在排序后的序列中，ri仍在rj之前，则称这种排序算法是稳定的；否则称为不稳定的。
-对于不稳定的排序算法，只要举出一个实例，即可说明它的不稳定性；而对于稳定的排序算法，必须对算法进行分析从而得到稳定的特性。需要注意的是，排序算法是否为稳定的是由">
-<meta name="twitter:image" content="http://fudali.cc/images/sort.jpg">
+<meta name="twitter:title" content="linux常用知识">
+<meta name="twitter:description" content="内核日志1cat /var/log/messages">
     
         <link rel="alternative" href="/atom.xml" title="fudali" type="application/atom+xml">
     
@@ -112,7 +107,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">排序</div>
+        <div class="flex-col header-title ellipsis">linux常用知识</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -134,7 +129,7 @@
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">排序</h1>
+        <h1 class="title">linux常用知识</h1>
         <h5 class="subtitle">
             
                 <time datetime="2017-03-19T16:00:00.000Z" itemprop="datePublished" class="page-time">
@@ -142,7 +137,7 @@
 </time>
 
 
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/linux/">linux</a></li></ul>
 
             
         </h5>
@@ -158,20 +153,20 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#排序算法稳定性"><span class="post-toc-number">1.</span> <span class="post-toc-text">排序算法稳定性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#各算法时间复杂度与是否稳定"><span class="post-toc-number">2.</span> <span class="post-toc-text">各算法时间复杂度与是否稳定</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#内核日志"><span class="post-toc-number">1.</span> <span class="post-toc-text">内核日志</span></a></li></ol>
         </nav>
     </aside>
     
-<article id="post-sort"
+<article id="post-linux"
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">排序</h1>
+        <h1 class="post-card-title">linux常用知识</h1>
         <div class="post-meta">
             <time class="post-time" title="2017年03月20日 0:00" datetime="2017-03-19T16:00:00.000Z"  itemprop="datePublished">2017-03-20</time>
 
             
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/linux/">linux</a></li></ul>
 
 
 
@@ -181,23 +176,14 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h2 id="排序算法稳定性"><a href="#排序算法稳定性" class="headerlink" title="排序算法稳定性"></a>排序算法稳定性</h2><p>假定在待排序的记录序列中，存在多个具有相同的关键字的记录，若经过排序，这些记录的相对次序保持不变，即在原序列中，ri=rj，且ri在rj之前，而在排序后的序列中，ri仍在rj之前，则称这种排序算法是稳定的；否则称为不稳定的。</p>
-<p>对于不稳定的排序算法，只要举出一个实例，即可说明它的不稳定性；而对于稳定的排序算法，必须对算法进行分析从而得到稳定的特性。需要注意的是，排序算法是否为稳定的是由具体算法决定的，不稳定的算法在某种条件下可以变为稳定的算法，而稳定的算法在某种条件下也可以变为不稳定的算法。</p>
-<p>堆排序、快速排序、希尔排序、直接选择排序不是稳定的排序算法，而基数排序、冒泡排序、直接插入排序、折半插入排序、归并排序是稳定的排序算法。</p>
-<h2 id="各算法时间复杂度与是否稳定"><a href="#各算法时间复杂度与是否稳定" class="headerlink" title="各算法时间复杂度与是否稳定"></a>各算法时间复杂度与是否稳定</h2><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/images/sort.jpg" alt="各算法时间复杂度与是否稳定对照表" title="">
-                </div>
-                <div class="image-caption">各算法时间复杂度与是否稳定对照表</div>
-            </figure>
+            <h2 id="内核日志"><a href="#内核日志" class="headerlink" title="内核日志"></a>内核日志</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat /var/log/messages</div></pre></td></tr></table></figure>
         </div>
 
         <blockquote class="post-copyright">
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2017-03-19T16:32:33.000Z" itemprop="dateUpdated">2017年3月20日 0:32</time>
+    最后更新时间：<time datetime="2017-03-20T07:26:07.000Z" itemprop="dateUpdated">2017年3月20日 15:26</time>
 </span><br>
 
 
@@ -220,7 +206,7 @@
 
         <div class="post-footer">
             
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/golang/">golang</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习/">学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/排序/">排序</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
 
 
             
@@ -230,7 +216,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2017/03/20/sort/&title=《排序》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2017/03/20/linux/&title=《linux常用知识》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -240,22 +226,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2017/03/20/sort/&title=《排序》 — fudali&source=do one`s best APE" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2017/03/20/linux/&title=《linux常用知识》 — fudali&source=do one`s best APE" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://fudali.cc/2017/03/20/sort/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://fudali.cc/2017/03/20/linux/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《排序》 — fudali&url=http://fudali.cc/2017/03/20/sort/&via=http://fudali.cc" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《linux常用知识》 — fudali&url=http://fudali.cc/2017/03/20/linux/&via=http://fudali.cc" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://fudali.cc/2017/03/20/sort/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://fudali.cc/2017/03/20/linux/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -275,21 +261,14 @@
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2017/03/20/linux/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">linux常用知识</h4>
-      </a>
-    </div>
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2017/03/20/adt-head/" id="post-next" class="post-nav-link">
+      <a href="/2017/03/20/sort/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">数据结构-堆</h4>
+        <h4 class="title">排序</h4>
       </a>
     </div>
   
@@ -300,7 +279,7 @@
     
 
 <div class="comments" id="comments">
-    <div class="ds-thread" data-thread-key="sort" data-title="排序" data-url="http://fudali.cc/2017/03/20/sort/"></div>
+    <div class="ds-thread" data-thread-key="linux" data-title="linux常用知识" data-url="http://fudali.cc/2017/03/20/linux/"></div>
 </div>
 <script>
 lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
@@ -369,7 +348,7 @@ lazyScripts.push('/js/embed.min.js?v=1.4.11');
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2017/03/20/sort/&title=《排序》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2017/03/20/linux/&title=《linux常用知识》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -379,22 +358,22 @@ lazyScripts.push('/js/embed.min.js?v=1.4.11');
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2017/03/20/sort/&title=《排序》 — fudali&source=do one`s best APE" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2017/03/20/linux/&title=《linux常用知识》 — fudali&source=do one`s best APE" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://fudali.cc/2017/03/20/sort/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://fudali.cc/2017/03/20/linux/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《排序》 — fudali&url=http://fudali.cc/2017/03/20/sort/&via=http://fudali.cc" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《linux常用知识》 — fudali&url=http://fudali.cc/2017/03/20/linux/&via=http://fudali.cc" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://fudali.cc/2017/03/20/sort/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://fudali.cc/2017/03/20/linux/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -405,7 +384,7 @@ lazyScripts.push('/js/embed.min.js?v=1.4.11');
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABwUlEQVR42u3aS46EMAwFwL7/pZntbDI82ySNRpUVQt1QYWHFn88nXldxrf67uvPwwsXFHXOTF1/j9fs5q+tk87i4uCe5q4jR+83kvzc2XFzcV3J7B53k0IOLi/s/uMkTkuQHFxf3ndx50pLXNA7lari4uAPu/DXz6y31XVxc3BZ33iCphqfR23FxcY9w84CSHHr+3lIvkOHi4p7n5qMSycvydCUvp958V1xc3G3cahiqDmckm0mehouLe4abhLBJ2pMnOcnnwMXFPcnN91Q9mkyC402uhouLu5nbK4hUB7Dygshj7RZcXNwWdzJykQe4PGzdlGJxcXEPcgtdlzieTJouyyfg4uJ+iZuHmEIAKhZGC4EMFxd3A7fXWO01VHoZWKGyi4uLu41bHbBIjibVOw/Xd3FxcQfc/CCSp0m9Ea6oyYqLi3uQO09+8gSp+RtcXNzN3Ku48s5tzioMWODi4h7hToYwqoGvuuE8OOLi4u7gzkuck7Jp3srFxcU9z62GoV7a00t+cHFx38+dN1Tylm2haoKLi/tV7u61Pe7i4uLG3OroZLUgkhReo4+Fi4t7hFsNLgklH+jsFWpxcXG3cX8ANOeaeR6sBV0AAAAASUVORK5CYII=" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAAB0klEQVR42u3ay2rDMBAFUP//T6dQuggEiTsjWXHhaGXUND7KYpiHriter9/1+Tzaed9/X5/71x0LFxd3mfuarjlodJjRkZIDjD6Di4t7npsjclCynxtwcXGfyR2FqvkB5lkKLi7uf+fmaVBS2ODi4j6f2ytOVl58e62Gi4u7wF1pmO56PtTfxcXFXZ5KJE2QeeNj13v/vhMXF/cItzc03dXgSFotV/WLcHFxl7nz0FMtgaKmRjyyHYYwXFzcm7kroacXkvIx7fC9uLi4R7hJ+lJtp/aGr3k+g4uLex+39+K8GZpAC6ENFxf3CHfX9alqSpQPWcsVFS4u7jJ3fVjSK2CaY1dcXNwj3KVqqZWgVH+awjFwcXE3cZOQtBLUkvSlMLjFxcU9yO1dyap+MqcPfzhcXNwj3F5hUy1akvQlb83g4uLeza2GquqIdP0yFi4u7re4vRZqtaXSa4bi4uJ+i1stgar7vWZr9A+4uLg3cKsBpdriTAqbaqGFi4t7hpsHr+ogNv9r4ZIWLi7uQe56o7M3Jim3VHBxcR/G7WVP87CYj2FwcXGfzE2CTpIqVce6uLi457nVBCV/LoN2tUVwcXH3xKVmQVK9slkdyuLi4h7k/gAQ4r5VilTgigAAAABJRU5ErkJggg==" alt="微信分享二维码">
 </div>
 
 
