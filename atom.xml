@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://fudali.cc/"/>
-  <updated>2017-03-20T07:26:07.000Z</updated>
+  <updated>2017-03-20T09:14:08.000Z</updated>
   <id>http://fudali.cc/</id>
   
   <author>
@@ -20,9 +20,14 @@
     <link href="http://fudali.cc/2017/03/20/linux/"/>
     <id>http://fudali.cc/2017/03/20/linux/</id>
     <published>2017-03-19T16:00:00.000Z</published>
-    <updated>2017-03-20T07:26:07.000Z</updated>
+    <updated>2017-03-20T09:14:08.000Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="内核日志"><a href="#内核日志" class="headerlink" title="内核日志"></a>内核日志</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat /var/log/messages</div></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<h2 id="内核日志"><a href="#内核日志" class="headerlink" title="内核日志"></a>内核日志</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat /var/log/messages</div></pre></td></tr></table></figure>
+<h2 id="linux内存不足时kill进程策略"><a href="#linux内存不足时kill进程策略" class="headerlink" title="linux内存不足时kill进程策略"></a>linux内存不足时kill进程策略</h2><p>OOM_killer是Linux自我保护的方式，在内存不足时将被唤醒，调出<code>/proc/{pid}/oom_score</code>最大者并将之kill掉</p>
+<p>为了保护重要进程不被OOM_killer kill掉，可以配置<code>/proc/{pid}/oom_score_adj</code>,此值为内核在为每个进行打分时的附加值，最后得分等于实际值+该值<br>顾可以使用<code>echo -20 &gt; /proc/{pid}/oom_score_adj</code>为实际值减去20(最后得分越小越不易被杀掉)</p>
+<p>root进程默认获取-30的附加值<br><a href="http://www.vpsee.com/2013/10/how-to-configure-the-linux-oom-killer/" target="_blank" rel="external">详细来源，从源码的角度讲解</a><br><a href="https://github.com/torvalds/linux/blob/master/mm/oom_kill.c#L172-L222" target="_blank" rel="external">计算oom_score的函数linux源码</a></p>
+<p>获取进程oom_score脚本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">for proc in $(find /proc -maxdepth 1 -regex &apos;/proc/[0-9]+&apos;); do</div><div class="line">    printf &quot;%2d %5d %s\n&quot; \</div><div class="line">        &quot;$(cat $proc/oom_score)&quot; \</div><div class="line">        &quot;$(basename $proc)&quot; \</div><div class="line">        &quot;$(cat $proc/cmdline | tr &apos;\0&apos; &apos; &apos; | head -c 50)&quot;</div><div class="line">done 2&gt;/dev/null | sort -nr | head -n 10</div></pre></td></tr></table></figure></p>
+]]></content>
     
     <summary type="html">
     

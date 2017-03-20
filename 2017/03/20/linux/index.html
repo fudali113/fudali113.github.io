@@ -20,16 +20,22 @@
     
     
     <meta name="keywords" content="linux">
-    <meta name="description" content="内核日志1cat /var/log/messages">
+    <meta name="description" content="内核日志1cat /var/log/messages
+linux内存不足时kill进程策略OOM_killer是Linux自我保护的方式，在内存不足时将被唤醒，调出/proc/{pid}/oom_score最大者并将之kill掉
+为了保护重要进程不被OOM_killer kill掉，可以配置/proc/{pid}/oom_score_adj,此值为内核在为每个进行打分时的附加值，最后得分等于实际值">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux常用知识">
 <meta property="og:url" content="http://fudali.cc/2017/03/20/linux/index.html">
 <meta property="og:site_name" content="fudali">
-<meta property="og:description" content="内核日志1cat /var/log/messages">
-<meta property="og:updated_time" content="2017-03-20T07:26:07.000Z">
+<meta property="og:description" content="内核日志1cat /var/log/messages
+linux内存不足时kill进程策略OOM_killer是Linux自我保护的方式，在内存不足时将被唤醒，调出/proc/{pid}/oom_score最大者并将之kill掉
+为了保护重要进程不被OOM_killer kill掉，可以配置/proc/{pid}/oom_score_adj,此值为内核在为每个进行打分时的附加值，最后得分等于实际值">
+<meta property="og:updated_time" content="2017-03-20T09:14:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux常用知识">
-<meta name="twitter:description" content="内核日志1cat /var/log/messages">
+<meta name="twitter:description" content="内核日志1cat /var/log/messages
+linux内存不足时kill进程策略OOM_killer是Linux自我保护的方式，在内存不足时将被唤醒，调出/proc/{pid}/oom_score最大者并将之kill掉
+为了保护重要进程不被OOM_killer kill掉，可以配置/proc/{pid}/oom_score_adj,此值为内核在为每个进行打分时的附加值，最后得分等于实际值">
     
         <link rel="alternative" href="/atom.xml" title="fudali" type="application/atom+xml">
     
@@ -153,7 +159,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#内核日志"><span class="post-toc-number">1.</span> <span class="post-toc-text">内核日志</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#内核日志"><span class="post-toc-number">1.</span> <span class="post-toc-text">内核日志</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#linux内存不足时kill进程策略"><span class="post-toc-number">2.</span> <span class="post-toc-text">linux内存不足时kill进程策略</span></a></li></ol>
         </nav>
     </aside>
     
@@ -177,13 +183,18 @@
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
             <h2 id="内核日志"><a href="#内核日志" class="headerlink" title="内核日志"></a>内核日志</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat /var/log/messages</div></pre></td></tr></table></figure>
+<h2 id="linux内存不足时kill进程策略"><a href="#linux内存不足时kill进程策略" class="headerlink" title="linux内存不足时kill进程策略"></a>linux内存不足时kill进程策略</h2><p>OOM_killer是Linux自我保护的方式，在内存不足时将被唤醒，调出<code>/proc/{pid}/oom_score</code>最大者并将之kill掉</p>
+<p>为了保护重要进程不被OOM_killer kill掉，可以配置<code>/proc/{pid}/oom_score_adj</code>,此值为内核在为每个进行打分时的附加值，最后得分等于实际值+该值<br>顾可以使用<code>echo -20 &gt; /proc/{pid}/oom_score_adj</code>为实际值减去20(最后得分越小越不易被杀掉)</p>
+<p>root进程默认获取-30的附加值<br><a href="http://www.vpsee.com/2013/10/how-to-configure-the-linux-oom-killer/" target="_blank" rel="external">详细来源，从源码的角度讲解</a><br><a href="https://github.com/torvalds/linux/blob/master/mm/oom_kill.c#L172-L222" target="_blank" rel="external">计算oom_score的函数linux源码</a></p>
+<p>获取进程oom_score脚本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">for proc in $(find /proc -maxdepth 1 -regex &apos;/proc/[0-9]+&apos;); do</div><div class="line">    printf &quot;%2d %5d %s\n&quot; \</div><div class="line">        &quot;$(cat $proc/oom_score)&quot; \</div><div class="line">        &quot;$(basename $proc)&quot; \</div><div class="line">        &quot;$(cat $proc/cmdline | tr &apos;\0&apos; &apos; &apos; | head -c 50)&quot;</div><div class="line">done 2&gt;/dev/null | sort -nr | head -n 10</div></pre></td></tr></table></figure></p>
+
         </div>
 
         <blockquote class="post-copyright">
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2017-03-20T07:26:07.000Z" itemprop="dateUpdated">2017年3月20日 15:26</time>
+    最后更新时间：<time datetime="2017-03-20T09:14:08.000Z" itemprop="dateUpdated">2017年3月20日 17:14</time>
 </span><br>
 
 

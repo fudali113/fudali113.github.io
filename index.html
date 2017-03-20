@@ -176,6 +176,8 @@
 
     
         内核日志1cat /var/log/messages
+linux内存不足时kill进程策略OOM_killer是Linux自我保护的方式，在内存不足时将被唤醒，调出/proc/{pid}/oom_score最大者并将之kill掉
+为了保护重要进程不被OOM_killer kill掉，可以配置/proc/{pid}...
     
 
         <a href="/2017/03/20/linux/" class="post-more waves-effect waves-button">
