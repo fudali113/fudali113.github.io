@@ -47,7 +47,7 @@ func main() {
 }
 
 ```
-[golang code in github](https://github.com/fudali113/learn-basic/blob/master/sort/insertion/insertion.go)
+[golang code on github](https://github.com/fudali113/learn-basic/blob/master/sort/insertion/insertion.go)
 
   ### java ###
   ```
@@ -82,7 +82,7 @@ public class Insertion {
 
 }
   ```
-[java code in github](https://github.com/fudali113/learn-basic/blob/master/sort/insertion/Insertion.java)
+[java code on github](https://github.com/fudali113/learn-basic/blob/master/sort/insertion/Insertion.java)
 
 
 

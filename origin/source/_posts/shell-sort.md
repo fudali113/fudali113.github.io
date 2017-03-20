@@ -43,7 +43,7 @@ func main() {
 	}
 }
 ```
-[golang code in github](https://github.com/fudali113/learn-basic/blob/master/sort/shell/shell.go)
+[golang code on github](https://github.com/fudali113/learn-basic/blob/master/sort/shell/shell.go)
 
 
 ## 总结 ##

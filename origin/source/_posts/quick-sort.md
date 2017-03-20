@@ -111,6 +111,7 @@ func median3(array []int, left, right int) int {
 
 
 ```
+[golang code on github](https://github.com/fudali113/learn-basic/blob/master/sort/quick/quick.go)
 ## 总结 ##
 
 平均运行时间：O(NlogN)

@@ -49,7 +49,7 @@ func merge(a1 []int, a2 []int) []int {
 }
 
 ```
-[golang code in github](https://github.com/fudali113/learn-basic/blob/master/sort/merge/merge.go)
+[golang code on github](https://github.com/fudali113/learn-basic/blob/master/sort/merge/merge.go)
 
 ## 总结 ##
 

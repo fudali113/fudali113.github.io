@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>数据结构-堆 | fudali | do one`s best</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="golang,学习,ADT">
+    <meta name="description" content="前言堆又称为优先队列，支持插入和删除堆顶操作；分为最小堆、最大堆、还有一种扩展实现对顶堆，常用语实时获取中位数；在贪婪算法的实现即是基于堆，该算法通过反复最小元来进行操作；
+下虑插入下虑插入主要用在delete操作，此时顶刚好空缺并且堆中少了一个元素,因此现在堆中最后一个元素(暂且命名为X)必须移动到该堆的某个位置。
+如果X可以放入堆顶，那么delete操作完成。
+但是这一般不太可能，因此我们将空">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构-堆">
+<meta property="og:url" content="http://fudali.cc/2017/03/20/adt-heap/index.html">
+<meta property="og:site_name" content="fudali">
+<meta property="og:description" content="前言堆又称为优先队列，支持插入和删除堆顶操作；分为最小堆、最大堆、还有一种扩展实现对顶堆，常用语实时获取中位数；在贪婪算法的实现即是基于堆，该算法通过反复最小元来进行操作；
+下虑插入下虑插入主要用在delete操作，此时顶刚好空缺并且堆中少了一个元素,因此现在堆中最后一个元素(暂且命名为X)必须移动到该堆的某个位置。
+如果X可以放入堆顶，那么delete操作完成。
+但是这一般不太可能，因此我们将空">
+<meta property="og:image" content="http://fudali.cc/images/percolate-down.jpeg">
+<meta property="og:image" content="http://fudali.cc/images/percolate-up1.jpeg">
+<meta property="og:image" content="http://fudali.cc/images/percolate-up2.jpeg">
+<meta property="og:updated_time" content="2017-03-20T15:24:19.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据结构-堆">
+<meta name="twitter:description" content="前言堆又称为优先队列，支持插入和删除堆顶操作；分为最小堆、最大堆、还有一种扩展实现对顶堆，常用语实时获取中位数；在贪婪算法的实现即是基于堆，该算法通过反复最小元来进行操作；
+下虑插入下虑插入主要用在delete操作，此时顶刚好空缺并且堆中少了一个元素,因此现在堆中最后一个元素(暂且命名为X)必须移动到该堆的某个位置。
+如果X可以放入堆顶，那么delete操作完成。
+但是这一般不太可能，因此我们将空">
+<meta name="twitter:image" content="http://fudali.cc/images/percolate-down.jpeg">
+    
+        <link rel="alternative" href="/atom.xml" title="fudali" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/logo.jpg">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.11">
+    <link rel="apple-touch-icon" sizes="114x114" href="img/logo.jpg">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">fudali</h5>
+          <a href="mailto:fudali113@gmail.com" title="fudali113@gmail.com" class="mail">fudali113@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/fudali113" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">数据结构-堆</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">数据结构-堆</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-03-19T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2017-03-20
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/数据结构/">数据结构</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#下虑插入"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">下虑插入</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#上虑插入"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">上虑插入</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#代码"><span class="post-toc-number">2.</span> <span class="post-toc-text">代码</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#go"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">go</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-number">3.</span> <span class="post-toc-text">总结</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-adt-heap"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">数据结构-堆</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017年03月20日 0:00" datetime="2017-03-19T16:00:00.000Z"  itemprop="datePublished">2017-03-20</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/数据结构/">数据结构</a></li></ul>
+
+
+
+            
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>堆又称为优先队列，支持插入和删除堆顶操作；<br>分为最小堆、最大堆、还有一种扩展实现对顶堆，常用语实时获取中位数；<br>在贪婪算法的实现即是基于堆，该算法通过反复最小元来进行操作；</p>
+<h3 id="下虑插入"><a href="#下虑插入" class="headerlink" title="下虑插入"></a>下虑插入</h3><p>下虑插入主要用在delete操作，此时顶刚好空缺并且堆中少了一个元素,因此现在堆中最后一个元素(暂且命名为X)必须移动到该堆的某个位置。</p>
+<p>如果X可以放入堆顶，那么delete操作完成。</p>
+<p>但是这一般不太可能，因此我们将空缺位置的两个儿子中优先级(根据最大堆或者最小堆优先级可能不同)更大与空缺位置调换；此时空缺位置被推向想一层。重复改步鄹直到X可以放入空缺位置。</p>
+<p>这种一般的策略叫做下虑；<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/percolate-down.jpeg" alt="下虑插入示意图" title="">
+                </div>
+                <div class="image-caption">下虑插入示意图</div>
+            </figure></p>
+<h3 id="上虑插入"><a href="#上虑插入" class="headerlink" title="上虑插入"></a>上虑插入</h3><p>上虑插入主要用于insert操作，此时堆中处于平衡状态，因此现在在堆尾建立一个一个空缺位置；</p>
+<p>在空缺位置与其父节点进行对比优先级，若插入元素优先级更高，则将空缺位置与父节点调换位置；</p>
+<p>此时空缺位置已被推上一层，重复吃步鄹直到找到合适的空缺位置。</p>
+<p>这种一般的策略叫做上虑；<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/percolate-up1.jpeg" alt="上虑插入示意图1" title="">
+                </div>
+                <div class="image-caption">上虑插入示意图1</div>
+            </figure><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/percolate-up2.jpeg" alt="上虑插入示意图2" title="">
+                </div>
+                <div class="image-caption">上虑插入示意图2</div>
+            </figure></p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="go"><a href="#go" class="headerlink" title="go"></a>go</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div></pre></td><td class="code"><pre><div class="line">package adt</div><div class="line"></div><div class="line">import &quot;fmt&quot;</div><div class="line"></div><div class="line">// Heap 堆结构</div><div class="line">// 数组形式为index为0的元素默认为空，总index为1元素开始</div><div class="line">// 方便定位元素</div><div class="line">// 即如往堆里插入1,2,3,4,5</div><div class="line">// 数组元素为[0,1,2,3,4,5]</div><div class="line">type Heap struct &#123;</div><div class="line">	array []int</div><div class="line">	isMax bool // 表示最大堆还是最小堆</div><div class="line">&#125;</div><div class="line"></div><div class="line">// GetHeap 获取一个Heap实列</div><div class="line">func GetHeap(isMax bool) *Heap &#123;</div><div class="line">	return &amp;Heap&#123;array: make([]int, 1, 8), isMax: isMax&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// Insert 插入一个元素</div><div class="line">func (h *Heap) Insert(value int) &#123;</div><div class="line">	if h.array == nil &#123;</div><div class="line">		h.array = make([]int, 1, 8)</div><div class="line">	&#125;</div><div class="line">	h.array = insert(h.array, value, h.isMax)</div><div class="line">&#125;</div><div class="line"></div><div class="line">// Delete 删除并获取堆顶</div><div class="line">func (h *Heap) Delete() (top int, err error) &#123;</div><div class="line">	h.array, top, err = reset(h.array, h.isMax)</div><div class="line">	return top, err</div><div class="line">&#125;</div><div class="line"></div><div class="line">// getCompareResult 比较</div><div class="line">func getCompareResult(o1, o2 int, isMax bool) int &#123;</div><div class="line">	if o1 == o2 &#123;</div><div class="line">		return 0</div><div class="line">	&#125;</div><div class="line">	if isMax &#123;</div><div class="line">		if o1 &gt; o2 &#123;</div><div class="line">			return 1</div><div class="line">		&#125;</div><div class="line">		return -1</div><div class="line">	&#125;</div><div class="line">	if o1 &lt; o2 &#123;</div><div class="line">		return 1</div><div class="line">	&#125;</div><div class="line">	return -1</div><div class="line">&#125;</div><div class="line"></div><div class="line">//</div><div class="line">//</div><div class="line">// Insert 相关函数</div><div class="line">//</div><div class="line">//</div><div class="line"></div><div class="line">// insert 根据堆性质想数组中插入一个元素</div><div class="line">func insert(array []int, value int, isMax bool) (nowArray []int) &#123;</div><div class="line">	nowArray = append(array, 0)</div><div class="line">	insertIndex := getInsertIndex(nowArray, len(array), value, isMax)</div><div class="line">	nowArray[insertIndex] = value</div><div class="line">	return nowArray</div><div class="line">&#125;</div><div class="line"></div><div class="line">// getInsertIndex 递归获取插入元素的数组下标</div><div class="line">// 使用上虑策略</div><div class="line">func getInsertIndex(array []int, nowIndex int, value int, isMax bool) int &#123;</div><div class="line">	if nowIndex &lt; 2 &#123;</div><div class="line">		return 1</div><div class="line">	&#125;</div><div class="line">	faIndex := getFaIndex(nowIndex)</div><div class="line">	if getCompareResult(array[faIndex], value, isMax) &gt;= 0 &#123;</div><div class="line">		return nowIndex</div><div class="line">	&#125;</div><div class="line">	array[faIndex], array[nowIndex] = array[nowIndex], array[faIndex]</div><div class="line">	return getInsertIndex(array, faIndex, value, isMax)</div><div class="line">&#125;</div><div class="line"></div><div class="line">// getFaIndex 获取一个元素的父级元素数组下标</div><div class="line">func getFaIndex(index int) int &#123;</div><div class="line">	return index / 2</div><div class="line">&#125;</div><div class="line"></div><div class="line">//</div><div class="line">//</div><div class="line">// Delete 相关函数</div><div class="line">//</div><div class="line">//</div><div class="line"></div><div class="line">const (</div><div class="line">	noGo = iota</div><div class="line">	goLeft</div><div class="line">	goRight</div><div class="line">)</div><div class="line"></div><div class="line">// reset 重设置一个数组</div><div class="line">func reset(array []int, isMax bool) (nowArray []int, topValue int, err error) &#123;</div><div class="line">	lastIndex := len(array) - 1</div><div class="line">	if lastIndex == 1 &#123;</div><div class="line">		topValue = array[1]</div><div class="line">		nowArray = array[:lastIndex]</div><div class="line">		return</div><div class="line">	&#125; else if lastIndex &lt; 1 &#123;</div><div class="line">		return array, 0, fmt.Errorf(&quot;堆中已无元素&quot;)</div><div class="line">	&#125;</div><div class="line">	topValue, array[1] = array[1], 0</div><div class="line">	value := array[len(array)-1]</div><div class="line">	nowArray = array[:len(array)-1]</div><div class="line">	lastInsertIndex := getLastInsertIndex(nowArray, 1, value, isMax)</div><div class="line">	nowArray[lastInsertIndex] = value</div><div class="line">	return</div><div class="line">&#125;</div><div class="line"></div><div class="line">// getLastInsertIndex 下虑</div><div class="line">func getLastInsertIndex(array []int, nowIndex int, value int, isMax bool) int &#123;</div><div class="line">	status := noGo</div><div class="line">	lastIndex := len(array) - 1</div><div class="line">	leftIndex, rightIndex := getSonIndex(nowIndex)</div><div class="line">	if lastIndex &gt;= rightIndex &#123;</div><div class="line">		left, right := array[leftIndex], array[rightIndex]</div><div class="line">		status = getStatus(left, right, value, isMax)</div><div class="line">	&#125; else if lastIndex == leftIndex &amp;&amp; getCompareResult(array[leftIndex], value, isMax) &gt;= 0 &#123;</div><div class="line">		status = goLeft</div><div class="line">	&#125;</div><div class="line">	switch status &#123;</div><div class="line">	case noGo:</div><div class="line">		return nowIndex</div><div class="line">	case goLeft:</div><div class="line">		array[nowIndex], array[leftIndex] = array[leftIndex], value</div><div class="line">		return getLastInsertIndex(array, leftIndex, value, isMax)</div><div class="line">	case goRight:</div><div class="line">		array[nowIndex], array[rightIndex] = array[rightIndex], value</div><div class="line">		return getLastInsertIndex(array, rightIndex, value, isMax)</div><div class="line">	&#125;</div><div class="line">	panic(&quot;--&quot;)</div><div class="line">&#125;</div><div class="line"></div><div class="line">// getSonIndex 获取一个元素的左右子元素数组下标</div><div class="line">func getSonIndex(index int) (left, right int) &#123;</div><div class="line">	return 2 * index, 2*index + 1</div><div class="line">&#125;</div><div class="line"></div><div class="line">// getStatus 根据三个值获取走那边获取步鄹</div><div class="line">func getStatus(left, right, value int, isMax bool) (res int) &#123;</div><div class="line">	res = 0</div><div class="line">	if getCompareResult(left, value, isMax) &gt; 0 || getCompareResult(right, value, isMax) &gt; 0 &#123;</div><div class="line">		res++</div><div class="line">	&#125; else &#123;</div><div class="line">		return</div><div class="line">	&#125;</div><div class="line">	if getCompareResult(right, left, isMax) &gt; 0 &#123;</div><div class="line">		res++</div><div class="line">	&#125;</div><div class="line">	return</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><a href="https://github.com/fudali113/learn-basic/blob/master/adt/head.go" target="_blank" rel="external">golang code on github</a></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>插入时间复杂度：O(logN)</p>
+<p>堆的实现确实惊为天人，如何的有魅力。<br>特别是上虑与下虑策略的思想，真是让人大开眼界。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-03-20T15:24:19.000Z" itemprop="dateUpdated">2017年3月20日 23:24</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="http://fudali.cc">
+            <img src="/img/logo.jpg" alt="fudali">
+            fudali
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ADT/">ADT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/golang/">golang</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习/">学习</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2017/03/20/adt-heap/&title=《数据结构-堆》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2017/03/20/adt-heap/&title=《数据结构-堆》 — fudali&source=do one`s best APE" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://fudali.cc/2017/03/20/adt-heap/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《数据结构-堆》 — fudali&url=http://fudali.cc/2017/03/20/adt-heap/&via=http://fudali.cc" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://fudali.cc/2017/03/20/adt-heap/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/03/20/sort/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">排序</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="adt-heap" data-title="数据结构-堆" data-url="http://fudali.cc/2017/03/20/adt-heap/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'fudali', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.11');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top" style="height:50px">
+        <p>
+            <span>do one`s best APE</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>fudali &copy; 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2017/03/20/adt-heap/&title=《数据结构-堆》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2017/03/20/adt-heap/&title=《数据结构-堆》 — fudali&source=do one`s best APE" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://fudali.cc/2017/03/20/adt-heap/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《数据结构-堆》 — fudali&url=http://fudali.cc/2017/03/20/adt-heap/&via=http://fudali.cc" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://fudali.cc/2017/03/20/adt-heap/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABzElEQVR42u3aQY7DIAwF0N7/0p0LTDL/G8K00mNVRSE8urCMzesVj/ftaN+8mrtt4OLiLnPbBRL0Fev+d/RlXFzcg9yrxWa/k4B1P/fyOS4u7kdyZ7g8wOHi4n4v9/7N2RNcXNxP4yaHn9lm8rRp81kNFxd3gbu+zK7D0ub6Li4u7oj7LsdsY7Omyy9zcXFxj3DzgJK3V/MnswIKLi7u09yVRCQJTEmwS/6a13rehIuLG3PbkkSepkQRNE6MfvmPcXFxH+Mm1yjba1WzasZ9CMPFxT3PnaGLZRYSo8sqDi4u7mPcWblz1/batg0uLu7/cmeJzq7SSZ484eLiPsHNw1Zb/kiSoTrw4eLiHuGupDLtknlh9I/v4OLiHuHmgawNebPDT9SOxcXFfZjbTi76twtJz9I9Mlxc3K3cNpAlEaZtkESHH1xc3CPcJJy1RZN8S8U7uLi4D3Pf5XjFI5lVfx8XF/cId7b8SlulvWYx3AwuLu4yN29p5AXWthRbXNTAxcU9yM3DUFvmmB2x6vouLi7uB3DzhkqSvhSNWFxc3C/hFmFodOVicyDDxcWNue3VyVkDZtaaxcXFPc9dCS73qUl7hWtzfRcXF3fC/QEB5+IxVOC8KgAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.11"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.11" async></script>
+
+
+
+
+
+
+
+</body>
+</html>
