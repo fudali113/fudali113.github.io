@@ -77,7 +77,7 @@
     <link href="http://fudali.cc/2017/03/20/sort/"/>
     <id>http://fudali.cc/2017/03/20/sort/</id>
     <published>2017-03-19T16:00:00.000Z</published>
-    <updated>2017-03-19T16:32:33.000Z</updated>
+    <updated>2017-03-20T15:45:01.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="排序算法稳定性"><a href="#排序算法稳定性" class="headerlink" title="排序算法稳定性"></a>排序算法稳定性</h2><p>假定在待排序的记录序列中，存在多个具有相同的关键字的记录，若经过排序，这些记录的相对次序保持不变，即在原序列中，ri=rj，且ri在rj之前，而在排序后的序列中，ri仍在rj之前，则称这种排序算法是稳定的；否则称为不稳定的。</p>
 <p>对于不稳定的排序算法，只要举出一个实例，即可说明它的不稳定性；而对于稳定的排序算法，必须对算法进行分析从而得到稳定的特性。需要注意的是，排序算法是否为稳定的是由具体算法决定的，不稳定的算法在某种条件下可以变为稳定的算法，而稳定的算法在某种条件下也可以变为不稳定的算法。</p>
@@ -88,7 +88,9 @@
                     <img src="/images/sort.jpg" alt="各算法时间复杂度与是否稳定对照表" title="">
                 </div>
                 <div class="image-caption">各算法时间复杂度与是否稳定对照表</div>
-            </figure>]]></content>
+            </figure>
+<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><p><a href="https://juejin.im/post/58ca051f61ff4b0060165122#数据结构" target="_blank" rel="external">掘金算法文章,包含各种算法</a></p>
+]]></content>
     
     <summary type="html">
     
