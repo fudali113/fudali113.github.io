@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://fudali.cc/"/>
-  <updated>2017-03-20T15:24:19.000Z</updated>
+  <updated>2017-03-22T14:58:25.000Z</updated>
   <id>http://fudali.cc/</id>
   
   <author>
@@ -14,6 +14,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>数据结构-对顶堆</title>
+    <link href="http://fudali.cc/2017/03/22/adt-median-heap/"/>
+    <id>http://fudali.cc/2017/03/22/adt-median-heap/</id>
+    <published>2017-03-21T16:00:00.000Z</published>
+    <updated>2017-03-22T14:58:25.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>对顶堆，用于实时求解中位数<br>用一个最大堆和一个最小堆组成一个结构体<br>对插入元素进行操作并使最大堆元素与最少堆元素最多只能有一个交点(集两个堆顶相等)且保证两个堆的长度差距不能大于1</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div></pre></td><td class="code"><pre><div class="line">package adt</div><div class="line"></div><div class="line">import &quot;log&quot;</div><div class="line"></div><div class="line">// MedianHeap 实时求解中位数堆</div><div class="line">type MedianHeap struct &#123;</div><div class="line">	min *Heap</div><div class="line">	max *Heap</div><div class="line">&#125;</div><div class="line"></div><div class="line">// GetMedianHeap 获取一个中位数堆</div><div class="line">func GetMedianHeap() MedianHeap &#123;</div><div class="line">	return MedianHeap&#123;min: GetHeap(false), max: GetHeap(true)&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// Len 获取实际长度</div><div class="line">func (mh MedianHeap) Len() int &#123;</div><div class="line">	return mh.min.Len() + mh.max.Len()</div><div class="line">&#125;</div><div class="line"></div><div class="line">// Insert 添加一个元素</div><div class="line">func (mh MedianHeap) Insert(value int) &#123;</div><div class="line">	if mh.min.Len() == 0 &#123;</div><div class="line">		mh.min.Insert(value)</div><div class="line">		return</div><div class="line">	&#125;</div><div class="line">	if mh.max.Len() == 0 &#123;</div><div class="line">		minValue, _ := mh.min.Get()</div><div class="line">		if value &gt; minValue &#123;</div><div class="line">			mh.min.Delete()</div><div class="line">			mh.min.Insert(value)</div><div class="line">			mh.max.Insert(minValue)</div><div class="line">		&#125; else &#123;</div><div class="line">			mh.max.Insert(value)</div><div class="line">		&#125;</div><div class="line">		return</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	if mh.insertMin(value) &#123;</div><div class="line">		mh.min.Insert(value)</div><div class="line">	&#125; else &#123;</div><div class="line">		mh.max.Insert(value)</div><div class="line">	&#125;</div><div class="line">	mh.reset()</div><div class="line">&#125;</div><div class="line"></div><div class="line">// GetMedian 实时获取中位数</div><div class="line">func (mh MedianHeap) GetMedian() (median float32) &#123;</div><div class="line">	log.Println(&quot;GetMedian log:&quot;, mh.min, &quot;---&quot;, mh.max)</div><div class="line">	minL, maxL := mh.min.Len(), mh.max.Len()</div><div class="line">	if mh.Len() == 0 &#123;</div><div class="line">		return 0</div><div class="line">	&#125;</div><div class="line">	gap := minL - maxL</div><div class="line">	switch gap &#123;</div><div class="line">	case 1:</div><div class="line">		minV, _ := mh.min.Get()</div><div class="line">		median = float32(minV)</div><div class="line">	case 0:</div><div class="line">		minV, _ := mh.min.Get()</div><div class="line">		maxV, _ := mh.max.Get()</div><div class="line">		median = (float32(minV) + float32(maxV)) / 2</div><div class="line">	case -1:</div><div class="line">		maxV, _ := mh.max.Get()</div><div class="line">		median = float32(maxV)</div><div class="line">	default:</div><div class="line">		mh.reset()</div><div class="line">		mh.GetMedian()</div><div class="line">	&#125;</div><div class="line">	return</div><div class="line">&#125;</div><div class="line"></div><div class="line">func (mh MedianHeap) insertMin(value int) bool &#123;</div><div class="line">	minV, _ := mh.min.Get()</div><div class="line">	maxV, _ := mh.max.Get()</div><div class="line">	minL, maxL := mh.min.Len(), mh.max.Len()</div><div class="line">	if value &gt; minV &#123;</div><div class="line">		return true</div><div class="line">	&#125; else if value &gt;= maxV &#123;</div><div class="line">		if minL &gt; maxL &#123;</div><div class="line">			return false</div><div class="line">		&#125;</div><div class="line">		return true</div><div class="line">	&#125;</div><div class="line">	return false</div><div class="line">&#125;</div><div class="line"></div><div class="line">func (mh MedianHeap) reset() &#123;</div><div class="line">	minL, maxL := mh.min.Len(), mh.max.Len()</div><div class="line">	gap := minL - maxL</div><div class="line">	if gap &gt;= 2 &#123;</div><div class="line">		minV, _ := mh.min.Delete()</div><div class="line">		mh.max.Insert(minV)</div><div class="line">	&#125; else if gap &lt;= -2 &#123;</div><div class="line">		maxV, _ := mh.max.Delete()</div><div class="line">		mh.min.Insert(maxV)</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><a href="https://github.com/fudali113/learn-basic/blob/master/adt/median_head.go" target="_blank" rel="external">golang code on github</a></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>TODO</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;对顶堆，用于实时求解中位数&lt;br&gt;用一个最大堆和一个最小堆组成一个结构体&lt;br&gt;对插入元素进行操作并使最大堆元素与最少堆元素最多只能有一个交
+    
+    </summary>
+    
+      <category term="数据结构" scheme="http://fudali.cc/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+    
+      <category term="golang" scheme="http://fudali.cc/tags/golang/"/>
+    
+      <category term="学习" scheme="http://fudali.cc/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="ADT" scheme="http://fudali.cc/tags/ADT/"/>
+    
+  </entry>
   
   <entry>
     <title>数据结构-堆</title>
@@ -73,6 +103,33 @@
   </entry>
   
   <entry>
+    <title>linux常用知识</title>
+    <link href="http://fudali.cc/2017/03/20/linux/"/>
+    <id>http://fudali.cc/2017/03/20/linux/</id>
+    <published>2017-03-19T16:00:00.000Z</published>
+    <updated>2017-03-20T09:14:08.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="内核日志"><a href="#内核日志" class="headerlink" title="内核日志"></a>内核日志</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat /var/log/messages</div></pre></td></tr></table></figure>
+<h2 id="linux内存不足时kill进程策略"><a href="#linux内存不足时kill进程策略" class="headerlink" title="linux内存不足时kill进程策略"></a>linux内存不足时kill进程策略</h2><p>OOM_killer是Linux自我保护的方式，在内存不足时将被唤醒，调出<code>/proc/{pid}/oom_score</code>最大者并将之kill掉</p>
+<p>为了保护重要进程不被OOM_killer kill掉，可以配置<code>/proc/{pid}/oom_score_adj</code>,此值为内核在为每个进行打分时的附加值，最后得分等于实际值+该值<br>顾可以使用<code>echo -20 &gt; /proc/{pid}/oom_score_adj</code>为实际值减去20(最后得分越小越不易被杀掉)</p>
+<p>root进程默认获取-30的附加值<br><a href="http://www.vpsee.com/2013/10/how-to-configure-the-linux-oom-killer/" target="_blank" rel="external">详细来源，从源码的角度讲解</a><br><a href="https://github.com/torvalds/linux/blob/master/mm/oom_kill.c#L172-L222" target="_blank" rel="external">计算oom_score的函数linux源码</a></p>
+<p>获取进程oom_score脚本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">for proc in $(find /proc -maxdepth 1 -regex &apos;/proc/[0-9]+&apos;); do</div><div class="line">    printf &quot;%2d %5d %s\n&quot; \</div><div class="line">        &quot;$(cat $proc/oom_score)&quot; \</div><div class="line">        &quot;$(basename $proc)&quot; \</div><div class="line">        &quot;$(cat $proc/cmdline | tr &apos;\0&apos; &apos; &apos; | head -c 50)&quot;</div><div class="line">done 2&gt;/dev/null | sort -nr | head -n 10</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;内核日志&quot;&gt;&lt;a href=&quot;#内核日志&quot; class=&quot;headerlink&quot; title=&quot;内核日志&quot;&gt;&lt;/a&gt;内核日志&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pr
+    
+    </summary>
+    
+      <category term="linux" scheme="http://fudali.cc/categories/linux/"/>
+    
+    
+      <category term="linux" scheme="http://fudali.cc/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
     <title>排序</title>
     <link href="http://fudali.cc/2017/03/20/sort/"/>
     <id>http://fudali.cc/2017/03/20/sort/</id>
@@ -110,33 +167,6 @@
   </entry>
   
   <entry>
-    <title>linux常用知识</title>
-    <link href="http://fudali.cc/2017/03/20/linux/"/>
-    <id>http://fudali.cc/2017/03/20/linux/</id>
-    <published>2017-03-19T16:00:00.000Z</published>
-    <updated>2017-03-20T09:14:08.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="内核日志"><a href="#内核日志" class="headerlink" title="内核日志"></a>内核日志</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat /var/log/messages</div></pre></td></tr></table></figure>
-<h2 id="linux内存不足时kill进程策略"><a href="#linux内存不足时kill进程策略" class="headerlink" title="linux内存不足时kill进程策略"></a>linux内存不足时kill进程策略</h2><p>OOM_killer是Linux自我保护的方式，在内存不足时将被唤醒，调出<code>/proc/{pid}/oom_score</code>最大者并将之kill掉</p>
-<p>为了保护重要进程不被OOM_killer kill掉，可以配置<code>/proc/{pid}/oom_score_adj</code>,此值为内核在为每个进行打分时的附加值，最后得分等于实际值+该值<br>顾可以使用<code>echo -20 &gt; /proc/{pid}/oom_score_adj</code>为实际值减去20(最后得分越小越不易被杀掉)</p>
-<p>root进程默认获取-30的附加值<br><a href="http://www.vpsee.com/2013/10/how-to-configure-the-linux-oom-killer/" target="_blank" rel="external">详细来源，从源码的角度讲解</a><br><a href="https://github.com/torvalds/linux/blob/master/mm/oom_kill.c#L172-L222" target="_blank" rel="external">计算oom_score的函数linux源码</a></p>
-<p>获取进程oom_score脚本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">for proc in $(find /proc -maxdepth 1 -regex &apos;/proc/[0-9]+&apos;); do</div><div class="line">    printf &quot;%2d %5d %s\n&quot; \</div><div class="line">        &quot;$(cat $proc/oom_score)&quot; \</div><div class="line">        &quot;$(basename $proc)&quot; \</div><div class="line">        &quot;$(cat $proc/cmdline | tr &apos;\0&apos; &apos; &apos; | head -c 50)&quot;</div><div class="line">done 2&gt;/dev/null | sort -nr | head -n 10</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;内核日志&quot;&gt;&lt;a href=&quot;#内核日志&quot; class=&quot;headerlink&quot; title=&quot;内核日志&quot;&gt;&lt;/a&gt;内核日志&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pr
-    
-    </summary>
-    
-      <category term="linux" scheme="http://fudali.cc/categories/linux/"/>
-    
-    
-      <category term="linux" scheme="http://fudali.cc/tags/linux/"/>
-    
-  </entry>
-  
-  <entry>
     <title>排序-快速排序</title>
     <link href="http://fudali.cc/2017/03/18/quick-sort/"/>
     <id>http://fudali.cc/2017/03/18/quick-sort/</id>
@@ -159,6 +189,42 @@
     <summary type="html">
     
       &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;快速排序是实践中一种快速的排序方式；他的平均运行时间是O(NlogN)，最坏运行时间是O(N^2)，但稍加努力可使最坏情形极难出现。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="算法" scheme="http://fudali.cc/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="golang" scheme="http://fudali.cc/tags/golang/"/>
+    
+      <category term="排序" scheme="http://fudali.cc/tags/%E6%8E%92%E5%BA%8F/"/>
+    
+      <category term="学习" scheme="http://fudali.cc/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>排序-归并排序</title>
+    <link href="http://fudali.cc/2017/03/17/merge-sort/"/>
+    <id>http://fudali.cc/2017/03/17/merge-sort/</id>
+    <published>2017-03-16T16:00:00.000Z</published>
+    <updated>2017-03-20T15:24:38.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>归并排序体现了递归分治的策略<br>思想是将数组拆分为两段，在对两段进行想通操作，直到数组元素为1，在对数组进行排序合并</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="go"><a href="#go" class="headerlink" title="go"></a>go</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">package merge</div><div class="line"></div><div class="line">// MergeSort 归并排序</div><div class="line">func MergeSort(array []int) []int &#123;</div><div class="line">	middle := len(array) / 2</div><div class="line">	if middle &lt; 1 &#123;</div><div class="line">		return array</div><div class="line">	&#125;</div><div class="line">	return merge(MergeSort(array[:middle]), MergeSort(array[middle:]))</div><div class="line">&#125;</div><div class="line"></div><div class="line">// merge 合并两个排好序的数组唯一组合两个元素并排好序的数组</div><div class="line">func merge(a1 []int, a2 []int) []int &#123;</div><div class="line">	a1Index := 0</div><div class="line">	a2Index := 0</div><div class="line">	res := make([]int, 0, len(a1)+len(a2))</div><div class="line">	for &#123;</div><div class="line">		if a1[a1Index] &lt;= a2[a2Index] &#123;</div><div class="line">			res = append(res, a1[a1Index])</div><div class="line">			if a1Index == len(a1)-1 &#123;</div><div class="line">				res = append(res, a2[a2Index:]...)</div><div class="line">				break</div><div class="line">			&#125;</div><div class="line">			a1Index++</div><div class="line">		&#125; else &#123;</div><div class="line">			res = append(res, a2[a2Index])</div><div class="line">			if a2Index == len(a1)-1 &#123;</div><div class="line">				res = append(res, a1[a1Index:]...)</div><div class="line">				break</div><div class="line">			&#125;</div><div class="line">			a2Index++</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	return res</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><a href="https://github.com/fudali113/learn-basic/blob/master/sort/merge/merge.go" target="_blank" rel="external">golang code on github</a></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>虽然归并排序的运行时间是O(NlogN)，但是他合并两个已排序数组到一个附加数组会更占用内存。</p>
+<p>与其他O(NlogN)的流行算法相比，归并排序是比较元素最少的，且运行时间严重依赖于比较元素和在数组(已经临时数组)中移动元素的开销(理论上使用更少内存的算法是可能的，但所得到的算法是复杂的和不实际的)。</p>
+<p>这些开销是于语言相关的(java中泛型数组中的元素是引用类型的，顾移动元素开销不大，所以归并排序是java泛型数组的默认排序方式。</p>
+<p>快速排序作为基础类型的排序方式，java基础类型是值传递的，因为比较与数据移动的开销是类似的，快排使用少得多的数据移动足以补偿那些附加的比较而且还有盈余)。</p>
+<p>在go中也存在相同的问题，所以在不同的输入数据选择不同的排序方式再能得到最好的性能。</p>
+<p>平均运行时间：O(NlogN)<br>最坏运行时间：O(NlogN)<br>是否稳定：稳定</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;归并排序体现了递归分治的策略&lt;br&gt;思想是将数组拆分为两段，在对两段进行想通操作，直到数组元素为1，在对数组进行排序合并&lt;/p&gt;
+&lt;h2 i
     
     </summary>
     
@@ -310,42 +376,6 @@
   </entry>
   
   <entry>
-    <title>排序-归并排序</title>
-    <link href="http://fudali.cc/2017/03/17/merge-sort/"/>
-    <id>http://fudali.cc/2017/03/17/merge-sort/</id>
-    <published>2017-03-16T16:00:00.000Z</published>
-    <updated>2017-03-20T15:24:38.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>归并排序体现了递归分治的策略<br>思想是将数组拆分为两段，在对两段进行想通操作，直到数组元素为1，在对数组进行排序合并</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="go"><a href="#go" class="headerlink" title="go"></a>go</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">package merge</div><div class="line"></div><div class="line">// MergeSort 归并排序</div><div class="line">func MergeSort(array []int) []int &#123;</div><div class="line">	middle := len(array) / 2</div><div class="line">	if middle &lt; 1 &#123;</div><div class="line">		return array</div><div class="line">	&#125;</div><div class="line">	return merge(MergeSort(array[:middle]), MergeSort(array[middle:]))</div><div class="line">&#125;</div><div class="line"></div><div class="line">// merge 合并两个排好序的数组唯一组合两个元素并排好序的数组</div><div class="line">func merge(a1 []int, a2 []int) []int &#123;</div><div class="line">	a1Index := 0</div><div class="line">	a2Index := 0</div><div class="line">	res := make([]int, 0, len(a1)+len(a2))</div><div class="line">	for &#123;</div><div class="line">		if a1[a1Index] &lt;= a2[a2Index] &#123;</div><div class="line">			res = append(res, a1[a1Index])</div><div class="line">			if a1Index == len(a1)-1 &#123;</div><div class="line">				res = append(res, a2[a2Index:]...)</div><div class="line">				break</div><div class="line">			&#125;</div><div class="line">			a1Index++</div><div class="line">		&#125; else &#123;</div><div class="line">			res = append(res, a2[a2Index])</div><div class="line">			if a2Index == len(a1)-1 &#123;</div><div class="line">				res = append(res, a1[a1Index:]...)</div><div class="line">				break</div><div class="line">			&#125;</div><div class="line">			a2Index++</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	return res</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><a href="https://github.com/fudali113/learn-basic/blob/master/sort/merge/merge.go" target="_blank" rel="external">golang code on github</a></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>虽然归并排序的运行时间是O(NlogN)，但是他合并两个已排序数组到一个附加数组会更占用内存。</p>
-<p>与其他O(NlogN)的流行算法相比，归并排序是比较元素最少的，且运行时间严重依赖于比较元素和在数组(已经临时数组)中移动元素的开销(理论上使用更少内存的算法是可能的，但所得到的算法是复杂的和不实际的)。</p>
-<p>这些开销是于语言相关的(java中泛型数组中的元素是引用类型的，顾移动元素开销不大，所以归并排序是java泛型数组的默认排序方式。</p>
-<p>快速排序作为基础类型的排序方式，java基础类型是值传递的，因为比较与数据移动的开销是类似的，快排使用少得多的数据移动足以补偿那些附加的比较而且还有盈余)。</p>
-<p>在go中也存在相同的问题，所以在不同的输入数据选择不同的排序方式再能得到最好的性能。</p>
-<p>平均运行时间：O(NlogN)<br>最坏运行时间：O(NlogN)<br>是否稳定：稳定</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;归并排序体现了递归分治的策略&lt;br&gt;思想是将数组拆分为两段，在对两段进行想通操作，直到数组元素为1，在对数组进行排序合并&lt;/p&gt;
-&lt;h2 i
-    
-    </summary>
-    
-      <category term="算法" scheme="http://fudali.cc/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="golang" scheme="http://fudali.cc/tags/golang/"/>
-    
-      <category term="排序" scheme="http://fudali.cc/tags/%E6%8E%92%E5%BA%8F/"/>
-    
-      <category term="学习" scheme="http://fudali.cc/tags/%E5%AD%A6%E4%B9%A0/"/>
-    
-  </entry>
-  
-  <entry>
     <title>排序-希尔排序</title>
     <link href="http://fudali.cc/2017/03/15/shell-sort/"/>
     <id>http://fudali.cc/2017/03/15/shell-sort/</id>
@@ -412,6 +442,34 @@
   </entry>
   
   <entry>
+    <title>go 1.6.2 strings split 方法改造</title>
+    <link href="http://fudali.cc/2016/12/13/go1.6.2-strings-split/"/>
+    <id>http://fudali.cc/2016/12/13/go1.6.2-strings-split/</id>
+    <published>2016-12-12T16:00:00.000Z</published>
+    <updated>2017-03-18T04:55:31.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>当调用<code>strings.Split(s,seq string)</code>时,如果seq连续出现，比如<code>s=&quot; dfdgdfg              （多个空格）        dfdg   （多个空格）   hghyjkjuyk      &quot;</code>。调用<code>slice:=strings.Split(s,&quot; &quot;)</code>将会出现<code>len(slice)!=3</code>，我认为这并不是大家希望看到的结果。</p>
+<p>查看<code>strings.Split(s,seq string)</code>源码：<br><code>func Split(s, sep string) []string { return genSplit(s, sep, 0, -1) }</code></p>
+<p>接着查看<code>strings.genSplit()</code>源码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">func genSplit(s, sep string, sepSave, n int) []string &#123;</div><div class="line">	if n == 0 &#123;</div><div class="line">		return nil</div><div class="line">	&#125;</div><div class="line">	if sep == &quot;&quot; &#123;</div><div class="line">		return explode(s, n)</div><div class="line">	&#125;</div><div class="line">	if n &lt; 0 &#123;</div><div class="line">		n = Count(s, sep) + 1</div><div class="line">	&#125;</div><div class="line">	c := sep[0]</div><div class="line">	start := 0</div><div class="line">	a := make([]string, n)</div><div class="line">	na := 0</div><div class="line">	for i := 0; i+len(sep) &lt;= len(s) &amp;&amp; na+1 &lt; n; i++ &#123;</div><div class="line">		if s[i] == c &amp;&amp; (len(sep) == 1 || s[i:i+len(sep)] == sep) &#123;</div><div class="line">			a[na] = s[start : i+sepSave]</div><div class="line">			na++</div><div class="line">			start = i + len(sep)</div><div class="line">			i += len(sep) - 1</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	a[na] = s[start:]</div><div class="line">	return a[0 : na+1]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>发现并没有做相关的判断就将<code>s[start : i+sepSave]</code>添加到返回数组造成出现这种情况；</p>
+<p>顾在for循环中添加一个判断以达到预期返回值，代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">if s[i] == c &amp;&amp; (len(sep) == 1 || s[i:i+len(sep)] == sep) &#123;</div><div class="line">			splitStr:=s[start : i+sepSave]</div><div class="line">			if !(splitStr == sep || start==i+sepSave) &#123;</div><div class="line">				a[na] = splitStr</div><div class="line">				na++</div><div class="line">			&#125;</div><div class="line">			start = i + len(sep)</div><div class="line">			i += len(sep) - 1</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>之后调用即可达到预期返回值</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;当调用&lt;code&gt;strings.Split(s,seq string)&lt;/code&gt;时,如果seq连续出现，比如&lt;code&gt;s=&amp;quot; dfdgdfg              （多个空格）        dfdg   （多个空格）   hghyjkjuyk    
+    
+    </summary>
+    
+      <category term="golang笔记" scheme="http://fudali.cc/categories/golang%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="golang" scheme="http://fudali.cc/tags/golang/"/>
+    
+  </entry>
+  
+  <entry>
     <title>beego upsert 方法原理</title>
     <link href="http://fudali.cc/2016/12/13/beego-upsert-method/"/>
     <id>http://fudali.cc/2016/12/13/beego-upsert-method/</id>
@@ -460,34 +518,6 @@
       <category term="golang" scheme="http://fudali.cc/tags/golang/"/>
     
       <category term="beego" scheme="http://fudali.cc/tags/beego/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>go 1.6.2 strings split 方法改造</title>
-    <link href="http://fudali.cc/2016/12/13/go1.6.2-strings-split/"/>
-    <id>http://fudali.cc/2016/12/13/go1.6.2-strings-split/</id>
-    <published>2016-12-12T16:00:00.000Z</published>
-    <updated>2017-03-18T04:55:31.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>当调用<code>strings.Split(s,seq string)</code>时,如果seq连续出现，比如<code>s=&quot; dfdgdfg              （多个空格）        dfdg   （多个空格）   hghyjkjuyk      &quot;</code>。调用<code>slice:=strings.Split(s,&quot; &quot;)</code>将会出现<code>len(slice)!=3</code>，我认为这并不是大家希望看到的结果。</p>
-<p>查看<code>strings.Split(s,seq string)</code>源码：<br><code>func Split(s, sep string) []string { return genSplit(s, sep, 0, -1) }</code></p>
-<p>接着查看<code>strings.genSplit()</code>源码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">func genSplit(s, sep string, sepSave, n int) []string &#123;</div><div class="line">	if n == 0 &#123;</div><div class="line">		return nil</div><div class="line">	&#125;</div><div class="line">	if sep == &quot;&quot; &#123;</div><div class="line">		return explode(s, n)</div><div class="line">	&#125;</div><div class="line">	if n &lt; 0 &#123;</div><div class="line">		n = Count(s, sep) + 1</div><div class="line">	&#125;</div><div class="line">	c := sep[0]</div><div class="line">	start := 0</div><div class="line">	a := make([]string, n)</div><div class="line">	na := 0</div><div class="line">	for i := 0; i+len(sep) &lt;= len(s) &amp;&amp; na+1 &lt; n; i++ &#123;</div><div class="line">		if s[i] == c &amp;&amp; (len(sep) == 1 || s[i:i+len(sep)] == sep) &#123;</div><div class="line">			a[na] = s[start : i+sepSave]</div><div class="line">			na++</div><div class="line">			start = i + len(sep)</div><div class="line">			i += len(sep) - 1</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	a[na] = s[start:]</div><div class="line">	return a[0 : na+1]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>发现并没有做相关的判断就将<code>s[start : i+sepSave]</code>添加到返回数组造成出现这种情况；</p>
-<p>顾在for循环中添加一个判断以达到预期返回值，代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">if s[i] == c &amp;&amp; (len(sep) == 1 || s[i:i+len(sep)] == sep) &#123;</div><div class="line">			splitStr:=s[start : i+sepSave]</div><div class="line">			if !(splitStr == sep || start==i+sepSave) &#123;</div><div class="line">				a[na] = splitStr</div><div class="line">				na++</div><div class="line">			&#125;</div><div class="line">			start = i + len(sep)</div><div class="line">			i += len(sep) - 1</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>之后调用即可达到预期返回值</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;当调用&lt;code&gt;strings.Split(s,seq string)&lt;/code&gt;时,如果seq连续出现，比如&lt;code&gt;s=&amp;quot; dfdgdfg              （多个空格）        dfdg   （多个空格）   hghyjkjuyk    
-    
-    </summary>
-    
-      <category term="golang笔记" scheme="http://fudali.cc/categories/golang%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="golang" scheme="http://fudali.cc/tags/golang/"/>
     
   </entry>
   

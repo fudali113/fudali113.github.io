@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>数据结构-对顶堆 | fudali | do one`s best</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="golang,学习,ADT">
+    <meta name="description" content="前言对顶堆，用于实时求解中位数用一个最大堆和一个最小堆组成一个结构体对插入元素进行操作并使最大堆元素与最少堆元素最多只能有一个交点(集两个堆顶相等)且保证两个堆的长度差距不能大于1
+代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构-对顶堆">
+<meta property="og:url" content="http://fudali.cc/2017/03/22/adt-median-heap/index.html">
+<meta property="og:site_name" content="fudali">
+<meta property="og:description" content="前言对顶堆，用于实时求解中位数用一个最大堆和一个最小堆组成一个结构体对插入元素进行操作并使最大堆元素与最少堆元素最多只能有一个交点(集两个堆顶相等)且保证两个堆的长度差距不能大于1
+代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758">
+<meta property="og:updated_time" content="2017-03-22T14:58:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据结构-对顶堆">
+<meta name="twitter:description" content="前言对顶堆，用于实时求解中位数用一个最大堆和一个最小堆组成一个结构体对插入元素进行操作并使最大堆元素与最少堆元素最多只能有一个交点(集两个堆顶相等)且保证两个堆的长度差距不能大于1
+代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758">
+    
+        <link rel="alternative" href="/atom.xml" title="fudali" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/logo.jpg">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.11">
+    <link rel="apple-touch-icon" sizes="114x114" href="img/logo.jpg">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">fudali</h5>
+          <a href="mailto:fudali113@gmail.com" title="fudali113@gmail.com" class="mail">fudali113@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/fudali113" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">数据结构-对顶堆</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">数据结构-对顶堆</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-03-21T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2017-03-22
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/数据结构/">数据结构</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#代码"><span class="post-toc-number">2.</span> <span class="post-toc-text">代码</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-number">3.</span> <span class="post-toc-text">总结</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-adt-median-heap"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">数据结构-对顶堆</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017年03月22日 0:00" datetime="2017-03-21T16:00:00.000Z"  itemprop="datePublished">2017-03-22</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/数据结构/">数据结构</a></li></ul>
+
+
+
+            
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>对顶堆，用于实时求解中位数<br>用一个最大堆和一个最小堆组成一个结构体<br>对插入元素进行操作并使最大堆元素与最少堆元素最多只能有一个交点(集两个堆顶相等)且保证两个堆的长度差距不能大于1</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div></pre></td><td class="code"><pre><div class="line">package adt</div><div class="line"></div><div class="line">import &quot;log&quot;</div><div class="line"></div><div class="line">// MedianHeap 实时求解中位数堆</div><div class="line">type MedianHeap struct &#123;</div><div class="line">	min *Heap</div><div class="line">	max *Heap</div><div class="line">&#125;</div><div class="line"></div><div class="line">// GetMedianHeap 获取一个中位数堆</div><div class="line">func GetMedianHeap() MedianHeap &#123;</div><div class="line">	return MedianHeap&#123;min: GetHeap(false), max: GetHeap(true)&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// Len 获取实际长度</div><div class="line">func (mh MedianHeap) Len() int &#123;</div><div class="line">	return mh.min.Len() + mh.max.Len()</div><div class="line">&#125;</div><div class="line"></div><div class="line">// Insert 添加一个元素</div><div class="line">func (mh MedianHeap) Insert(value int) &#123;</div><div class="line">	if mh.min.Len() == 0 &#123;</div><div class="line">		mh.min.Insert(value)</div><div class="line">		return</div><div class="line">	&#125;</div><div class="line">	if mh.max.Len() == 0 &#123;</div><div class="line">		minValue, _ := mh.min.Get()</div><div class="line">		if value &gt; minValue &#123;</div><div class="line">			mh.min.Delete()</div><div class="line">			mh.min.Insert(value)</div><div class="line">			mh.max.Insert(minValue)</div><div class="line">		&#125; else &#123;</div><div class="line">			mh.max.Insert(value)</div><div class="line">		&#125;</div><div class="line">		return</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	if mh.insertMin(value) &#123;</div><div class="line">		mh.min.Insert(value)</div><div class="line">	&#125; else &#123;</div><div class="line">		mh.max.Insert(value)</div><div class="line">	&#125;</div><div class="line">	mh.reset()</div><div class="line">&#125;</div><div class="line"></div><div class="line">// GetMedian 实时获取中位数</div><div class="line">func (mh MedianHeap) GetMedian() (median float32) &#123;</div><div class="line">	log.Println(&quot;GetMedian log:&quot;, mh.min, &quot;---&quot;, mh.max)</div><div class="line">	minL, maxL := mh.min.Len(), mh.max.Len()</div><div class="line">	if mh.Len() == 0 &#123;</div><div class="line">		return 0</div><div class="line">	&#125;</div><div class="line">	gap := minL - maxL</div><div class="line">	switch gap &#123;</div><div class="line">	case 1:</div><div class="line">		minV, _ := mh.min.Get()</div><div class="line">		median = float32(minV)</div><div class="line">	case 0:</div><div class="line">		minV, _ := mh.min.Get()</div><div class="line">		maxV, _ := mh.max.Get()</div><div class="line">		median = (float32(minV) + float32(maxV)) / 2</div><div class="line">	case -1:</div><div class="line">		maxV, _ := mh.max.Get()</div><div class="line">		median = float32(maxV)</div><div class="line">	default:</div><div class="line">		mh.reset()</div><div class="line">		mh.GetMedian()</div><div class="line">	&#125;</div><div class="line">	return</div><div class="line">&#125;</div><div class="line"></div><div class="line">func (mh MedianHeap) insertMin(value int) bool &#123;</div><div class="line">	minV, _ := mh.min.Get()</div><div class="line">	maxV, _ := mh.max.Get()</div><div class="line">	minL, maxL := mh.min.Len(), mh.max.Len()</div><div class="line">	if value &gt; minV &#123;</div><div class="line">		return true</div><div class="line">	&#125; else if value &gt;= maxV &#123;</div><div class="line">		if minL &gt; maxL &#123;</div><div class="line">			return false</div><div class="line">		&#125;</div><div class="line">		return true</div><div class="line">	&#125;</div><div class="line">	return false</div><div class="line">&#125;</div><div class="line"></div><div class="line">func (mh MedianHeap) reset() &#123;</div><div class="line">	minL, maxL := mh.min.Len(), mh.max.Len()</div><div class="line">	gap := minL - maxL</div><div class="line">	if gap &gt;= 2 &#123;</div><div class="line">		minV, _ := mh.min.Delete()</div><div class="line">		mh.max.Insert(minV)</div><div class="line">	&#125; else if gap &lt;= -2 &#123;</div><div class="line">		maxV, _ := mh.max.Delete()</div><div class="line">		mh.min.Insert(maxV)</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><a href="https://github.com/fudali113/learn-basic/blob/master/adt/median_head.go" target="_blank" rel="external">golang code on github</a></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>TODO</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-03-22T14:58:25.000Z" itemprop="dateUpdated">2017年3月22日 22:58</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="http://fudali.cc">
+            <img src="/img/logo.jpg" alt="fudali">
+            fudali
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ADT/">ADT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/golang/">golang</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习/">学习</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2017/03/22/adt-median-heap/&title=《数据结构-对顶堆》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2017/03/22/adt-median-heap/&title=《数据结构-对顶堆》 — fudali&source=do one`s best APE" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://fudali.cc/2017/03/22/adt-median-heap/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《数据结构-对顶堆》 — fudali&url=http://fudali.cc/2017/03/22/adt-median-heap/&via=http://fudali.cc" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://fudali.cc/2017/03/22/adt-median-heap/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/03/20/adt-heap/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">数据结构-堆</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="adt-median-heap" data-title="数据结构-对顶堆" data-url="http://fudali.cc/2017/03/22/adt-median-heap/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'fudali', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.11');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top" style="height:50px">
+        <p>
+            <span>do one`s best APE</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>fudali &copy; 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2017/03/22/adt-median-heap/&title=《数据结构-对顶堆》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2017/03/22/adt-median-heap/&title=《数据结构-对顶堆》 — fudali&source=do one`s best APE" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://fudali.cc/2017/03/22/adt-median-heap/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《数据结构-对顶堆》 — fudali&url=http://fudali.cc/2017/03/22/adt-median-heap/&via=http://fudali.cc" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://fudali.cc/2017/03/22/adt-median-heap/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACGUlEQVR42u3a0W7CMAwFUP7/p9nrJER3rwNoJCdP0yitTydltuPbLV73h/X4+2e/ye/2+9PbOxYGBsbXMu6Xq2UkT3kMN3/u0ydiYGAcwHj24OSR11fONvE8NgwMDIw8Xbu+T7s1Y2BgYKwz8oRy5VsYGBgYb7/1/6zFMTAwvpCRd90///NbzjcwMDC+inEvV16srmzldVQYGBhbM9pW2gz2glZa8MowMDD2Zlx/0LbPrrfR/HA0jwoDA+MERt72ajHtd2eHExgYGCcwZjt0Hm7S1s+3WgwMjJMZeYizNlmSJs5eHwYGxt6MNrj8mjxxnL1EDAyMcxjtoEO7pSaJYN0XzGtxDAyMrRkrIbavJimA65NYDAyMjRh5eyvfFvNEsG36RwNhGBgYxzBmKWDS6M/L46KsxcDAOICxUkauhP6qIQ8MDIzTGLOjyjzRXN/KMTAwTmOstMPaxK4tkuuZEQwMjK0ZbRB5ytiOhSXXD/8mGBgYX87Ik8I89NnGPRvawMDAOIfRHi6ujH/lB5ZJDBgYGKcx2iPJWbI4u8MfV2JgYGzKuJcrH+2aHTYMjzMxMDC2ZswGKdqmWN5uS15N9D8EAwNjO0Y+ALFe6OYtuXqYAwMD4wBGnva1W+fskDIvgzEwMDByUj600d4zas9hYGBgjA4dZ5V0S8LAwDiHsTKktRJ0nmhiYGCczGhLx8/MgMzKZgwMjO0YP9FlslBXVJ0JAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.11"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.11" async></script>
+
+
+
+
+
+
+
+</body>
+</html>
