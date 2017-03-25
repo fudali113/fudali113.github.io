@@ -13,29 +13,26 @@
     
     
     
-    <title>linux常用知识 | fudali | do one`s best</title>
+    <title>排序-堆排序 | fudali | do one`s best</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="linux">
-    <meta name="description" content="内核日志1cat /var/log/messages
-linux内存不足时kill进程策略OOM_killer是Linux自我保护的方式，在内存不足时将被唤醒，调出/proc/{pid}/oom_score最大者并将之kill掉
-为了保护重要进程不被OOM_killer kill掉，可以配置/proc/{pid}/oom_score_adj,此值为内核在为每个进行打分时的附加值，最后得分等于实际值">
+    <meta name="keywords" content="golang,排序,学习">
+    <meta name="description" content="简介堆排序是利用堆的特性实现的排序方式;因为最小堆始终保证堆顶元素为最小值，且每此获取操作为logN;顾堆排序为NlogN的时间复杂度
+代码go12345678910111213package heapimport &amp;quot;github.com/fudali113/learn-basic/adt&amp;quot;// HeapSort 堆排序func HeapSort(array []int) &amp;#">
 <meta property="og:type" content="article">
-<meta property="og:title" content="linux常用知识">
-<meta property="og:url" content="http://fudali.cc/2017/03/20/linux/index.html">
+<meta property="og:title" content="排序-堆排序">
+<meta property="og:url" content="http://fudali.cc/2017/03/25/heap-sort/index.html">
 <meta property="og:site_name" content="fudali">
-<meta property="og:description" content="内核日志1cat /var/log/messages
-linux内存不足时kill进程策略OOM_killer是Linux自我保护的方式，在内存不足时将被唤醒，调出/proc/{pid}/oom_score最大者并将之kill掉
-为了保护重要进程不被OOM_killer kill掉，可以配置/proc/{pid}/oom_score_adj,此值为内核在为每个进行打分时的附加值，最后得分等于实际值">
-<meta property="og:updated_time" content="2017-03-20T09:14:08.000Z">
+<meta property="og:description" content="简介堆排序是利用堆的特性实现的排序方式;因为最小堆始终保证堆顶元素为最小值，且每此获取操作为logN;顾堆排序为NlogN的时间复杂度
+代码go12345678910111213package heapimport &amp;quot;github.com/fudali113/learn-basic/adt&amp;quot;// HeapSort 堆排序func HeapSort(array []int) &amp;#">
+<meta property="og:updated_time" content="2017-03-25T09:09:06.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="linux常用知识">
-<meta name="twitter:description" content="内核日志1cat /var/log/messages
-linux内存不足时kill进程策略OOM_killer是Linux自我保护的方式，在内存不足时将被唤醒，调出/proc/{pid}/oom_score最大者并将之kill掉
-为了保护重要进程不被OOM_killer kill掉，可以配置/proc/{pid}/oom_score_adj,此值为内核在为每个进行打分时的附加值，最后得分等于实际值">
+<meta name="twitter:title" content="排序-堆排序">
+<meta name="twitter:description" content="简介堆排序是利用堆的特性实现的排序方式;因为最小堆始终保证堆顶元素为最小值，且每此获取操作为logN;顾堆排序为NlogN的时间复杂度
+代码go12345678910111213package heapimport &amp;quot;github.com/fudali113/learn-basic/adt&amp;quot;// HeapSort 堆排序func HeapSort(array []int) &amp;#">
     
         <link rel="alternative" href="/atom.xml" title="fudali" type="application/atom+xml">
     
@@ -113,7 +110,7 @@ linux内存不足时kill进程策略OOM_killer是Linux自我保护的方式，�
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">linux常用知识</div>
+        <div class="flex-col header-title ellipsis">排序-堆排序</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -135,15 +132,15 @@ linux内存不足时kill进程策略OOM_killer是Linux自我保护的方式，�
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">linux常用知识</h1>
+        <h1 class="title">排序-堆排序</h1>
         <h5 class="subtitle">
             
-                <time datetime="2017-03-19T16:00:00.000Z" itemprop="datePublished" class="page-time">
-  2017-03-20
+                <time datetime="2017-03-24T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2017-03-25
 </time>
 
 
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/linux/">linux</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
 
             
         </h5>
@@ -159,20 +156,20 @@ linux内存不足时kill进程策略OOM_killer是Linux自我保护的方式，�
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#内核日志"><span class="post-toc-number">1.</span> <span class="post-toc-text">内核日志</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#linux内存不足时kill进程策略"><span class="post-toc-number">2.</span> <span class="post-toc-text">linux内存不足时kill进程策略</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#简介"><span class="post-toc-number">1.</span> <span class="post-toc-text">简介</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#代码"><span class="post-toc-number">2.</span> <span class="post-toc-text">代码</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#go"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">go</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-number">3.</span> <span class="post-toc-text">总结</span></a></li></ol>
         </nav>
     </aside>
     
-<article id="post-linux"
+<article id="post-heap-sort"
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">linux常用知识</h1>
+        <h1 class="post-card-title">排序-堆排序</h1>
         <div class="post-meta">
-            <time class="post-time" title="2017年03月20日 0:00" datetime="2017-03-19T16:00:00.000Z"  itemprop="datePublished">2017-03-20</time>
+            <time class="post-time" title="2017年03月25日 0:00" datetime="2017-03-24T16:00:00.000Z"  itemprop="datePublished">2017-03-25</time>
 
             
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/linux/">linux</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
 
 
 
@@ -182,11 +179,9 @@ linux内存不足时kill进程策略OOM_killer是Linux自我保护的方式，�
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h2 id="内核日志"><a href="#内核日志" class="headerlink" title="内核日志"></a>内核日志</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat /var/log/messages</div></pre></td></tr></table></figure>
-<h2 id="linux内存不足时kill进程策略"><a href="#linux内存不足时kill进程策略" class="headerlink" title="linux内存不足时kill进程策略"></a>linux内存不足时kill进程策略</h2><p>OOM_killer是Linux自我保护的方式，在内存不足时将被唤醒，调出<code>/proc/{pid}/oom_score</code>最大者并将之kill掉</p>
-<p>为了保护重要进程不被OOM_killer kill掉，可以配置<code>/proc/{pid}/oom_score_adj</code>,此值为内核在为每个进行打分时的附加值，最后得分等于实际值+该值<br>顾可以使用<code>echo -20 &gt; /proc/{pid}/oom_score_adj</code>为实际值减去20(最后得分越小越不易被杀掉)</p>
-<p>root进程默认获取-30的附加值<br><a href="http://www.vpsee.com/2013/10/how-to-configure-the-linux-oom-killer/" target="_blank" rel="external">详细来源，从源码的角度讲解</a><br><a href="https://github.com/torvalds/linux/blob/master/mm/oom_kill.c#L172-L222" target="_blank" rel="external">计算oom_score的函数linux源码</a></p>
-<p>获取进程oom_score脚本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">for proc in $(find /proc -maxdepth 1 -regex &apos;/proc/[0-9]+&apos;); do</div><div class="line">    printf &quot;%2d %5d %s\n&quot; \</div><div class="line">        &quot;$(cat $proc/oom_score)&quot; \</div><div class="line">        &quot;$(basename $proc)&quot; \</div><div class="line">        &quot;$(cat $proc/cmdline | tr &apos;\0&apos; &apos; &apos; | head -c 50)&quot;</div><div class="line">done 2&gt;/dev/null | sort -nr | head -n 10</div></pre></td></tr></table></figure></p>
+            <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>堆排序是利用堆的特性实现的排序方式;<br>因为最小堆始终保证堆顶元素为最小值，且每此获取操作为logN;<br>顾堆排序为NlogN的时间复杂度</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="go"><a href="#go" class="headerlink" title="go"></a>go</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">package heap</div><div class="line"></div><div class="line">import &quot;github.com/fudali113/learn-basic/adt&quot;</div><div class="line"></div><div class="line">// HeapSort 堆排序</div><div class="line">func HeapSort(array []int) &#123;</div><div class="line">	arrayLen := len(array)</div><div class="line">	minHeap := adt.GetHeap(false)</div><div class="line">	minHeap.Insert(array...)</div><div class="line">	for i := 0; i &lt; arrayLen; i++ &#123;</div><div class="line">		array[i], _ = minHeap.Delete()</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>时间复杂度: NlogN<br>是否稳定: 不稳定</p>
 
         </div>
 
@@ -194,7 +189,7 @@ linux内存不足时kill进程策略OOM_killer是Linux自我保护的方式，�
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2017-03-20T09:14:08.000Z" itemprop="dateUpdated">2017年3月20日 17:14</time>
+    最后更新时间：<time datetime="2017-03-25T09:09:06.000Z" itemprop="dateUpdated">2017年3月25日 17:09</time>
 </span><br>
 
 
@@ -217,7 +212,7 @@ linux内存不足时kill进程策略OOM_killer是Linux自我保护的方式，�
 
         <div class="post-footer">
             
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/golang/">golang</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习/">学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/排序/">排序</a></li></ul>
 
 
             
@@ -227,7 +222,7 @@ linux内存不足时kill进程策略OOM_killer是Linux自我保护的方式，�
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2017/03/20/linux/&title=《linux常用知识》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2017/03/25/heap-sort/&title=《排序-堆排序》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -237,22 +232,22 @@ linux内存不足时kill进程策略OOM_killer是Linux自我保护的方式，�
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2017/03/20/linux/&title=《linux常用知识》 — fudali&source=do one`s best APE" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2017/03/25/heap-sort/&title=《排序-堆排序》 — fudali&source=do one`s best APE" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://fudali.cc/2017/03/20/linux/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://fudali.cc/2017/03/25/heap-sort/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《linux常用知识》 — fudali&url=http://fudali.cc/2017/03/20/linux/&via=http://fudali.cc" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《排序-堆排序》 — fudali&url=http://fudali.cc/2017/03/25/heap-sort/&via=http://fudali.cc" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://fudali.cc/2017/03/20/linux/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://fudali.cc/2017/03/25/heap-sort/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -272,21 +267,14 @@ linux内存不足时kill进程策略OOM_killer是Linux自我保护的方式，�
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2017/03/20/adt-heap/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">数据结构-堆</h4>
-      </a>
-    </div>
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2017/03/20/sort/" id="post-next" class="post-nav-link">
+      <a href="/2017/03/24/consul-acl/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">排序知识总结</h4>
+        <h4 class="title">consul权限控制</h4>
       </a>
     </div>
   
@@ -297,7 +285,7 @@ linux内存不足时kill进程策略OOM_killer是Linux自我保护的方式，�
     
 
 <div class="comments" id="comments">
-    <div class="ds-thread" data-thread-key="linux" data-title="linux常用知识" data-url="http://fudali.cc/2017/03/20/linux/"></div>
+    <div class="ds-thread" data-thread-key="heap-sort" data-title="排序-堆排序" data-url="http://fudali.cc/2017/03/25/heap-sort/"></div>
 </div>
 <script>
 lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
@@ -366,7 +354,7 @@ lazyScripts.push('/js/embed.min.js?v=1.4.11');
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2017/03/20/linux/&title=《linux常用知识》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2017/03/25/heap-sort/&title=《排序-堆排序》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -376,22 +364,22 @@ lazyScripts.push('/js/embed.min.js?v=1.4.11');
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2017/03/20/linux/&title=《linux常用知识》 — fudali&source=do one`s best APE" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2017/03/25/heap-sort/&title=《排序-堆排序》 — fudali&source=do one`s best APE" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://fudali.cc/2017/03/20/linux/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://fudali.cc/2017/03/25/heap-sort/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《linux常用知识》 — fudali&url=http://fudali.cc/2017/03/20/linux/&via=http://fudali.cc" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《排序-堆排序》 — fudali&url=http://fudali.cc/2017/03/25/heap-sort/&via=http://fudali.cc" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://fudali.cc/2017/03/20/linux/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://fudali.cc/2017/03/25/heap-sort/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -402,7 +390,7 @@ lazyScripts.push('/js/embed.min.js?v=1.4.11');
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAAB0klEQVR42u3ay2rDMBAFUP//T6dQuggEiTsjWXHhaGXUND7KYpiHriter9/1+Tzaed9/X5/71x0LFxd3mfuarjlodJjRkZIDjD6Di4t7npsjclCynxtwcXGfyR2FqvkB5lkKLi7uf+fmaVBS2ODi4j6f2ytOVl58e62Gi4u7wF1pmO56PtTfxcXFXZ5KJE2QeeNj13v/vhMXF/cItzc03dXgSFotV/WLcHFxl7nz0FMtgaKmRjyyHYYwXFzcm7kroacXkvIx7fC9uLi4R7hJ+lJtp/aGr3k+g4uLex+39+K8GZpAC6ENFxf3CHfX9alqSpQPWcsVFS4u7jJ3fVjSK2CaY1dcXNwj3KVqqZWgVH+awjFwcXE3cZOQtBLUkvSlMLjFxcU9yO1dyap+MqcPfzhcXNwj3F5hUy1akvQlb83g4uLeza2GquqIdP0yFi4u7re4vRZqtaXSa4bi4uJ+i1stgar7vWZr9A+4uLg3cKsBpdriTAqbaqGFi4t7hpsHr+ogNv9r4ZIWLi7uQe56o7M3Jim3VHBxcR/G7WVP87CYj2FwcXGfzE2CTpIqVce6uLi457nVBCV/LoN2tUVwcXH3xKVmQVK9slkdyuLi4h7k/gAQ4r5VilTgigAAAABJRU5ErkJggg==" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABxElEQVR42u3aS4rDMBAFwNz/0h6Y1cAQuZ9aUhworUIwVsmLpj96vcrr+l3jf8ZP/l3jNyxYuLi4be41XP+feffP+G3vnqkbcHFxz3PHIWkchurE8fsrYREXF/dp3HTjNCzi4uJ+O7eUjpSLH1xc3GdyK8XPXPtjfICNtRouLm6DmzZMd/ze2N/FxcUNuVe4Og3WBbvj4uIe4c4NQevJR1DS1HfBxcXdzK2UN3MN0DRVauVZuLi4G7id1GTu/ZVR7k1yg4uLu41bQaRNzFVjlZvPgYuLe4RbT2LSxKjTELlJhnBxcbdx0xAWnH6q7RJ8UVxc3A3ctKGZJkBXY70NYbi4uMe5lbZFvVxJk6SbEgsXF/cgd67x0cmq5o6Bi4t7hjvXCpmbgS673oGLi7uZWxl71BsoczcogpQLFxf3Q9z+9Yg05AVpFi4u7hFuWtJ0WiTpKuVluLi4G7hz440Oq94QwcXF/RS3s03aWOmHTlxc3JPc+jWIzvWsdKQajFJwcXG3cdeWOnOHwcXF/UZu2mDdMojFxcV9MDcNXpXLFvEQBRcXdzO3XvzU25ppi6SUEuHi4h7hpqVIGpjS7RfQcXFx57k/WQ4LCUTNrsMAAAAASUVORK5CYII=" alt="微信分享二维码">
 </div>
 
 

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://fudali.cc/"/>
-  <updated>2017-03-25T04:36:59.000Z</updated>
+  <updated>2017-03-25T09:09:06.000Z</updated>
   <id>http://fudali.cc/</id>
   
   <author>
@@ -14,6 +14,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>排序-堆排序</title>
+    <link href="http://fudali.cc/2017/03/25/heap-sort/"/>
+    <id>http://fudali.cc/2017/03/25/heap-sort/</id>
+    <published>2017-03-24T16:00:00.000Z</published>
+    <updated>2017-03-25T09:09:06.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>堆排序是利用堆的特性实现的排序方式;<br>因为最小堆始终保证堆顶元素为最小值，且每此获取操作为logN;<br>顾堆排序为NlogN的时间复杂度</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="go"><a href="#go" class="headerlink" title="go"></a>go</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">package heap</div><div class="line"></div><div class="line">import &quot;github.com/fudali113/learn-basic/adt&quot;</div><div class="line"></div><div class="line">// HeapSort 堆排序</div><div class="line">func HeapSort(array []int) &#123;</div><div class="line">	arrayLen := len(array)</div><div class="line">	minHeap := adt.GetHeap(false)</div><div class="line">	minHeap.Insert(array...)</div><div class="line">	for i := 0; i &lt; arrayLen; i++ &#123;</div><div class="line">		array[i], _ = minHeap.Delete()</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>时间复杂度: NlogN<br>是否稳定: 不稳定</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;堆排序是利用堆的特性实现的排序方式;&lt;br&gt;因为最小堆始终保证堆顶元素为最小值，且每此获取操作为logN;&lt;br&gt;顾堆排序为NlogN的时间
+    
+    </summary>
+    
+      <category term="算法" scheme="http://fudali.cc/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="golang" scheme="http://fudali.cc/tags/golang/"/>
+    
+      <category term="排序" scheme="http://fudali.cc/tags/%E6%8E%92%E5%BA%8F/"/>
+    
+      <category term="学习" scheme="http://fudali.cc/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
   
   <entry>
     <title>consul权限控制</title>
@@ -168,11 +197,11 @@
   </entry>
   
   <entry>
-    <title>排序</title>
+    <title>排序知识总结</title>
     <link href="http://fudali.cc/2017/03/20/sort/"/>
     <id>http://fudali.cc/2017/03/20/sort/</id>
     <published>2017-03-19T16:00:00.000Z</published>
-    <updated>2017-03-20T15:45:01.000Z</updated>
+    <updated>2017-03-25T09:09:43.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="排序算法稳定性"><a href="#排序算法稳定性" class="headerlink" title="排序算法稳定性"></a>排序算法稳定性</h2><p>假定在待排序的记录序列中，存在多个具有相同的关键字的记录，若经过排序，这些记录的相对次序保持不变，即在原序列中，ri=rj，且ri在rj之前，而在排序后的序列中，ri仍在rj之前，则称这种排序算法是稳定的；否则称为不稳定的。</p>
 <p>对于不稳定的排序算法，只要举出一个实例，即可说明它的不稳定性；而对于稳定的排序算法，必须对算法进行分析从而得到稳定的特性。需要注意的是，排序算法是否为稳定的是由具体算法决定的，不稳定的算法在某种条件下可以变为稳定的算法，而稳定的算法在某种条件下也可以变为不稳定的算法。</p>
@@ -227,6 +256,42 @@
     <summary type="html">
     
       &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;快速排序是实践中一种快速的排序方式；他的平均运行时间是O(NlogN)，最坏运行时间是O(N^2)，但稍加努力可使最坏情形极难出现。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="算法" scheme="http://fudali.cc/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="golang" scheme="http://fudali.cc/tags/golang/"/>
+    
+      <category term="排序" scheme="http://fudali.cc/tags/%E6%8E%92%E5%BA%8F/"/>
+    
+      <category term="学习" scheme="http://fudali.cc/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>排序-归并排序</title>
+    <link href="http://fudali.cc/2017/03/17/merge-sort/"/>
+    <id>http://fudali.cc/2017/03/17/merge-sort/</id>
+    <published>2017-03-16T16:00:00.000Z</published>
+    <updated>2017-03-20T15:24:38.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>归并排序体现了递归分治的策略<br>思想是将数组拆分为两段，在对两段进行想通操作，直到数组元素为1，在对数组进行排序合并</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="go"><a href="#go" class="headerlink" title="go"></a>go</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">package merge</div><div class="line"></div><div class="line">// MergeSort 归并排序</div><div class="line">func MergeSort(array []int) []int &#123;</div><div class="line">	middle := len(array) / 2</div><div class="line">	if middle &lt; 1 &#123;</div><div class="line">		return array</div><div class="line">	&#125;</div><div class="line">	return merge(MergeSort(array[:middle]), MergeSort(array[middle:]))</div><div class="line">&#125;</div><div class="line"></div><div class="line">// merge 合并两个排好序的数组唯一组合两个元素并排好序的数组</div><div class="line">func merge(a1 []int, a2 []int) []int &#123;</div><div class="line">	a1Index := 0</div><div class="line">	a2Index := 0</div><div class="line">	res := make([]int, 0, len(a1)+len(a2))</div><div class="line">	for &#123;</div><div class="line">		if a1[a1Index] &lt;= a2[a2Index] &#123;</div><div class="line">			res = append(res, a1[a1Index])</div><div class="line">			if a1Index == len(a1)-1 &#123;</div><div class="line">				res = append(res, a2[a2Index:]...)</div><div class="line">				break</div><div class="line">			&#125;</div><div class="line">			a1Index++</div><div class="line">		&#125; else &#123;</div><div class="line">			res = append(res, a2[a2Index])</div><div class="line">			if a2Index == len(a1)-1 &#123;</div><div class="line">				res = append(res, a1[a1Index:]...)</div><div class="line">				break</div><div class="line">			&#125;</div><div class="line">			a2Index++</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	return res</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><a href="https://github.com/fudali113/learn-basic/blob/master/sort/merge/merge.go" target="_blank" rel="external">golang code on github</a></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>虽然归并排序的运行时间是O(NlogN)，但是他合并两个已排序数组到一个附加数组会更占用内存。</p>
+<p>与其他O(NlogN)的流行算法相比，归并排序是比较元素最少的，且运行时间严重依赖于比较元素和在数组(已经临时数组)中移动元素的开销(理论上使用更少内存的算法是可能的，但所得到的算法是复杂的和不实际的)。</p>
+<p>这些开销是于语言相关的(java中泛型数组中的元素是引用类型的，顾移动元素开销不大，所以归并排序是java泛型数组的默认排序方式。</p>
+<p>快速排序作为基础类型的排序方式，java基础类型是值传递的，因为比较与数据移动的开销是类似的，快排使用少得多的数据移动足以补偿那些附加的比较而且还有盈余)。</p>
+<p>在go中也存在相同的问题，所以在不同的输入数据选择不同的排序方式再能得到最好的性能。</p>
+<p>平均运行时间：O(NlogN)<br>最坏运行时间：O(NlogN)<br>是否稳定：稳定</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;归并排序体现了递归分治的策略&lt;br&gt;思想是将数组拆分为两段，在对两段进行想通操作，直到数组元素为1，在对数组进行排序合并&lt;/p&gt;
+&lt;h2 i
     
     </summary>
     
@@ -374,42 +439,6 @@
       <category term="网络" scheme="http://fudali.cc/tags/%E7%BD%91%E7%BB%9C/"/>
     
       <category term="tcp/ip" scheme="http://fudali.cc/tags/tcp-ip/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>排序-归并排序</title>
-    <link href="http://fudali.cc/2017/03/17/merge-sort/"/>
-    <id>http://fudali.cc/2017/03/17/merge-sort/</id>
-    <published>2017-03-16T16:00:00.000Z</published>
-    <updated>2017-03-20T15:24:38.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>归并排序体现了递归分治的策略<br>思想是将数组拆分为两段，在对两段进行想通操作，直到数组元素为1，在对数组进行排序合并</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="go"><a href="#go" class="headerlink" title="go"></a>go</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">package merge</div><div class="line"></div><div class="line">// MergeSort 归并排序</div><div class="line">func MergeSort(array []int) []int &#123;</div><div class="line">	middle := len(array) / 2</div><div class="line">	if middle &lt; 1 &#123;</div><div class="line">		return array</div><div class="line">	&#125;</div><div class="line">	return merge(MergeSort(array[:middle]), MergeSort(array[middle:]))</div><div class="line">&#125;</div><div class="line"></div><div class="line">// merge 合并两个排好序的数组唯一组合两个元素并排好序的数组</div><div class="line">func merge(a1 []int, a2 []int) []int &#123;</div><div class="line">	a1Index := 0</div><div class="line">	a2Index := 0</div><div class="line">	res := make([]int, 0, len(a1)+len(a2))</div><div class="line">	for &#123;</div><div class="line">		if a1[a1Index] &lt;= a2[a2Index] &#123;</div><div class="line">			res = append(res, a1[a1Index])</div><div class="line">			if a1Index == len(a1)-1 &#123;</div><div class="line">				res = append(res, a2[a2Index:]...)</div><div class="line">				break</div><div class="line">			&#125;</div><div class="line">			a1Index++</div><div class="line">		&#125; else &#123;</div><div class="line">			res = append(res, a2[a2Index])</div><div class="line">			if a2Index == len(a1)-1 &#123;</div><div class="line">				res = append(res, a1[a1Index:]...)</div><div class="line">				break</div><div class="line">			&#125;</div><div class="line">			a2Index++</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	return res</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><a href="https://github.com/fudali113/learn-basic/blob/master/sort/merge/merge.go" target="_blank" rel="external">golang code on github</a></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>虽然归并排序的运行时间是O(NlogN)，但是他合并两个已排序数组到一个附加数组会更占用内存。</p>
-<p>与其他O(NlogN)的流行算法相比，归并排序是比较元素最少的，且运行时间严重依赖于比较元素和在数组(已经临时数组)中移动元素的开销(理论上使用更少内存的算法是可能的，但所得到的算法是复杂的和不实际的)。</p>
-<p>这些开销是于语言相关的(java中泛型数组中的元素是引用类型的，顾移动元素开销不大，所以归并排序是java泛型数组的默认排序方式。</p>
-<p>快速排序作为基础类型的排序方式，java基础类型是值传递的，因为比较与数据移动的开销是类似的，快排使用少得多的数据移动足以补偿那些附加的比较而且还有盈余)。</p>
-<p>在go中也存在相同的问题，所以在不同的输入数据选择不同的排序方式再能得到最好的性能。</p>
-<p>平均运行时间：O(NlogN)<br>最坏运行时间：O(NlogN)<br>是否稳定：稳定</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;归并排序体现了递归分治的策略&lt;br&gt;思想是将数组拆分为两段，在对两段进行想通操作，直到数组元素为1，在对数组进行排序合并&lt;/p&gt;
-&lt;h2 i
-    
-    </summary>
-    
-      <category term="算法" scheme="http://fudali.cc/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="golang" scheme="http://fudali.cc/tags/golang/"/>
-    
-      <category term="排序" scheme="http://fudali.cc/tags/%E6%8E%92%E5%BA%8F/"/>
-    
-      <category term="学习" scheme="http://fudali.cc/tags/%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   

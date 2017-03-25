@@ -1,4 +1,4 @@
-title: 排序
+title: 排序知识总结
 date: 2017-03-20
 tags: ["golang","排序","学习"]
 categories:
