@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>consul权限控制 | fudali | do one`s best</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="consul">
+    <meta name="description" content="前言最近公司准备实践微服务，在服务发现与注册方面选择了consul；主要是基于易用与功能全面的考虑；
+因为之前只是有点点初步的理解，并没有去深入的了解与实践，实践的时候发现consul的权限控制有一点不好理解；所以只有跟我们老大(大波哥)一起去踩坑；
+内容
+  consul的acl控制默认是关闭的，需要在任意配置文件中添加acl_master_token配置项  此时默认的控制策略是可写的(acl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="consul权限控制">
+<meta property="og:url" content="http://fudali.cc/2017/03/24/consul-acl/index.html">
+<meta property="og:site_name" content="fudali">
+<meta property="og:description" content="前言最近公司准备实践微服务，在服务发现与注册方面选择了consul；主要是基于易用与功能全面的考虑；
+因为之前只是有点点初步的理解，并没有去深入的了解与实践，实践的时候发现consul的权限控制有一点不好理解；所以只有跟我们老大(大波哥)一起去踩坑；
+内容
+  consul的acl控制默认是关闭的，需要在任意配置文件中添加acl_master_token配置项  此时默认的控制策略是可写的(acl">
+<meta property="og:updated_time" content="2017-03-25T04:36:59.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="consul权限控制">
+<meta name="twitter:description" content="前言最近公司准备实践微服务，在服务发现与注册方面选择了consul；主要是基于易用与功能全面的考虑；
+因为之前只是有点点初步的理解，并没有去深入的了解与实践，实践的时候发现consul的权限控制有一点不好理解；所以只有跟我们老大(大波哥)一起去踩坑；
+内容
+  consul的acl控制默认是关闭的，需要在任意配置文件中添加acl_master_token配置项  此时默认的控制策略是可写的(acl">
+    
+        <link rel="alternative" href="/atom.xml" title="fudali" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/logo.jpg">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.11">
+    <link rel="apple-touch-icon" sizes="114x114" href="img/logo.jpg">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">fudali</h5>
+          <a href="mailto:fudali113@gmail.com" title="fudali113@gmail.com" class="mail">fudali113@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/fudali113" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">consul权限控制</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">consul权限控制</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-03-23T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2017-03-24
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/微服务/">微服务</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#内容"><span class="post-toc-number">2.</span> <span class="post-toc-text">内容</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-consul-acl"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">consul权限控制</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017年03月24日 0:00" datetime="2017-03-23T16:00:00.000Z"  itemprop="datePublished">2017-03-24</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/微服务/">微服务</a></li></ul>
+
+
+
+            
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近公司准备实践微服务，在服务发现与注册方面选择了consul；<br>主要是基于易用与功能全面的考虑；</p>
+<p>因为之前只是有点点初步的理解，并没有去深入的了解与实践，实践的时候发现consul的权限控制有一点不好理解；<br>所以只有跟我们老大(大波哥)一起去踩坑；</p>
+<h2 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h2><ul>
+<li><p>  consul的acl控制默认是关闭的，需要在任意配置文件中添加<code>acl_master_token</code>配置项<br>  此时默认的控制策略是可写的(<code>acl_default_policy为write</code>)<br>  因为consul默认有匿名token(即<code>anonymous</code>),此token当用户acl开启且用户token为空时默认使用该token<br>  因为此时默认策略为全部可写，此时<code>anonymous</code>也拥有全部的权限包括acl的读写权限<br>  顾想要设置权限控制应该使<code>acl_default_policy为deny</code>，此时默认权限控制为全部否定。</p>
+</li>
+<li><p>  当配置之后可能会发现打开ui依然可见自己的consul服务，这一点会让人很奇怪，这是consul在检测服务时默认不检测consul服务的权限：</p>
+<p>  <code>consul/consul/acl.go#347</code> version：v0.7.5</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">// allowService is used to determine if a service is accessible for an ACL.</div><div class="line">func (f *aclFilter) allowService(service string) bool &#123;</div><div class="line">    if service == &quot;&quot; || service == ConsulServiceID &#123;</div><div class="line">        return true</div><div class="line">    &#125;</div><div class="line">    return f.acl.ServiceRead(service)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>  <a href="https://github.com/hashicorp/consul/issues/2816" target="_blank" rel="external">github issue # 2816</a></p>
+<p>  这个貌似可以使使用<code>enforceVersion8</code>进行控制，未实现</p>
+</li>
+</ul>
+<ul>
+<li>  对于ui中多次输错token出现403页面，可以使用清除浏览器缓存或者换个浏览器进入ui界面，这应该做的一定的安全举措</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-03-25T04:36:59.000Z" itemprop="dateUpdated">2017年3月25日 12:36</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="http://fudali.cc">
+            <img src="/img/logo.jpg" alt="fudali">
+            fudali
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/consul/">consul</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2017/03/24/consul-acl/&title=《consul权限控制》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2017/03/24/consul-acl/&title=《consul权限控制》 — fudali&source=do one`s best APE" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://fudali.cc/2017/03/24/consul-acl/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《consul权限控制》 — fudali&url=http://fudali.cc/2017/03/24/consul-acl/&via=http://fudali.cc" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://fudali.cc/2017/03/24/consul-acl/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/03/22/adt-median-heap/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">数据结构-对顶堆</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="consul-acl" data-title="consul权限控制" data-url="http://fudali.cc/2017/03/24/consul-acl/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'fudali', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.11');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top" style="height:50px">
+        <p>
+            <span>do one`s best APE</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>fudali &copy; 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2017/03/24/consul-acl/&title=《consul权限控制》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2017/03/24/consul-acl/&title=《consul权限控制》 — fudali&source=do one`s best APE" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://fudali.cc/2017/03/24/consul-acl/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《consul权限控制》 — fudali&url=http://fudali.cc/2017/03/24/consul-acl/&via=http://fudali.cc" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://fudali.cc/2017/03/24/consul-acl/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABwklEQVR42u3aQW7DMAwEwPz/0ynQa2t3SUqKUYxOge1IIx8ImeTrFY/397i68r4YP+9eXVk8cHFxx9z37bjC5ZupbunqGVxc3PPc++BVDUb3lOQVXF7HxcV9GDeaLp4ZFxf3f3CTo0zvgwoXF/eZ3LWpjSRUbf9Ww8XFHXAnQWfV7435XVxc3CL3XRzJDPlHUXl1XFzcI9y8EFJdZlKm/WPDuLi4m7n3yY7kbh7aqmnWyxCGi4u7mdtLffYaKSYvopDlxcXFXcrNE6PJxhJWPkPhIVxc3DF3X1NFDi2ENlxc3IPcSTPl2vaLcjUYFxd3GzcPWJPmjAVlV1xc3A9xq1d6zzfLKri4uEe41U+XJGz17ibz4+LinuH2Epd54mOysV/mxMXFPcJN0hO9hGmvKFsuqODi4m7gzhuw8pNUrxkLFxf3U9xq8WOycK/cgouLe56bj3mLRt54Ef0BFxd3A3dVq8Qk8dor2ODi4u7mJsGrmgatpjwKRVZcXNyD3Dx4TZbMjz5RfhcXF/cB3Px3b7boIwoXF/fB3GrptHyUwcXFfQA3Xz4JQ71GrsVpEVxc3AG3lzDNl8y31zsG4eLiLuV+AbKND/a1OANHAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.11"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.11" async></script>
+
+
+
+
+
+
+
+</body>
+</html>
