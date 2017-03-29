@@ -1,5 +1,5 @@
 title: ELK学习之安装logstash
-date: 2016-02-16
+date: 2017-02-16
 tags: ["ELK","logstash"]
 categories:
   日志收集

@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>fastjson反序列化异常类 | fudali | do one`s best</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="fastjson">
+    <meta name="description" content="简介因为公司本使用fastjson进行json数据序列化与反序列化。最近正准备实践微服务，可能需要在各服务之间传递异常，顾将异常信息序列化传输在反序列化。本以为fastjson根据setter进行反序列化相关操作，但是实际情况有些差距，我自定义的一些字段并没有被反序列化。
+内容如下，我的异常结构体是：12345678910111213141516171819202122public class B">
+<meta property="og:type" content="article">
+<meta property="og:title" content="fastjson反序列化异常类">
+<meta property="og:url" content="http://fudali.cc/2017/03/29/fastjson-desrialze-exception/index.html">
+<meta property="og:site_name" content="fudali">
+<meta property="og:description" content="简介因为公司本使用fastjson进行json数据序列化与反序列化。最近正准备实践微服务，可能需要在各服务之间传递异常，顾将异常信息序列化传输在反序列化。本以为fastjson根据setter进行反序列化相关操作，但是实际情况有些差距，我自定义的一些字段并没有被反序列化。
+内容如下，我的异常结构体是：12345678910111213141516171819202122public class B">
+<meta property="og:updated_time" content="2017-03-29T03:01:45.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="fastjson反序列化异常类">
+<meta name="twitter:description" content="简介因为公司本使用fastjson进行json数据序列化与反序列化。最近正准备实践微服务，可能需要在各服务之间传递异常，顾将异常信息序列化传输在反序列化。本以为fastjson根据setter进行反序列化相关操作，但是实际情况有些差距，我自定义的一些字段并没有被反序列化。
+内容如下，我的异常结构体是：12345678910111213141516171819202122public class B">
+    
+        <link rel="alternative" href="/atom.xml" title="fudali" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/logo.jpg">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.11">
+    <link rel="apple-touch-icon" sizes="114x114" href="img/logo.jpg">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">fudali</h5>
+          <a href="mailto:fudali113@gmail.com" title="fudali113@gmail.com" class="mail">fudali113@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/fudali113" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">fastjson反序列化异常类</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">fastjson反序列化异常类</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-03-28T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2017-03-29
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/笔记/">笔记</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#简介"><span class="post-toc-number">1.</span> <span class="post-toc-text">简介</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#内容"><span class="post-toc-number">2.</span> <span class="post-toc-text">内容</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-number">3.</span> <span class="post-toc-text">总结</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-fastjson-desrialze-exception"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">fastjson反序列化异常类</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017年03月29日 0:00" datetime="2017-03-28T16:00:00.000Z"  itemprop="datePublished">2017-03-29</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/笔记/">笔记</a></li></ul>
+
+
+
+            
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>因为公司本使用fastjson进行json数据序列化与反序列化。<br>最近正准备实践微服务，可能需要在各服务之间传递异常，顾将异常信息序列化传输在反序列化。<br>本以为fastjson根据setter进行反序列化相关操作，但是实际情况有些差距，我自定义的一些字段并没有被反序列化。</p>
+<h2 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h2><p>如下，我的异常结构体是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">public class BaseException extends FeignException &#123;</div><div class="line"></div><div class="line">    private int code;</div><div class="line"></div><div class="line">    public BaseException()&#123;</div><div class="line">        super(&quot;&quot;, null);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    protected BaseException(int code, String message, Throwable cause) &#123;</div><div class="line">        super(message, cause);</div><div class="line">        this.code = code;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public int getCode() &#123;</div><div class="line">        return code;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void setCode(int code) &#123;</div><div class="line">        this.code = code;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>我接收到的json数据是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    &quot;code&quot;: 133,</div><div class="line">    &quot;message&quot;: &quot;ooo&quot;,</div><div class="line">    &quot;stackTrace&quot;: [...],</div><div class="line">    &quot;rootCause&quot;: &#123;...&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>但是反序列化后我得到的实体却只有stackTrace信息，并没有code和message信息，只有debug追踪代码找原因。<br>最后找到DefaultJSONParse.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">public &lt;T&gt; T parseObject(Type type, Object fieldName) &#123;</div><div class="line">        int token = lexer.token();</div><div class="line">        if (token == JSONToken.NULL) &#123;</div><div class="line">            lexer.nextToken();</div><div class="line">            return null;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        if (token == JSONToken.LITERAL_STRING) &#123;</div><div class="line">            if (type == byte[].class) &#123;</div><div class="line">                byte[] bytes = lexer.bytesValue();</div><div class="line">                lexer.nextToken();</div><div class="line">                return (T) bytes;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            if (type == char[].class) &#123;</div><div class="line">                String strVal = lexer.stringVal();</div><div class="line">                lexer.nextToken();</div><div class="line">                return (T) strVal.toCharArray();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        // 这里会根据类型获取相关的反序列化类型，Exception Type对应ThrowableDeserializer反序列化类</div><div class="line">        ObjectDeserializer derializer = config.getDeserializer(type);</div><div class="line"></div><div class="line">        try &#123;</div><div class="line">            return (T) derializer.deserialze(this, type, fieldName);</div><div class="line">        &#125; catch (JSONException e) &#123;</div><div class="line">            throw e;</div><div class="line">        &#125; catch (Throwable e) &#123;</div><div class="line">            throw new JSONException(e.getMessage(), e);</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>ThrowableDeserializer在初始化异常类的代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">private Throwable createException(String message, Throwable cause, Class&lt;?&gt; exClass) throws Exception &#123;</div><div class="line">        Constructor&lt;?&gt; defaultConstructor = null;</div><div class="line">        Constructor&lt;?&gt; messageConstructor = null;</div><div class="line">        Constructor&lt;?&gt; causeConstructor = null;</div><div class="line">        for (Constructor&lt;?&gt; constructor : exClass.getConstructors()) &#123;</div><div class="line">        	Class&lt;?&gt;[] types = constructor.getParameterTypes();</div><div class="line">            if (types.length == 0) &#123;</div><div class="line">                defaultConstructor = constructor;</div><div class="line">                continue;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            if (types.length == 1 &amp;&amp; types[0] == String.class) &#123;</div><div class="line">                messageConstructor = constructor;</div><div class="line">                continue;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            if (types.length == 2 &amp;&amp; types[0] == String.class &amp;&amp; types[1] == Throwable.class) &#123;</div><div class="line">                causeConstructor = constructor;</div><div class="line">                continue;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        if (causeConstructor != null) &#123;</div><div class="line">            return (Throwable) causeConstructor.newInstance(message, cause);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        if (messageConstructor != null) &#123;</div><div class="line">            return (Throwable) messageConstructor.newInstance(message);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        if (defaultConstructor != null) &#123;</div><div class="line">            return (Throwable) defaultConstructor.newInstance();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        return null;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>从最下面的三个if判断可以看出，ThrowableDeserializer是根据构造函数来进行初始化实体的且值支持三种类型，最开始我的构造函数只有无参构造满足最后一个，所以最后出来的数据都为空，除了堆栈。<br>那堆栈为何不为空呢？<br>因为在ThrowableDeserializer的deserialze()的最后有一段这样的代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">if (stackTrace != null) &#123;</div><div class="line">            ex.setStackTrace(stackTrace);</div><div class="line">        &#125;</div></pre></td></tr></table></figure></p>
+<p>so…</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>使用fastjson反序列化Exception类时一定要给出确定的构造函数且与之对应。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-03-29T03:01:45.000Z" itemprop="dateUpdated">2017年3月29日 11:01</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="http://fudali.cc">
+            <img src="/img/logo.jpg" alt="fudali">
+            fudali
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fastjson/">fastjson</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2017/03/29/fastjson-desrialze-exception/&title=《fastjson反序列化异常类》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2017/03/29/fastjson-desrialze-exception/&title=《fastjson反序列化异常类》 — fudali&source=do one`s best APE" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://fudali.cc/2017/03/29/fastjson-desrialze-exception/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《fastjson反序列化异常类》 — fudali&url=http://fudali.cc/2017/03/29/fastjson-desrialze-exception/&via=http://fudali.cc" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://fudali.cc/2017/03/29/fastjson-desrialze-exception/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/03/25/heap-sort/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">排序-堆排序</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="fastjson-desrialze-exception" data-title="fastjson反序列化异常类" data-url="http://fudali.cc/2017/03/29/fastjson-desrialze-exception/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'fudali', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.11');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top" style="height:50px">
+        <p>
+            <span>do one`s best APE</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>fudali &copy; 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2017/03/29/fastjson-desrialze-exception/&title=《fastjson反序列化异常类》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2017/03/29/fastjson-desrialze-exception/&title=《fastjson反序列化异常类》 — fudali&source=do one`s best APE" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://fudali.cc/2017/03/29/fastjson-desrialze-exception/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《fastjson反序列化异常类》 — fudali&url=http://fudali.cc/2017/03/29/fastjson-desrialze-exception/&via=http://fudali.cc" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://fudali.cc/2017/03/29/fastjson-desrialze-exception/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACMElEQVR42u3aS27DMAxFUe9/0+40QCr1PlIuYOlqFCSK7eMBwY+uC6/7Y31+8/3rfOdo//ev1xNLhgwZr2Xc0zW/8WgP5/X3yJAh4xzGKILV9pD/8lA+v68MGTJkkEQwTR9JyihDhgwZfQa6dKkwliFDhoxOETu6WadkTYP7glpchgwZL2Tw4Pj/nx+Zb8iQIeNVjDtc8+SsM+DsLBkyZOzN4AFunpCRxtnaYliGDBnnMNKSsg/joZnc5UpPgsiQIeOFDJK6rdqfBlk+8pQhQ8YJDHIhHgTTkUAt1A5fnAwZMrZjdNK+NKFc9b6DKlyGDBlbMDoBNB0J1BLH4ICFDBkyNmXwAWG/iV8bbaLPMmTIOICRlqCd4QF5HSRk/zLClCFDxqYMXqDyh+skkbX2nwwZMvZm1NKy9JYkKawNOGXIkHECIy4XcY8rDeW1Qno45ZAhQ8ZGjHkwJRetHSBDAZSXxzJkyNiakTb3a4+ejgFqjTkZMmTszeiHvFowfeIwmQwZMnZlcCtp9HMSTz1RaS1DhowDGOQS/AAEKY/T0cIfr1WGDBkHMNLAGo8Yw+AeF9IyZMjYlHGHiz9W7V+1oxgyZMjYm8EXT/jSo2C8AZc28mTIkLETIz2SRYJsf1QQB1wZMmQcwHhiuJi25BaUsjJkyJCBy9dVxyx4XJUhQ4aMfn1ca8bx5FWGDBknMNJDWqt+TfcMx58yZMjYmsFLx1pxy4cNPGS35hsyZMh4E+MHA8/RP+k01cIAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.11"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.11" async></script>
+
+
+
+
+
+
+
+</body>
+</html>
