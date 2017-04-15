@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>word pattern 实现 | fudali | do one`s best</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="学习,算法,leetcode">
+    <meta name="description" content="简介leetcode第290题
+代码go123456789101112131415161718192021222324252627func wordPattern(pattern string, str string) bool &amp;#123;    singleStrs := strings.Split(str, &amp;quot; &amp;quot;)    if len(pattern) != len(s">
+<meta property="og:type" content="article">
+<meta property="og:title" content="word pattern 实现">
+<meta property="og:url" content="http://fudali.cc/2017/04/15/woed_pattern/index.html">
+<meta property="og:site_name" content="fudali">
+<meta property="og:description" content="简介leetcode第290题
+代码go123456789101112131415161718192021222324252627func wordPattern(pattern string, str string) bool &amp;#123;    singleStrs := strings.Split(str, &amp;quot; &amp;quot;)    if len(pattern) != len(s">
+<meta property="og:updated_time" content="2017-04-15T14:56:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="word pattern 实现">
+<meta name="twitter:description" content="简介leetcode第290题
+代码go123456789101112131415161718192021222324252627func wordPattern(pattern string, str string) bool &amp;#123;    singleStrs := strings.Split(str, &amp;quot; &amp;quot;)    if len(pattern) != len(s">
+    
+        <link rel="alternative" href="/atom.xml" title="fudali" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/logo.jpg">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.11">
+    <link rel="apple-touch-icon" sizes="114x114" href="img/logo.jpg">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">fudali</h5>
+          <a href="mailto:fudali113@gmail.com" title="fudali113@gmail.com" class="mail">fudali113@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/fudali113" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">word pattern 实现</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">word pattern 实现</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-04-14T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2017-04-15
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#简介"><span class="post-toc-number">1.</span> <span class="post-toc-text">简介</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#代码"><span class="post-toc-number">2.</span> <span class="post-toc-text">代码</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#go"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">go</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-woed_pattern"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">word pattern 实现</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017年04月15日 0:00" datetime="2017-04-14T16:00:00.000Z"  itemprop="datePublished">2017-04-15</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
+
+
+
+            
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><a href="https://leetcode.com/problems/word-pattern/#/description" target="_blank" rel="external">leetcode第290题</a></p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="go"><a href="#go" class="headerlink" title="go"></a>go</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">func wordPattern(pattern string, str string) bool &#123;</div><div class="line">    singleStrs := strings.Split(str, &quot; &quot;)</div><div class="line">    if len(pattern) != len(singleStrs) &#123;</div><div class="line">        return false</div><div class="line">    &#125;</div><div class="line">    for i := 0; i &lt; len(pattern); i++ &#123;</div><div class="line">        singleP := pattern[i]</div><div class="line">        singleStr := singleStrs[i]</div><div class="line">        for j := 0; j &lt; len(pattern); j++ &#123;</div><div class="line">            if i == j &#123;</div><div class="line">                continue</div><div class="line">            &#125;</div><div class="line">            _singleP := pattern[j]</div><div class="line">            _singleStr := singleStrs[j]</div><div class="line">            if singleP == _singleP &amp;&amp; singleStr != _singleStr &#123;</div><div class="line">                return false</div><div class="line">            &#125;</div><div class="line">            switch &#123;</div><div class="line">            case singleP == _singleP &amp;&amp; singleStr != _singleStr: </div><div class="line">                return false</div><div class="line">            case singleP != _singleP &amp;&amp; singleStr == _singleStr:</div><div class="line">                return false</div><div class="line">            &#125;</div><div class="line">        &#125; </div><div class="line">    &#125;</div><div class="line">    return true</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-04-15T14:56:37.000Z" itemprop="dateUpdated">2017年4月15日 22:56</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="http://fudali.cc">
+            <img src="/img/logo.jpg" alt="fudali">
+            fudali
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习/">学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2017/04/15/woed_pattern/&title=《word pattern 实现》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2017/04/15/woed_pattern/&title=《word pattern 实现》 — fudali&source=do one`s best APE" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://fudali.cc/2017/04/15/woed_pattern/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《word pattern 实现》 — fudali&url=http://fudali.cc/2017/04/15/woed_pattern/&via=http://fudali.cc" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://fudali.cc/2017/04/15/woed_pattern/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/03/29/fastjson-desrialze-exception/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">fastjson反序列化异常类</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="woed_pattern" data-title="word pattern 实现" data-url="http://fudali.cc/2017/04/15/woed_pattern/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'fudali', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.11');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top" style="height:50px">
+        <p>
+            <span>do one`s best APE</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>fudali &copy; 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2017/04/15/woed_pattern/&title=《word pattern 实现》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2017/04/15/woed_pattern/&title=《word pattern 实现》 — fudali&source=do one`s best APE" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://fudali.cc/2017/04/15/woed_pattern/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《word pattern 实现》 — fudali&url=http://fudali.cc/2017/04/15/woed_pattern/&via=http://fudali.cc" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://fudali.cc/2017/04/15/woed_pattern/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABzklEQVR42u3ay2ojMRAF0Pz/Tzswq0CIcq9KrZjhaGVE233kRaF6fHzE6/VvrXe+7n9d3/fXv3Bg4eLijrmv5Vo/s6Yk38qfx8XFvc9dB6/1T7fhLw9quLi478/NLyjrKxEuLu7/ym33kysOLi7uu3HzRGVdqUiuR5dyNVxc3AG3LZg+8fnB+i4uLm7JfW2tPJCtv1u/FxcX9wq3LYa2jdW9sukvwQ4XF/dhblsQaUPVpMhyoH6Di4u7xZ3MROUv2CuVHsjncHFxB9xJk6NNXZI7V5T84OLiXuFO0pi8sbr3FxzL1XBxcXcylKjxmR8gCVXJPi4u7k1ukrTkIWkytBHRcXFxr3DbS0Zb/piXX4vQhouLe4i7x5oXUvfCIi4u7l9xn6O33CLK4uLiHuUmCU87MJGkUvmB64IpLi7umJs3QdvAlDxfB1ZcXNwr3LaButcKrS8uyQgILi7uY9zJcNVekGpvXkVZBBcX9xD3VBRsGyRtoMTFxb3P3Sub5gWUPdaPfxAuLu5Fbj6YNS+ajEInLi7uW3L3kpy8KfvLIXFxcd+Mm7db5uMdPx4SFxf3IvfseNbk2MUQBi4u7mPc9pXz61FbZh3Vd3FxcTvuJ/HYlYzZELXvAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.11"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.11" async></script>
+
+
+
+
+
+
+
+</body>
+</html>
