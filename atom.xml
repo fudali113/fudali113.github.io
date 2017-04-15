@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://fudali.cc/"/>
-  <updated>2017-03-29T03:01:45.000Z</updated>
+  <updated>2017-04-15T14:56:37.000Z</updated>
   <id>http://fudali.cc/</id>
   
   <author>
@@ -14,6 +14,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>word pattern 实现</title>
+    <link href="http://fudali.cc/2017/04/15/woed_pattern/"/>
+    <id>http://fudali.cc/2017/04/15/woed_pattern/</id>
+    <published>2017-04-14T16:00:00.000Z</published>
+    <updated>2017-04-15T14:56:37.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><a href="https://leetcode.com/problems/word-pattern/#/description" target="_blank" rel="external">leetcode第290题</a></p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="go"><a href="#go" class="headerlink" title="go"></a>go</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">func wordPattern(pattern string, str string) bool &#123;</div><div class="line">    singleStrs := strings.Split(str, &quot; &quot;)</div><div class="line">    if len(pattern) != len(singleStrs) &#123;</div><div class="line">        return false</div><div class="line">    &#125;</div><div class="line">    for i := 0; i &lt; len(pattern); i++ &#123;</div><div class="line">        singleP := pattern[i]</div><div class="line">        singleStr := singleStrs[i]</div><div class="line">        for j := 0; j &lt; len(pattern); j++ &#123;</div><div class="line">            if i == j &#123;</div><div class="line">                continue</div><div class="line">            &#125;</div><div class="line">            _singleP := pattern[j]</div><div class="line">            _singleStr := singleStrs[j]</div><div class="line">            if singleP == _singleP &amp;&amp; singleStr != _singleStr &#123;</div><div class="line">                return false</div><div class="line">            &#125;</div><div class="line">            switch &#123;</div><div class="line">            case singleP == _singleP &amp;&amp; singleStr != _singleStr: </div><div class="line">                return false</div><div class="line">            case singleP != _singleP &amp;&amp; singleStr == _singleStr:</div><div class="line">                return false</div><div class="line">            &#125;</div><div class="line">        &#125; </div><div class="line">    &#125;</div><div class="line">    return true</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://leetcode.com/problems/word-pattern/#/description&quot; tar
+    
+    </summary>
+    
+      <category term="算法" scheme="http://fudali.cc/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="学习" scheme="http://fudali.cc/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="算法" scheme="http://fudali.cc/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="leetcode" scheme="http://fudali.cc/tags/leetcode/"/>
+    
+  </entry>
   
   <entry>
     <title>fastjson反序列化异常类</title>
@@ -143,6 +170,43 @@
   </entry>
   
   <entry>
+    <title>排序知识总结</title>
+    <link href="http://fudali.cc/2017/03/20/sort/"/>
+    <id>http://fudali.cc/2017/03/20/sort/</id>
+    <published>2017-03-19T16:00:00.000Z</published>
+    <updated>2017-03-25T09:09:43.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="排序算法稳定性"><a href="#排序算法稳定性" class="headerlink" title="排序算法稳定性"></a>排序算法稳定性</h2><p>假定在待排序的记录序列中，存在多个具有相同的关键字的记录，若经过排序，这些记录的相对次序保持不变，即在原序列中，ri=rj，且ri在rj之前，而在排序后的序列中，ri仍在rj之前，则称这种排序算法是稳定的；否则称为不稳定的。</p>
+<p>对于不稳定的排序算法，只要举出一个实例，即可说明它的不稳定性；而对于稳定的排序算法，必须对算法进行分析从而得到稳定的特性。需要注意的是，排序算法是否为稳定的是由具体算法决定的，不稳定的算法在某种条件下可以变为稳定的算法，而稳定的算法在某种条件下也可以变为不稳定的算法。</p>
+<p>堆排序、快速排序、希尔排序、直接选择排序不是稳定的排序算法，而基数排序、冒泡排序、直接插入排序、折半插入排序、归并排序是稳定的排序算法。</p>
+<h2 id="各算法时间复杂度与是否稳定"><a href="#各算法时间复杂度与是否稳定" class="headerlink" title="各算法时间复杂度与是否稳定"></a>各算法时间复杂度与是否稳定</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/sort.jpg" alt="各算法时间复杂度与是否稳定对照表" title="">
+                </div>
+                <div class="image-caption">各算法时间复杂度与是否稳定对照表</div>
+            </figure>
+<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><p><a href="https://juejin.im/post/58ca051f61ff4b0060165122#数据结构" target="_blank" rel="external">掘金算法文章,包含各种算法</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;排序算法稳定性&quot;&gt;&lt;a href=&quot;#排序算法稳定性&quot; class=&quot;headerlink&quot; title=&quot;排序算法稳定性&quot;&gt;&lt;/a&gt;排序算法稳定性&lt;/h2&gt;&lt;p&gt;假定在待排序的记录序列中，存在多个具有相同的关键字的记录，若经过排序，这些记录的相对次序保持不变，即
+    
+    </summary>
+    
+      <category term="算法" scheme="http://fudali.cc/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="golang" scheme="http://fudali.cc/tags/golang/"/>
+    
+      <category term="排序" scheme="http://fudali.cc/tags/%E6%8E%92%E5%BA%8F/"/>
+    
+      <category term="学习" scheme="http://fudali.cc/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
     <title>数据结构-堆</title>
     <link href="http://fudali.cc/2017/03/20/adt-heap/"/>
     <id>http://fudali.cc/2017/03/20/adt-heap/</id>
@@ -223,43 +287,6 @@
     
     
       <category term="linux" scheme="http://fudali.cc/tags/linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>排序知识总结</title>
-    <link href="http://fudali.cc/2017/03/20/sort/"/>
-    <id>http://fudali.cc/2017/03/20/sort/</id>
-    <published>2017-03-19T16:00:00.000Z</published>
-    <updated>2017-03-25T09:09:43.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="排序算法稳定性"><a href="#排序算法稳定性" class="headerlink" title="排序算法稳定性"></a>排序算法稳定性</h2><p>假定在待排序的记录序列中，存在多个具有相同的关键字的记录，若经过排序，这些记录的相对次序保持不变，即在原序列中，ri=rj，且ri在rj之前，而在排序后的序列中，ri仍在rj之前，则称这种排序算法是稳定的；否则称为不稳定的。</p>
-<p>对于不稳定的排序算法，只要举出一个实例，即可说明它的不稳定性；而对于稳定的排序算法，必须对算法进行分析从而得到稳定的特性。需要注意的是，排序算法是否为稳定的是由具体算法决定的，不稳定的算法在某种条件下可以变为稳定的算法，而稳定的算法在某种条件下也可以变为不稳定的算法。</p>
-<p>堆排序、快速排序、希尔排序、直接选择排序不是稳定的排序算法，而基数排序、冒泡排序、直接插入排序、折半插入排序、归并排序是稳定的排序算法。</p>
-<h2 id="各算法时间复杂度与是否稳定"><a href="#各算法时间复杂度与是否稳定" class="headerlink" title="各算法时间复杂度与是否稳定"></a>各算法时间复杂度与是否稳定</h2><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/images/sort.jpg" alt="各算法时间复杂度与是否稳定对照表" title="">
-                </div>
-                <div class="image-caption">各算法时间复杂度与是否稳定对照表</div>
-            </figure>
-<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><p><a href="https://juejin.im/post/58ca051f61ff4b0060165122#数据结构" target="_blank" rel="external">掘金算法文章,包含各种算法</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;排序算法稳定性&quot;&gt;&lt;a href=&quot;#排序算法稳定性&quot; class=&quot;headerlink&quot; title=&quot;排序算法稳定性&quot;&gt;&lt;/a&gt;排序算法稳定性&lt;/h2&gt;&lt;p&gt;假定在待排序的记录序列中，存在多个具有相同的关键字的记录，若经过排序，这些记录的相对次序保持不变，即
-    
-    </summary>
-    
-      <category term="算法" scheme="http://fudali.cc/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="golang" scheme="http://fudali.cc/tags/golang/"/>
-    
-      <category term="排序" scheme="http://fudali.cc/tags/%E6%8E%92%E5%BA%8F/"/>
-    
-      <category term="学习" scheme="http://fudali.cc/tags/%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
