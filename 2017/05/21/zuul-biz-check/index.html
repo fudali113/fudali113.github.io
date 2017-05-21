@@ -13,29 +13,26 @@
     
     
     
-    <title>springbox-swagger2使用 | fudali | do one`s best</title>
+    <title>No title | fudali | do one`s best</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="swagger,spring cloud">
-    <meta name="description" content="与FeignClient冲突
-Q:  使用springbox-swagger2 2.2.2版本进行注释api生成文档，但是当basePackage路径下存在feignClient注释的类时，将会报NullPointerException.出现这种情况是因为2.2.2版本没有对feignClient初始化时调用refreshContext作兼容。
-A:  升级版本到最新版，在2.5.0中改问题被彻底">
+    <meta name="keywords" content="">
+    <meta name="description" content="title: zuul业务检查相关模块date: 2017-04-20tags: [“zuul”,”spring cloud”]categories:  微服务
+前言在使用spring cloud进行微服务开发的过程中，因为微服务之间的访问只是对资源的访问，不应该有权限相关的检验，但是对外开放的服务是必须要对没有用户所能访问的资源与操作进行权限检验的。而spring cloud的网关服务开源项目并">
 <meta property="og:type" content="article">
-<meta property="og:title" content="springbox-swagger2使用">
-<meta property="og:url" content="http://fudali.cc/2017/04/20/springbox-swagger2-conflict-feignclient/index.html">
+<meta property="og:title" content="No title">
+<meta property="og:url" content="http://fudali.cc/2017/05/21/zuul-biz-check/index.html">
 <meta property="og:site_name" content="fudali">
-<meta property="og:description" content="与FeignClient冲突
-Q:  使用springbox-swagger2 2.2.2版本进行注释api生成文档，但是当basePackage路径下存在feignClient注释的类时，将会报NullPointerException.出现这种情况是因为2.2.2版本没有对feignClient初始化时调用refreshContext作兼容。
-A:  升级版本到最新版，在2.5.0中改问题被彻底">
-<meta property="og:updated_time" content="2017-05-04T09:44:47.000Z">
+<meta property="og:description" content="title: zuul业务检查相关模块date: 2017-04-20tags: [“zuul”,”spring cloud”]categories:  微服务
+前言在使用spring cloud进行微服务开发的过程中，因为微服务之间的访问只是对资源的访问，不应该有权限相关的检验，但是对外开放的服务是必须要对没有用户所能访问的资源与操作进行权限检验的。而spring cloud的网关服务开源项目并">
+<meta property="og:updated_time" content="2017-05-21T12:59:53.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="springbox-swagger2使用">
-<meta name="twitter:description" content="与FeignClient冲突
-Q:  使用springbox-swagger2 2.2.2版本进行注释api生成文档，但是当basePackage路径下存在feignClient注释的类时，将会报NullPointerException.出现这种情况是因为2.2.2版本没有对feignClient初始化时调用refreshContext作兼容。
-A:  升级版本到最新版，在2.5.0中改问题被彻底">
+<meta name="twitter:title" content="No title">
+<meta name="twitter:description" content="title: zuul业务检查相关模块date: 2017-04-20tags: [“zuul”,”spring cloud”]categories:  微服务
+前言在使用spring cloud进行微服务开发的过程中，因为微服务之间的访问只是对资源的访问，不应该有权限相关的检验，但是对外开放的服务是必须要对没有用户所能访问的资源与操作进行权限检验的。而spring cloud的网关服务开源项目并">
     
         <link rel="alternative" href="/atom.xml" title="fudali" type="application/atom+xml">
     
@@ -113,7 +110,7 @@ A:  升级版本到最新版，在2.5.0中改问题被彻底">
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">springbox-swagger2使用</div>
+        <div class="flex-col header-title ellipsis">No title</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -135,15 +132,13 @@ A:  升级版本到最新版，在2.5.0中改问题被彻底">
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">springbox-swagger2使用</h1>
+        <h1 class="title">No title</h1>
         <h5 class="subtitle">
             
-                <time datetime="2017-04-19T16:00:00.000Z" itemprop="datePublished" class="page-time">
-  2017-04-20
+                <time datetime="2017-05-21T12:25:49.000Z" itemprop="datePublished" class="page-time">
+  2017-05-21
 </time>
 
-
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/微服务/">微服务</a></li></ul>
 
             
         </h5>
@@ -159,21 +154,19 @@ A:  升级版本到最新版，在2.5.0中改问题被彻底">
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#与FeignClient冲突"><span class="post-toc-number">1.</span> <span class="post-toc-text">与FeignClient冲突</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#简介"><span class="post-toc-number">2.</span> <span class="post-toc-text">简介</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#代码"><span class="post-toc-number">3.</span> <span class="post-toc-text">代码</span></a></li></ol>
         </nav>
     </aside>
     
-<article id="post-springbox-swagger2-conflict-feignclient"
+<article id="post-zuul-biz-check"
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">springbox-swagger2使用</h1>
+        <h1 class="post-card-title">No title</h1>
         <div class="post-meta">
-            <time class="post-time" title="2017年04月20日 0:00" datetime="2017-04-19T16:00:00.000Z"  itemprop="datePublished">2017-04-20</time>
+            <time class="post-time" title="2017年05月21日 20:25" datetime="2017-05-21T12:25:49.000Z"  itemprop="datePublished">2017-05-21</time>
 
             
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/微服务/">微服务</a></li></ul>
-
 
 
             
@@ -182,11 +175,23 @@ A:  升级版本到最新版，在2.5.0中改问题被彻底">
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h2 id="与FeignClient冲突"><a href="#与FeignClient冲突" class="headerlink" title="与FeignClient冲突"></a>与FeignClient冲突</h2><ul>
-<li>Q:<br>  使用springbox-swagger2 2.2.2版本进行注释api生成文档，但是当basePackage路径下存在feignClient注释的类时，将会报NullPointerException.出现这种情况是因为2.2.2版本没有对feignClient初始化时调用refreshContext作兼容。</li>
-<li>A:<br>  升级版本到最新版，在2.5.0中改问题被彻底解决;<a href="https://github.com/springfox/springfox/issues/1074" target="_blank" rel="external">springbox-swagger2 github issue 1074</a>;</li>
+            <p>title: zuul业务检查相关模块<br>date: 2017-04-20<br>tags: [“zuul”,”spring cloud”]<br>categories:<br>  微服务</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在使用spring cloud进行微服务开发的过程中，因为微服务之间的访问只是对资源的访问，不应该有权限相关的检验，但是对外开放的服务是必须要对没有用户所能访问的资源与操作进行权限检验的。<br>而spring cloud的网关服务开源项目并没有很好地提供业务检查相关的处理模块，所以我在使用zuul进行网关开发的过程中根据自己的理解写了一套业务检查相关的代码。</p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>业务相关的权限检查因为每个微服务所需要的检查是不一样的，所以不同的微服务可能需要不同的检查，且同意微服务内不同的接口路径和HTTP方法的检查策略也可能是不同的，所以检查应该可以确切到每一个访问。</p>
+<p>业务检查虽然是在网关进行检查的，但是为了降低耦合与提高内聚。实际检查的处理逻辑也应该是由微服务内部提供，并对外提供接口。我们在网关进行检查的时候也应该是请求相关的接口检查权限。</p>
+<p>zuul权限检查模块的实现思路大致是可以在配置文件中配置微服务相关路由的检查器(实现BusinessChecker接口的实现类)，根据检查内容抛出错误或者通过检查。</p>
+<p>在代码的实现上时，提供BusinessChecker接口供需要检查的权限实现，拥有<code>type(),order(),check(CheckContext ct)</code>方法并且该接口默认实现了<code>Comparable&lt;BusinessChecker&gt;</code>,</p>
+<ul>
+<li>type :返回改checker的type，用于在配置文件中配置路由相关处理器的type时使用</li>
+<li>order :返回执行时的顺序</li>
+<li>check :进行实际的检查内容，一般以抛出异常为检验错误。</li>
 </ul>
-<p>“111-1141-9124”,”111-1143-6985”,”111-1145-2039”,”111-1144-0685”</p>
+<p>CheckContext :是从Zull requestContext 切换过来的上下文，主要是为了与Zuul的解耦</p>
+<p>CheckException :检查时可抛出的错误，包含Http status, BizCode, 错误信息。</p>
+<p>CheckManager :管理根据路由获取相关Checker的管理类，首先根据相关配置获取个Checker的type，在根据type查找在spring中的相关bean，最后排序并返回改请求所对应的相关Check实体数组。</p>
+<p>BusinessVerifyFilter :主要是衔接Check模块与Zuul之间的桥梁 </p>
+<p>CheckProperties :加载相关的配置文件</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p><a href="https://github.com/23mf/zuul-biz-check" target="_blank" rel="external">zuul-biz-check</a></p>
 
         </div>
 
@@ -194,7 +199,7 @@ A:  升级版本到最新版，在2.5.0中改问题被彻底">
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2017-05-04T09:44:47.000Z" itemprop="dateUpdated">2017年5月4日 17:44</time>
+    最后更新时间：<time datetime="2017-05-21T12:59:53.000Z" itemprop="dateUpdated">2017年5月21日 20:59</time>
 </span><br>
 
 
@@ -217,8 +222,6 @@ A:  升级版本到最新版，在2.5.0中改问题被彻底">
 
         <div class="post-footer">
             
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring-cloud/">spring cloud</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/swagger/">swagger</a></li></ul>
-
 
             
 <div class="page-share-wrap">
@@ -227,7 +230,7 @@ A:  升级版本到最新版，在2.5.0中改问题被彻底">
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2017/04/20/springbox-swagger2-conflict-feignclient/&title=《springbox-swagger2使用》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2017/05/21/zuul-biz-check/&title=《No title》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -237,22 +240,22 @@ A:  升级版本到最新版，在2.5.0中改问题被彻底">
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2017/04/20/springbox-swagger2-conflict-feignclient/&title=《springbox-swagger2使用》 — fudali&source=do one`s best APE" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2017/05/21/zuul-biz-check/&title=《No title》 — fudali&source=do one`s best APE" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://fudali.cc/2017/04/20/springbox-swagger2-conflict-feignclient/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://fudali.cc/2017/05/21/zuul-biz-check/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《springbox-swagger2使用》 — fudali&url=http://fudali.cc/2017/04/20/springbox-swagger2-conflict-feignclient/&via=http://fudali.cc" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《No title》 — fudali&url=http://fudali.cc/2017/05/21/zuul-biz-check/&via=http://fudali.cc" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://fudali.cc/2017/04/20/springbox-swagger2-conflict-feignclient/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://fudali.cc/2017/05/21/zuul-biz-check/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -272,21 +275,14 @@ A:  升级版本到最新版，在2.5.0中改问题被彻底">
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2017/04/22/tw-learn-4.22/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">4.22 thoughtWorks 学习</h4>
-      </a>
-    </div>
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2017/04/15/woed_pattern/" id="post-next" class="post-nav-link">
+      <a href="/2017/04/22/tw-learn-4.22/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">word pattern 实现</h4>
+        <h4 class="title">4.22 thoughtWorks 学习</h4>
       </a>
     </div>
   
@@ -297,7 +293,7 @@ A:  升级版本到最新版，在2.5.0中改问题被彻底">
     
 
 <div class="comments" id="comments">
-    <div class="ds-thread" data-thread-key="springbox-swagger2-conflict-feignclient" data-title="springbox-swagger2使用" data-url="http://fudali.cc/2017/04/20/springbox-swagger2-conflict-feignclient/"></div>
+    <div class="ds-thread" data-thread-key="zuul-biz-check" data-title="No title" data-url="http://fudali.cc/2017/05/21/zuul-biz-check/"></div>
 </div>
 <script>
 lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
@@ -366,7 +362,7 @@ lazyScripts.push('/js/embed.min.js?v=1.4.11');
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2017/04/20/springbox-swagger2-conflict-feignclient/&title=《springbox-swagger2使用》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2017/05/21/zuul-biz-check/&title=《No title》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -376,22 +372,22 @@ lazyScripts.push('/js/embed.min.js?v=1.4.11');
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2017/04/20/springbox-swagger2-conflict-feignclient/&title=《springbox-swagger2使用》 — fudali&source=do one`s best APE" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2017/05/21/zuul-biz-check/&title=《No title》 — fudali&source=do one`s best APE" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://fudali.cc/2017/04/20/springbox-swagger2-conflict-feignclient/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://fudali.cc/2017/05/21/zuul-biz-check/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《springbox-swagger2使用》 — fudali&url=http://fudali.cc/2017/04/20/springbox-swagger2-conflict-feignclient/&via=http://fudali.cc" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《No title》 — fudali&url=http://fudali.cc/2017/05/21/zuul-biz-check/&via=http://fudali.cc" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://fudali.cc/2017/04/20/springbox-swagger2-conflict-feignclient/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://fudali.cc/2017/05/21/zuul-biz-check/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -402,7 +398,7 @@ lazyScripts.push('/js/embed.min.js?v=1.4.11');
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACsklEQVR42u3aQW7DMAwEwP7/0y3QUw+xwyXFJEDHp8BxbI0KWOqSX1/l4/v3qHy+OvP3/NWd62M4fODh4eG1hn51pAO9v8PVQOvTVx8zHh4e3javshhUXs31KahQ67+6PI+Hh4f3Vl5v6zy5sv4tHh4e3ufz0iUhvaY+Hjw8PLx38epRQv0lXhnQfHE6lrXg4eHhlXlnC2Cv+fy2+h4eHt6/532HRxrF9loHeovBg2fh4eHhLfDuo9W03JW2HTSHm8YceHh4eAu83mY6BdcntN7U1Qs+8PDw8Oa8ycv3/tYpo148q08ZHh4e3llefZtbjwnSElcvgCiVzfDw8PBewqsHrL2h1O9Q+dWTxQwPDw9vgTcJZHtLQrp9T7fUlwsGHh4e3gIvjQmCrW0ryOgFyk+mDw8PD2/Mqxec0tB2HsX2noiHh4e3zUubriaNU/VnxXFtGkPg4eHhHeKl7QJp3FCfrN6f4UnTFR4eHt5RXqV81ds0BwFrOciIe8rw8PDwlnnpY3rLw/YE4eHh4e3xeoX8tNGqXrKqb8cPpNR4eHh4/RpWs2F0kpdOymDpt3h4eHhneZMWqFOtAGkwUR8PHh4e3gYvLf9PilWjxqkwyAhWJDw8PLyQd/+DtAR1arjHmq7w8PDwFngbpPr16fne5OLh4eGd5U0AvWaCXoRxPwWl+h4eHh7eAu/+x/M1p7dxTyfxSdMVHh4e3pjXKztNQt40ip23LODh4eGd5U1KX73XdNrCVV82gv8Y8PDw8Aa8SeWojplEvelz8fDw8F7D6y0G6fKQvtzT8PfyuXh4eHhrvDQUmG+7J4wga8HDw8N7K++ekRal0vJbsxkLDw8P7yN524tNeuWDMAIPDw9vgbdR9JosBr3rH5zBw8PDW+CdKoDd37S+nNTBzWoeHh4eXp/3A3k3K/CXssRCAAAAAElFTkSuQmCC" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJElEQVR42u3a0YqDQAwF0P3/n3ZfF4pyk9gF4/GpVOrMsXCZZObnJ76Oj+vs7t9vPj9X7958YWBgPJZxXF7XE+19k4yezw0DA+M9jLMES0IwH/76Cfm4GBgYGPmjq+GYRzAGBgbGvYE7CeXrIhkDAwOjGpTXyDxYrxeLX6/FMTAwHsjIu+7///kr+xsYGBiPYhzFqxfQd8Xr6YgYGBirGdUCNV+oTYre6nwwMDB2M3qNtmqJW22uJWEd/Q8YGBgrGPMNgLz5lSwfq8Xt6X+CgYGxiFGNxXxzMblbLlPPXigGBsZqRjJMsmjrHaT4XomLgYGxiXFdoM6PUEy+KbwCDAyM1Yy8QdaL3aQonbTeCuGLgYGxjlGN1LwZl5e41ReKgYGxm9HbyKy+gskzo2UiBgbGUkZz+TU4QFZlF/ZgMTAwVjN64Vs9ZpGXweXWHgYGxmpG71BFUojm4TsZBQMD422MpOFVXTj22v3NMyMYGBirGb3iM4nFe5eShfMjGBgY6xiTsMsPllUnl+BvaLphYGA8kDF5UKE1VtxgKPwAAwPjNYxqKTtZAt7Gw8DAWMo4ildvYzIvmPPWHgYGxnsYk5hLWm9J4dpbbjYxGBgYj2X0tgSSqM0Dt7ddioGB8TZGHnyT9VjzCEUyKwwMDIxWc623wdkcEQMDA6M4TK8MHuExMDBewMib9b3tgWrhWh0LAwNjN6NaOva2LedTySMbAwNjEeMXYfmyUNmeEekAAAAASUVORK5CYII=" alt="微信分享二维码">
 </div>
 
 

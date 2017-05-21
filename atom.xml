@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://fudali.cc/"/>
-  <updated>2017-04-20T01:43:43.000Z</updated>
+  <updated>2017-05-21T12:59:53.000Z</updated>
   <id>http://fudali.cc/</id>
   
   <author>
@@ -16,16 +16,73 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title></title>
+    <link href="http://fudali.cc/2017/05/21/zuul-biz-check/"/>
+    <id>http://fudali.cc/2017/05/21/zuul-biz-check/</id>
+    <published>2017-05-21T12:25:49.000Z</published>
+    <updated>2017-05-21T12:59:53.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>title: zuul业务检查相关模块<br>date: 2017-04-20<br>tags: [“zuul”,”spring cloud”]<br>categories:<br>  微服务</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在使用spring cloud进行微服务开发的过程中，因为微服务之间的访问只是对资源的访问，不应该有权限相关的检验，但是对外开放的服务是必须要对没有用户所能访问的资源与操作进行权限检验的。<br>而spring cloud的网关服务开源项目并没有很好地提供业务检查相关的处理模块，所以我在使用zuul进行网关开发的过程中根据自己的理解写了一套业务检查相关的代码。</p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>业务相关的权限检查因为每个微服务所需要的检查是不一样的，所以不同的微服务可能需要不同的检查，且同意微服务内不同的接口路径和HTTP方法的检查策略也可能是不同的，所以检查应该可以确切到每一个访问。</p>
+<p>业务检查虽然是在网关进行检查的，但是为了降低耦合与提高内聚。实际检查的处理逻辑也应该是由微服务内部提供，并对外提供接口。我们在网关进行检查的时候也应该是请求相关的接口检查权限。</p>
+<p>zuul权限检查模块的实现思路大致是可以在配置文件中配置微服务相关路由的检查器(实现BusinessChecker接口的实现类)，根据检查内容抛出错误或者通过检查。</p>
+<p>在代码的实现上时，提供BusinessChecker接口供需要检查的权限实现，拥有<code>type(),order(),check(CheckContext ct)</code>方法并且该接口默认实现了<code>Comparable&lt;BusinessChecker&gt;</code>,</p>
+<ul>
+<li>type :返回改checker的type，用于在配置文件中配置路由相关处理器的type时使用</li>
+<li>order :返回执行时的顺序</li>
+<li>check :进行实际的检查内容，一般以抛出异常为检验错误。</li>
+</ul>
+<p>CheckContext :是从Zull requestContext 切换过来的上下文，主要是为了与Zuul的解耦</p>
+<p>CheckException :检查时可抛出的错误，包含Http status, BizCode, 错误信息。</p>
+<p>CheckManager :管理根据路由获取相关Checker的管理类，首先根据相关配置获取个Checker的type，在根据type查找在spring中的相关bean，最后排序并返回改请求所对应的相关Check实体数组。</p>
+<p>BusinessVerifyFilter :主要是衔接Check模块与Zuul之间的桥梁 </p>
+<p>CheckProperties :加载相关的配置文件</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p><a href="https://github.com/23mf/zuul-biz-check" target="_blank" rel="external">zuul-biz-check</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;title: zuul业务检查相关模块&lt;br&gt;date: 2017-04-20&lt;br&gt;tags: [“zuul”,”spring cloud”]&lt;br&gt;categories:&lt;br&gt;  微服务&lt;/p&gt;
+&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;hea
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>4.22 thoughtWorks 学习</title>
+    <link href="http://fudali.cc/2017/04/22/tw-learn-4.22/"/>
+    <id>http://fudali.cc/2017/04/22/tw-learn-4.22/</id>
+    <published>2017-04-21T16:00:00.000Z</published>
+    <updated>2017-04-22T03:01:11.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="容器技术" scheme="http://fudali.cc/categories/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="学习" scheme="http://fudali.cc/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="docker" scheme="http://fudali.cc/tags/docker/"/>
+    
+  </entry>
+  
+  <entry>
     <title>springbox-swagger2使用</title>
     <link href="http://fudali.cc/2017/04/20/springbox-swagger2-conflict-feignclient/"/>
     <id>http://fudali.cc/2017/04/20/springbox-swagger2-conflict-feignclient/</id>
     <published>2017-04-19T16:00:00.000Z</published>
-    <updated>2017-04-20T01:43:43.000Z</updated>
+    <updated>2017-05-04T09:44:47.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="与FeignClient冲突"><a href="#与FeignClient冲突" class="headerlink" title="与FeignClient冲突"></a>与FeignClient冲突</h2><ul>
 <li>Q:<br>  使用springbox-swagger2 2.2.2版本进行注释api生成文档，但是当basePackage路径下存在feignClient注释的类时，将会报NullPointerException.出现这种情况是因为2.2.2版本没有对feignClient初始化时调用refreshContext作兼容。</li>
 <li>A:<br>  升级版本到最新版，在2.5.0中改问题被彻底解决;<a href="https://github.com/springfox/springfox/issues/1074" target="_blank" rel="external">springbox-swagger2 github issue 1074</a>;</li>
 </ul>
+<p>“111-1141-9124”,”111-1143-6985”,”111-1145-2039”,”111-1144-0685”</p>
 ]]></content>
     
     <summary type="html">
@@ -199,39 +256,29 @@
   </entry>
   
   <entry>
-    <title>排序知识总结</title>
-    <link href="http://fudali.cc/2017/03/20/sort/"/>
-    <id>http://fudali.cc/2017/03/20/sort/</id>
+    <title>linux常用知识</title>
+    <link href="http://fudali.cc/2017/03/20/linux/"/>
+    <id>http://fudali.cc/2017/03/20/linux/</id>
     <published>2017-03-19T16:00:00.000Z</published>
-    <updated>2017-03-25T09:09:43.000Z</updated>
+    <updated>2017-03-20T09:14:08.000Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="排序算法稳定性"><a href="#排序算法稳定性" class="headerlink" title="排序算法稳定性"></a>排序算法稳定性</h2><p>假定在待排序的记录序列中，存在多个具有相同的关键字的记录，若经过排序，这些记录的相对次序保持不变，即在原序列中，ri=rj，且ri在rj之前，而在排序后的序列中，ri仍在rj之前，则称这种排序算法是稳定的；否则称为不稳定的。</p>
-<p>对于不稳定的排序算法，只要举出一个实例，即可说明它的不稳定性；而对于稳定的排序算法，必须对算法进行分析从而得到稳定的特性。需要注意的是，排序算法是否为稳定的是由具体算法决定的，不稳定的算法在某种条件下可以变为稳定的算法，而稳定的算法在某种条件下也可以变为不稳定的算法。</p>
-<p>堆排序、快速排序、希尔排序、直接选择排序不是稳定的排序算法，而基数排序、冒泡排序、直接插入排序、折半插入排序、归并排序是稳定的排序算法。</p>
-<h2 id="各算法时间复杂度与是否稳定"><a href="#各算法时间复杂度与是否稳定" class="headerlink" title="各算法时间复杂度与是否稳定"></a>各算法时间复杂度与是否稳定</h2><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/images/sort.jpg" alt="各算法时间复杂度与是否稳定对照表" title="">
-                </div>
-                <div class="image-caption">各算法时间复杂度与是否稳定对照表</div>
-            </figure>
-<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><p><a href="https://juejin.im/post/58ca051f61ff4b0060165122#数据结构" target="_blank" rel="external">掘金算法文章,包含各种算法</a></p>
+    <content type="html"><![CDATA[<h2 id="内核日志"><a href="#内核日志" class="headerlink" title="内核日志"></a>内核日志</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat /var/log/messages</div></pre></td></tr></table></figure>
+<h2 id="linux内存不足时kill进程策略"><a href="#linux内存不足时kill进程策略" class="headerlink" title="linux内存不足时kill进程策略"></a>linux内存不足时kill进程策略</h2><p>OOM_killer是Linux自我保护的方式，在内存不足时将被唤醒，调出<code>/proc/{pid}/oom_score</code>最大者并将之kill掉</p>
+<p>为了保护重要进程不被OOM_killer kill掉，可以配置<code>/proc/{pid}/oom_score_adj</code>,此值为内核在为每个进行打分时的附加值，最后得分等于实际值+该值<br>顾可以使用<code>echo -20 &gt; /proc/{pid}/oom_score_adj</code>为实际值减去20(最后得分越小越不易被杀掉)</p>
+<p>root进程默认获取-30的附加值<br><a href="http://www.vpsee.com/2013/10/how-to-configure-the-linux-oom-killer/" target="_blank" rel="external">详细来源，从源码的角度讲解</a><br><a href="https://github.com/torvalds/linux/blob/master/mm/oom_kill.c#L172-L222" target="_blank" rel="external">计算oom_score的函数linux源码</a></p>
+<p>获取进程oom_score脚本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">for proc in $(find /proc -maxdepth 1 -regex &apos;/proc/[0-9]+&apos;); do</div><div class="line">    printf &quot;%2d %5d %s\n&quot; \</div><div class="line">        &quot;$(cat $proc/oom_score)&quot; \</div><div class="line">        &quot;$(basename $proc)&quot; \</div><div class="line">        &quot;$(cat $proc/cmdline | tr &apos;\0&apos; &apos; &apos; | head -c 50)&quot;</div><div class="line">done 2&gt;/dev/null | sort -nr | head -n 10</div></pre></td></tr></table></figure></p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;排序算法稳定性&quot;&gt;&lt;a href=&quot;#排序算法稳定性&quot; class=&quot;headerlink&quot; title=&quot;排序算法稳定性&quot;&gt;&lt;/a&gt;排序算法稳定性&lt;/h2&gt;&lt;p&gt;假定在待排序的记录序列中，存在多个具有相同的关键字的记录，若经过排序，这些记录的相对次序保持不变，即
+      &lt;h2 id=&quot;内核日志&quot;&gt;&lt;a href=&quot;#内核日志&quot; class=&quot;headerlink&quot; title=&quot;内核日志&quot;&gt;&lt;/a&gt;内核日志&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pr
     
     </summary>
     
-      <category term="算法" scheme="http://fudali.cc/categories/%E7%AE%97%E6%B3%95/"/>
+      <category term="linux" scheme="http://fudali.cc/categories/linux/"/>
     
     
-      <category term="golang" scheme="http://fudali.cc/tags/golang/"/>
-    
-      <category term="学习" scheme="http://fudali.cc/tags/%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="排序" scheme="http://fudali.cc/tags/%E6%8E%92%E5%BA%8F/"/>
+      <category term="linux" scheme="http://fudali.cc/tags/linux/"/>
     
   </entry>
   
@@ -293,29 +340,39 @@
   </entry>
   
   <entry>
-    <title>linux常用知识</title>
-    <link href="http://fudali.cc/2017/03/20/linux/"/>
-    <id>http://fudali.cc/2017/03/20/linux/</id>
+    <title>排序知识总结</title>
+    <link href="http://fudali.cc/2017/03/20/sort/"/>
+    <id>http://fudali.cc/2017/03/20/sort/</id>
     <published>2017-03-19T16:00:00.000Z</published>
-    <updated>2017-03-20T09:14:08.000Z</updated>
+    <updated>2017-03-25T09:09:43.000Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="内核日志"><a href="#内核日志" class="headerlink" title="内核日志"></a>内核日志</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat /var/log/messages</div></pre></td></tr></table></figure>
-<h2 id="linux内存不足时kill进程策略"><a href="#linux内存不足时kill进程策略" class="headerlink" title="linux内存不足时kill进程策略"></a>linux内存不足时kill进程策略</h2><p>OOM_killer是Linux自我保护的方式，在内存不足时将被唤醒，调出<code>/proc/{pid}/oom_score</code>最大者并将之kill掉</p>
-<p>为了保护重要进程不被OOM_killer kill掉，可以配置<code>/proc/{pid}/oom_score_adj</code>,此值为内核在为每个进行打分时的附加值，最后得分等于实际值+该值<br>顾可以使用<code>echo -20 &gt; /proc/{pid}/oom_score_adj</code>为实际值减去20(最后得分越小越不易被杀掉)</p>
-<p>root进程默认获取-30的附加值<br><a href="http://www.vpsee.com/2013/10/how-to-configure-the-linux-oom-killer/" target="_blank" rel="external">详细来源，从源码的角度讲解</a><br><a href="https://github.com/torvalds/linux/blob/master/mm/oom_kill.c#L172-L222" target="_blank" rel="external">计算oom_score的函数linux源码</a></p>
-<p>获取进程oom_score脚本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">for proc in $(find /proc -maxdepth 1 -regex &apos;/proc/[0-9]+&apos;); do</div><div class="line">    printf &quot;%2d %5d %s\n&quot; \</div><div class="line">        &quot;$(cat $proc/oom_score)&quot; \</div><div class="line">        &quot;$(basename $proc)&quot; \</div><div class="line">        &quot;$(cat $proc/cmdline | tr &apos;\0&apos; &apos; &apos; | head -c 50)&quot;</div><div class="line">done 2&gt;/dev/null | sort -nr | head -n 10</div></pre></td></tr></table></figure></p>
+    <content type="html"><![CDATA[<h2 id="排序算法稳定性"><a href="#排序算法稳定性" class="headerlink" title="排序算法稳定性"></a>排序算法稳定性</h2><p>假定在待排序的记录序列中，存在多个具有相同的关键字的记录，若经过排序，这些记录的相对次序保持不变，即在原序列中，ri=rj，且ri在rj之前，而在排序后的序列中，ri仍在rj之前，则称这种排序算法是稳定的；否则称为不稳定的。</p>
+<p>对于不稳定的排序算法，只要举出一个实例，即可说明它的不稳定性；而对于稳定的排序算法，必须对算法进行分析从而得到稳定的特性。需要注意的是，排序算法是否为稳定的是由具体算法决定的，不稳定的算法在某种条件下可以变为稳定的算法，而稳定的算法在某种条件下也可以变为不稳定的算法。</p>
+<p>堆排序、快速排序、希尔排序、直接选择排序不是稳定的排序算法，而基数排序、冒泡排序、直接插入排序、折半插入排序、归并排序是稳定的排序算法。</p>
+<h2 id="各算法时间复杂度与是否稳定"><a href="#各算法时间复杂度与是否稳定" class="headerlink" title="各算法时间复杂度与是否稳定"></a>各算法时间复杂度与是否稳定</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/sort.jpg" alt="各算法时间复杂度与是否稳定对照表" title="">
+                </div>
+                <div class="image-caption">各算法时间复杂度与是否稳定对照表</div>
+            </figure>
+<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><p><a href="https://juejin.im/post/58ca051f61ff4b0060165122#数据结构" target="_blank" rel="external">掘金算法文章,包含各种算法</a></p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;内核日志&quot;&gt;&lt;a href=&quot;#内核日志&quot; class=&quot;headerlink&quot; title=&quot;内核日志&quot;&gt;&lt;/a&gt;内核日志&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pr
+      &lt;h2 id=&quot;排序算法稳定性&quot;&gt;&lt;a href=&quot;#排序算法稳定性&quot; class=&quot;headerlink&quot; title=&quot;排序算法稳定性&quot;&gt;&lt;/a&gt;排序算法稳定性&lt;/h2&gt;&lt;p&gt;假定在待排序的记录序列中，存在多个具有相同的关键字的记录，若经过排序，这些记录的相对次序保持不变，即
     
     </summary>
     
-      <category term="linux" scheme="http://fudali.cc/categories/linux/"/>
+      <category term="算法" scheme="http://fudali.cc/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-      <category term="linux" scheme="http://fudali.cc/tags/linux/"/>
+      <category term="golang" scheme="http://fudali.cc/tags/golang/"/>
+    
+      <category term="学习" scheme="http://fudali.cc/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="排序" scheme="http://fudali.cc/tags/%E6%8E%92%E5%BA%8F/"/>
     
   </entry>
   
