@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://fudali.cc/"/>
-  <updated>2017-05-21T12:59:53.000Z</updated>
+  <updated>2017-05-21T13:01:26.000Z</updated>
   <id>http://fudali.cc/</id>
   
   <author>
@@ -16,14 +16,13 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
+    <title>zuul业务检查相关模块</title>
     <link href="http://fudali.cc/2017/05/21/zuul-biz-check/"/>
     <id>http://fudali.cc/2017/05/21/zuul-biz-check/</id>
-    <published>2017-05-21T12:25:49.000Z</published>
-    <updated>2017-05-21T12:59:53.000Z</updated>
+    <published>2017-05-20T16:00:00.000Z</published>
+    <updated>2017-05-21T13:01:26.000Z</updated>
     
-    <content type="html"><![CDATA[<p>title: zuul业务检查相关模块<br>date: 2017-04-20<br>tags: [“zuul”,”spring cloud”]<br>categories:<br>  微服务</p>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在使用spring cloud进行微服务开发的过程中，因为微服务之间的访问只是对资源的访问，不应该有权限相关的检验，但是对外开放的服务是必须要对没有用户所能访问的资源与操作进行权限检验的。<br>而spring cloud的网关服务开源项目并没有很好地提供业务检查相关的处理模块，所以我在使用zuul进行网关开发的过程中根据自己的理解写了一套业务检查相关的代码。</p>
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在使用spring cloud进行微服务开发的过程中，因为微服务之间的访问只是对资源的访问，不应该有权限相关的检验，但是对外开放的服务是必须要对没有用户所能访问的资源与操作进行权限检验的。<br>而spring cloud的网关服务开源项目并没有很好地提供业务检查相关的处理模块，所以我在使用zuul进行网关开发的过程中根据自己的理解写了一套业务检查相关的代码。</p>
 <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>业务相关的权限检查因为每个微服务所需要的检查是不一样的，所以不同的微服务可能需要不同的检查，且同意微服务内不同的接口路径和HTTP方法的检查策略也可能是不同的，所以检查应该可以确切到每一个访问。</p>
 <p>业务检查虽然是在网关进行检查的，但是为了降低耦合与提高内聚。实际检查的处理逻辑也应该是由微服务内部提供，并对外提供接口。我们在网关进行检查的时候也应该是请求相关的接口检查权限。</p>
 <p>zuul权限检查模块的实现思路大致是可以在配置文件中配置微服务相关路由的检查器(实现BusinessChecker接口的实现类)，根据检查内容抛出错误或者通过检查。</p>
@@ -43,11 +42,16 @@
     
     <summary type="html">
     
-      &lt;p&gt;title: zuul业务检查相关模块&lt;br&gt;date: 2017-04-20&lt;br&gt;tags: [“zuul”,”spring cloud”]&lt;br&gt;categories:&lt;br&gt;  微服务&lt;/p&gt;
-&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;hea
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;在使用spring cloud进行微服务开发的过程中，因为微服务之间的访问只是对资源的访问，不应该有权限相关的检验，但是对外开放的服务是必须
     
     </summary>
     
+      <category term="微服务" scheme="http://fudali.cc/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
+    
+    
+      <category term="spring cloud" scheme="http://fudali.cc/tags/spring-cloud/"/>
+    
+      <category term="zuul" scheme="http://fudali.cc/tags/zuul/"/>
     
   </entry>
   

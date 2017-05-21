@@ -13,26 +13,26 @@
     
     
     
-    <title>No title | fudali | do one`s best</title>
+    <title>zuul业务检查相关模块 | fudali | do one`s best</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="">
-    <meta name="description" content="title: zuul业务检查相关模块date: 2017-04-20tags: [“zuul”,”spring cloud”]categories:  微服务
-前言在使用spring cloud进行微服务开发的过程中，因为微服务之间的访问只是对资源的访问，不应该有权限相关的检验，但是对外开放的服务是必须要对没有用户所能访问的资源与操作进行权限检验的。而spring cloud的网关服务开源项目并">
+    <meta name="keywords" content="spring cloud,zuul">
+    <meta name="description" content="前言在使用spring cloud进行微服务开发的过程中，因为微服务之间的访问只是对资源的访问，不应该有权限相关的检验，但是对外开放的服务是必须要对没有用户所能访问的资源与操作进行权限检验的。而spring cloud的网关服务开源项目并没有很好地提供业务检查相关的处理模块，所以我在使用zuul进行网关开发的过程中根据自己的理解写了一套业务检查相关的代码。
+简介业务相关的权限检查因为每个微服务所需">
 <meta property="og:type" content="article">
-<meta property="og:title" content="No title">
+<meta property="og:title" content="zuul业务检查相关模块">
 <meta property="og:url" content="http://fudali.cc/2017/05/21/zuul-biz-check/index.html">
 <meta property="og:site_name" content="fudali">
-<meta property="og:description" content="title: zuul业务检查相关模块date: 2017-04-20tags: [“zuul”,”spring cloud”]categories:  微服务
-前言在使用spring cloud进行微服务开发的过程中，因为微服务之间的访问只是对资源的访问，不应该有权限相关的检验，但是对外开放的服务是必须要对没有用户所能访问的资源与操作进行权限检验的。而spring cloud的网关服务开源项目并">
-<meta property="og:updated_time" content="2017-05-21T12:59:53.000Z">
+<meta property="og:description" content="前言在使用spring cloud进行微服务开发的过程中，因为微服务之间的访问只是对资源的访问，不应该有权限相关的检验，但是对外开放的服务是必须要对没有用户所能访问的资源与操作进行权限检验的。而spring cloud的网关服务开源项目并没有很好地提供业务检查相关的处理模块，所以我在使用zuul进行网关开发的过程中根据自己的理解写了一套业务检查相关的代码。
+简介业务相关的权限检查因为每个微服务所需">
+<meta property="og:updated_time" content="2017-05-21T13:01:26.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="No title">
-<meta name="twitter:description" content="title: zuul业务检查相关模块date: 2017-04-20tags: [“zuul”,”spring cloud”]categories:  微服务
-前言在使用spring cloud进行微服务开发的过程中，因为微服务之间的访问只是对资源的访问，不应该有权限相关的检验，但是对外开放的服务是必须要对没有用户所能访问的资源与操作进行权限检验的。而spring cloud的网关服务开源项目并">
+<meta name="twitter:title" content="zuul业务检查相关模块">
+<meta name="twitter:description" content="前言在使用spring cloud进行微服务开发的过程中，因为微服务之间的访问只是对资源的访问，不应该有权限相关的检验，但是对外开放的服务是必须要对没有用户所能访问的资源与操作进行权限检验的。而spring cloud的网关服务开源项目并没有很好地提供业务检查相关的处理模块，所以我在使用zuul进行网关开发的过程中根据自己的理解写了一套业务检查相关的代码。
+简介业务相关的权限检查因为每个微服务所需">
     
         <link rel="alternative" href="/atom.xml" title="fudali" type="application/atom+xml">
     
@@ -110,7 +110,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">No title</div>
+        <div class="flex-col header-title ellipsis">zuul业务检查相关模块</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -132,13 +132,15 @@
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">No title</h1>
+        <h1 class="title">zuul业务检查相关模块</h1>
         <h5 class="subtitle">
             
-                <time datetime="2017-05-21T12:25:49.000Z" itemprop="datePublished" class="page-time">
+                <time datetime="2017-05-20T16:00:00.000Z" itemprop="datePublished" class="page-time">
   2017-05-21
 </time>
 
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/微服务/">微服务</a></li></ul>
 
             
         </h5>
@@ -162,11 +164,13 @@
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">No title</h1>
+        <h1 class="post-card-title">zuul业务检查相关模块</h1>
         <div class="post-meta">
-            <time class="post-time" title="2017年05月21日 20:25" datetime="2017-05-21T12:25:49.000Z"  itemprop="datePublished">2017-05-21</time>
+            <time class="post-time" title="2017年05月21日 0:00" datetime="2017-05-20T16:00:00.000Z"  itemprop="datePublished">2017-05-21</time>
 
             
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/微服务/">微服务</a></li></ul>
+
 
 
             
@@ -175,8 +179,7 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <p>title: zuul业务检查相关模块<br>date: 2017-04-20<br>tags: [“zuul”,”spring cloud”]<br>categories:<br>  微服务</p>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在使用spring cloud进行微服务开发的过程中，因为微服务之间的访问只是对资源的访问，不应该有权限相关的检验，但是对外开放的服务是必须要对没有用户所能访问的资源与操作进行权限检验的。<br>而spring cloud的网关服务开源项目并没有很好地提供业务检查相关的处理模块，所以我在使用zuul进行网关开发的过程中根据自己的理解写了一套业务检查相关的代码。</p>
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在使用spring cloud进行微服务开发的过程中，因为微服务之间的访问只是对资源的访问，不应该有权限相关的检验，但是对外开放的服务是必须要对没有用户所能访问的资源与操作进行权限检验的。<br>而spring cloud的网关服务开源项目并没有很好地提供业务检查相关的处理模块，所以我在使用zuul进行网关开发的过程中根据自己的理解写了一套业务检查相关的代码。</p>
 <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>业务相关的权限检查因为每个微服务所需要的检查是不一样的，所以不同的微服务可能需要不同的检查，且同意微服务内不同的接口路径和HTTP方法的检查策略也可能是不同的，所以检查应该可以确切到每一个访问。</p>
 <p>业务检查虽然是在网关进行检查的，但是为了降低耦合与提高内聚。实际检查的处理逻辑也应该是由微服务内部提供，并对外提供接口。我们在网关进行检查的时候也应该是请求相关的接口检查权限。</p>
 <p>zuul权限检查模块的实现思路大致是可以在配置文件中配置微服务相关路由的检查器(实现BusinessChecker接口的实现类)，根据检查内容抛出错误或者通过检查。</p>
@@ -199,7 +202,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2017-05-21T12:59:53.000Z" itemprop="dateUpdated">2017年5月21日 20:59</time>
+    最后更新时间：<time datetime="2017-05-21T13:01:26.000Z" itemprop="dateUpdated">2017年5月21日 21:01</time>
 </span><br>
 
 
@@ -222,6 +225,8 @@
 
         <div class="post-footer">
             
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring-cloud/">spring cloud</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/zuul/">zuul</a></li></ul>
+
 
             
 <div class="page-share-wrap">
@@ -230,7 +235,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2017/05/21/zuul-biz-check/&title=《No title》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2017/05/21/zuul-biz-check/&title=《zuul业务检查相关模块》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -240,7 +245,7 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2017/05/21/zuul-biz-check/&title=《No title》 — fudali&source=do one`s best APE" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2017/05/21/zuul-biz-check/&title=《zuul业务检查相关模块》 — fudali&source=do one`s best APE" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -250,7 +255,7 @@
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《No title》 — fudali&url=http://fudali.cc/2017/05/21/zuul-biz-check/&via=http://fudali.cc" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《zuul业务检查相关模块》 — fudali&url=http://fudali.cc/2017/05/21/zuul-biz-check/&via=http://fudali.cc" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
@@ -293,7 +298,7 @@
     
 
 <div class="comments" id="comments">
-    <div class="ds-thread" data-thread-key="zuul-biz-check" data-title="No title" data-url="http://fudali.cc/2017/05/21/zuul-biz-check/"></div>
+    <div class="ds-thread" data-thread-key="zuul-biz-check" data-title="zuul业务检查相关模块" data-url="http://fudali.cc/2017/05/21/zuul-biz-check/"></div>
 </div>
 <script>
 lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
@@ -362,7 +367,7 @@ lazyScripts.push('/js/embed.min.js?v=1.4.11');
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2017/05/21/zuul-biz-check/&title=《No title》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2017/05/21/zuul-biz-check/&title=《zuul业务检查相关模块》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -372,7 +377,7 @@ lazyScripts.push('/js/embed.min.js?v=1.4.11');
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2017/05/21/zuul-biz-check/&title=《No title》 — fudali&source=do one`s best APE" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2017/05/21/zuul-biz-check/&title=《zuul业务检查相关模块》 — fudali&source=do one`s best APE" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -382,7 +387,7 @@ lazyScripts.push('/js/embed.min.js?v=1.4.11');
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《No title》 — fudali&url=http://fudali.cc/2017/05/21/zuul-biz-check/&via=http://fudali.cc" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《zuul业务检查相关模块》 — fudali&url=http://fudali.cc/2017/05/21/zuul-biz-check/&via=http://fudali.cc" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
