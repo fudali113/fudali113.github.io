@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://fudali.cc/"/>
-  <updated>2017-05-21T13:01:26.000Z</updated>
+  <updated>2017-11-02T10:41:39.000Z</updated>
   <id>http://fudali.cc/</id>
   
   <author>
@@ -14,6 +14,46 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>spring cloud 微服务异常记录与报警</title>
+    <link href="http://fudali.cc/2017/11/02/spring-cloud-excepton-deal/"/>
+    <id>http://fudali.cc/2017/11/02/spring-cloud-excepton-deal/</id>
+    <published>2017-11-01T16:00:00.000Z</published>
+    <updated>2017-11-02T10:41:39.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>当我们的应用在线上正常运转起来了，在正常情况下我们不需要再担心任何的事情，但是bug总是不可避免的会出现；此时我们就需要一种相关的机制能够发现我们系统中的异常并通知到相关人员，不然等到用户进行反馈时才能知道发生了bug是很影响用户体验的也是不可控的，这两者都是不可接受的。</p>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>我所在的团队目前正在使用spring cloud相关套件进行微服务的开发，所以我的介绍与实践也是在该技术栈下进行，同时可能会使用到elasticsearch。<br>我们使用spring mvc来进行业务开发，feign来做restful接口远程调用框架，zuul作为服务网关来对外开放接口。这个技术栈在使用spring cloud进行开发的团队是非常常见的。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>因为最开始我们就有在网关记录统一的访问日志，并使用filebeat将其同步到elasticsearch以方便后期数据的查询与分析，但是只是这样子是不够的；我们想要直接能够从日志中能够判断是否发生了毕竟明确的异常，我们需要有一个点或者相关的阈值去确定什么情况是异常，可能会有bug，需要进行相关的操作去进行报警。所以我们需要在日志记录上面做一些文章，让我们记录的日志能够有足够有力和准确的信息让我们去判断是不是异常，然后去触发一系列的操作(报警等等…)。<br>经过一定的分析之后我认为异常是一个很好的判断是否有bug的点，因为没有异常不一定没有bug，但是有没有被捕获异常的请求一定是有bug的；所以以此作为切入点，深入思考。</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="开发中的定制"><a href="#开发中的定制" class="headerlink" title="开发中的定制"></a>开发中的定制</h3><p>首先我们的基础架构指定了统一的错误码来对外进行提示，同时在业务层以抛出异常来对外进行提示。<br>我们将它定义为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">public class DomainServerException extends Exception &#123;</div><div class="line">    // 平台定义错误码</div><div class="line">    private int code;</div><div class="line">    // http status</div><div class="line">    private int status;</div><div class="line">    // 具体错误信息，面向开发者的提示， Exception的message用于面向用户的提示</div><div class="line">    private int error;</div><div class="line">    // 相关异常的堆栈信息</div><div class="line">    private int stack;</div><div class="line"></div><div class="line">    public DomainServiceException(int code, String message, Throwable throwable) &#123;</div><div class="line">        super(message, throwable);</div><div class="line">        this.code = code;</div><div class="line">        if (isServerError())</div><div class="line">            this.stack = ExceptionUtils.getStackTrace(throwable);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>其中的stack信息就是为了我们进行异常追踪而添加的字段，当<code>http status为5**</code>或者<code>平台定义错误码为服务器异常</code>的时候会加载相关异常堆栈信息并设值到stack字段。具体是在<code>DomainServiceException</code>构造函数进行或者在<code>spring ErrorController</code>中进行相关设值操作(因为我们使用异常来抛出错误码，所以我们对<code>spring MVC</code>默认的<code>ErrorController</code>进行了定制)。<br>我们<code>ErrorController</code>的返回类型定义为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">public class HttpErrorResponse implements Serializable &#123;</div><div class="line">    private Date timestamp;</div><div class="line">    private Integer status;</div><div class="line">    private String error;</div><div class="line">    private String message;         </div><div class="line">    private String stack;           // 异常堆栈  方便记录同时在前后端调试的时候信息也更加丰富</div><div class="line">    private String exception;       // 异常类型</div><div class="line">    private String path;            // 错误请求路径</div><div class="line">    private Integer errorCode;      // 平台定义错误码</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>对于错误的情况我们抛出<code>DomainServerException</code>或者其他未捕获异常，<code>DomainServerException</code>默认为我们的业务错误，同时也可作为异常错误，但是我们在进行异常错误处理为<code>DomainServerException</code>是会将上层异常堆栈传入构造函数生成<code>DomainServerException</code>异常对象(<code>注意:此模式下一定不要去处理你不知道该怎么处理的异常，如果你处理不了就一直往外抛，ErroController能够正确的处理并记录他然后供报警使用</code>)。<br>此时我们抛出的<code>HttpErrorResponse</code>可能会被两个地方用到:</p>
+<ol>
+<li>服务之间的调用</li>
+<li>zuul转发来的请求</li>
+</ol>
+<ul>
+<li><p>对于第一种情况，因为我们使用<code>feign</code>来进行服务间远程调用，我们重写了<code>ErrorDecoder</code>来进行<code>HttpErrorResponse</code>与<code>DomainServerException</code>或者<code>DomainServerException的子类</code>(通过exception字段来进行类型判断)并向外抛出。级联调用一次类推，最终都会到网关一层进行处理。所以第一种情况最终也会变为第二种情况。</p>
+</li>
+<li><p>对于第二种情况我们，因为我们有错误码的定义并且在正常情况下我们也会返回错误，但是正常的结果却是没有错误码的，所以我们在<code>zuul</code>实现了一个<code>type为“post”的filter来对返回值进行格式化，同时也对老的平台与新的平台进行输出格式化</code>。在这里面我们判断服务返回的内容是否有异常并进行相关的记录(存入相关信息到<code>RequestContext</code>)，最后在统一日志记录Filter(包含正常filter和zuul 异常filter)进行统一记录相关信息。同时因为我们在zuul也写了一些胶水接口，所以我们在Zuul继承了普通服务的ErroController实现了ZuulErrorController同时也会记录异常信息。</p>
+</li>
+</ul>
+<h3 id="日志的储存和报警"><a href="#日志的储存和报警" class="headerlink" title="日志的储存和报警"></a>日志的储存和报警</h3><p>记录怎么样的日志已经确定了，我们使用filebeat来讲日志数据传输到elasticsearch中。现在我们elasticsearch中就有错误码和stack的信息了，很明显，stack信息是很明显的错误信息，紫瑶该字段一出现就表示我们的代码又问题，我们可以根据这个很好的去报警。对于错误码信息，可能会比较复杂，我们需要判断他在某些情况下的一个阈值，当我们在某种情况下相关错误码超过了该阈值就报警(目前该块的应用还需要多思考)<br>对于elasticsearch查询报警的工具有<code>elastalert</code>,但是我对于该工具不是很感冒，同时我也疲于应对python部署那些复杂的依赖，我正在使用golang开发一款功能更简洁，学习成本更低的工具。如果在内部试用的还行应该会进行开源。</p>
+<p><code>未完待续</code></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;当我们的应用在线上正常运转起来了，在正常情况下我们不需要再担心任何的事情，但是bug总是不可避免的会出现；此时我们就需要一种相关的机制能够发
+    
+    </summary>
+    
+      <category term="微服务 监控" scheme="http://fudali.cc/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1-%E7%9B%91%E6%8E%A7/"/>
+    
+    
+      <category term="spring cloud" scheme="http://fudali.cc/tags/spring-cloud/"/>
+    
+  </entry>
   
   <entry>
     <title>zuul业务检查相关模块</title>
@@ -260,33 +300,6 @@
   </entry>
   
   <entry>
-    <title>linux常用知识</title>
-    <link href="http://fudali.cc/2017/03/20/linux/"/>
-    <id>http://fudali.cc/2017/03/20/linux/</id>
-    <published>2017-03-19T16:00:00.000Z</published>
-    <updated>2017-03-20T09:14:08.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="内核日志"><a href="#内核日志" class="headerlink" title="内核日志"></a>内核日志</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat /var/log/messages</div></pre></td></tr></table></figure>
-<h2 id="linux内存不足时kill进程策略"><a href="#linux内存不足时kill进程策略" class="headerlink" title="linux内存不足时kill进程策略"></a>linux内存不足时kill进程策略</h2><p>OOM_killer是Linux自我保护的方式，在内存不足时将被唤醒，调出<code>/proc/{pid}/oom_score</code>最大者并将之kill掉</p>
-<p>为了保护重要进程不被OOM_killer kill掉，可以配置<code>/proc/{pid}/oom_score_adj</code>,此值为内核在为每个进行打分时的附加值，最后得分等于实际值+该值<br>顾可以使用<code>echo -20 &gt; /proc/{pid}/oom_score_adj</code>为实际值减去20(最后得分越小越不易被杀掉)</p>
-<p>root进程默认获取-30的附加值<br><a href="http://www.vpsee.com/2013/10/how-to-configure-the-linux-oom-killer/" target="_blank" rel="external">详细来源，从源码的角度讲解</a><br><a href="https://github.com/torvalds/linux/blob/master/mm/oom_kill.c#L172-L222" target="_blank" rel="external">计算oom_score的函数linux源码</a></p>
-<p>获取进程oom_score脚本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">for proc in $(find /proc -maxdepth 1 -regex &apos;/proc/[0-9]+&apos;); do</div><div class="line">    printf &quot;%2d %5d %s\n&quot; \</div><div class="line">        &quot;$(cat $proc/oom_score)&quot; \</div><div class="line">        &quot;$(basename $proc)&quot; \</div><div class="line">        &quot;$(cat $proc/cmdline | tr &apos;\0&apos; &apos; &apos; | head -c 50)&quot;</div><div class="line">done 2&gt;/dev/null | sort -nr | head -n 10</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;内核日志&quot;&gt;&lt;a href=&quot;#内核日志&quot; class=&quot;headerlink&quot; title=&quot;内核日志&quot;&gt;&lt;/a&gt;内核日志&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pr
-    
-    </summary>
-    
-      <category term="linux" scheme="http://fudali.cc/categories/linux/"/>
-    
-    
-      <category term="linux" scheme="http://fudali.cc/tags/linux/"/>
-    
-  </entry>
-  
-  <entry>
     <title>数据结构-堆</title>
     <link href="http://fudali.cc/2017/03/20/adt-heap/"/>
     <id>http://fudali.cc/2017/03/20/adt-heap/</id>
@@ -340,6 +353,33 @@
       <category term="ADT" scheme="http://fudali.cc/tags/ADT/"/>
     
       <category term="学习" scheme="http://fudali.cc/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux常用知识</title>
+    <link href="http://fudali.cc/2017/03/20/linux/"/>
+    <id>http://fudali.cc/2017/03/20/linux/</id>
+    <published>2017-03-19T16:00:00.000Z</published>
+    <updated>2017-03-20T09:14:08.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="内核日志"><a href="#内核日志" class="headerlink" title="内核日志"></a>内核日志</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat /var/log/messages</div></pre></td></tr></table></figure>
+<h2 id="linux内存不足时kill进程策略"><a href="#linux内存不足时kill进程策略" class="headerlink" title="linux内存不足时kill进程策略"></a>linux内存不足时kill进程策略</h2><p>OOM_killer是Linux自我保护的方式，在内存不足时将被唤醒，调出<code>/proc/{pid}/oom_score</code>最大者并将之kill掉</p>
+<p>为了保护重要进程不被OOM_killer kill掉，可以配置<code>/proc/{pid}/oom_score_adj</code>,此值为内核在为每个进行打分时的附加值，最后得分等于实际值+该值<br>顾可以使用<code>echo -20 &gt; /proc/{pid}/oom_score_adj</code>为实际值减去20(最后得分越小越不易被杀掉)</p>
+<p>root进程默认获取-30的附加值<br><a href="http://www.vpsee.com/2013/10/how-to-configure-the-linux-oom-killer/" target="_blank" rel="external">详细来源，从源码的角度讲解</a><br><a href="https://github.com/torvalds/linux/blob/master/mm/oom_kill.c#L172-L222" target="_blank" rel="external">计算oom_score的函数linux源码</a></p>
+<p>获取进程oom_score脚本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">for proc in $(find /proc -maxdepth 1 -regex &apos;/proc/[0-9]+&apos;); do</div><div class="line">    printf &quot;%2d %5d %s\n&quot; \</div><div class="line">        &quot;$(cat $proc/oom_score)&quot; \</div><div class="line">        &quot;$(basename $proc)&quot; \</div><div class="line">        &quot;$(cat $proc/cmdline | tr &apos;\0&apos; &apos; &apos; | head -c 50)&quot;</div><div class="line">done 2&gt;/dev/null | sort -nr | head -n 10</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;内核日志&quot;&gt;&lt;a href=&quot;#内核日志&quot; class=&quot;headerlink&quot; title=&quot;内核日志&quot;&gt;&lt;/a&gt;内核日志&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pr
+    
+    </summary>
+    
+      <category term="linux" scheme="http://fudali.cc/categories/linux/"/>
+    
+    
+      <category term="linux" scheme="http://fudali.cc/tags/linux/"/>
     
   </entry>
   
@@ -403,42 +443,6 @@
     <summary type="html">
     
       &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;快速排序是实践中一种快速的排序方式；他的平均运行时间是O(NlogN)，最坏运行时间是O(N^2)，但稍加努力可使最坏情形极难出现。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="算法" scheme="http://fudali.cc/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="golang" scheme="http://fudali.cc/tags/golang/"/>
-    
-      <category term="学习" scheme="http://fudali.cc/tags/%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="排序" scheme="http://fudali.cc/tags/%E6%8E%92%E5%BA%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>排序-归并排序</title>
-    <link href="http://fudali.cc/2017/03/17/merge-sort/"/>
-    <id>http://fudali.cc/2017/03/17/merge-sort/</id>
-    <published>2017-03-16T16:00:00.000Z</published>
-    <updated>2017-03-20T15:24:38.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>归并排序体现了递归分治的策略<br>思想是将数组拆分为两段，在对两段进行想通操作，直到数组元素为1，在对数组进行排序合并</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="go"><a href="#go" class="headerlink" title="go"></a>go</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">package merge</div><div class="line"></div><div class="line">// MergeSort 归并排序</div><div class="line">func MergeSort(array []int) []int &#123;</div><div class="line">	middle := len(array) / 2</div><div class="line">	if middle &lt; 1 &#123;</div><div class="line">		return array</div><div class="line">	&#125;</div><div class="line">	return merge(MergeSort(array[:middle]), MergeSort(array[middle:]))</div><div class="line">&#125;</div><div class="line"></div><div class="line">// merge 合并两个排好序的数组唯一组合两个元素并排好序的数组</div><div class="line">func merge(a1 []int, a2 []int) []int &#123;</div><div class="line">	a1Index := 0</div><div class="line">	a2Index := 0</div><div class="line">	res := make([]int, 0, len(a1)+len(a2))</div><div class="line">	for &#123;</div><div class="line">		if a1[a1Index] &lt;= a2[a2Index] &#123;</div><div class="line">			res = append(res, a1[a1Index])</div><div class="line">			if a1Index == len(a1)-1 &#123;</div><div class="line">				res = append(res, a2[a2Index:]...)</div><div class="line">				break</div><div class="line">			&#125;</div><div class="line">			a1Index++</div><div class="line">		&#125; else &#123;</div><div class="line">			res = append(res, a2[a2Index])</div><div class="line">			if a2Index == len(a1)-1 &#123;</div><div class="line">				res = append(res, a1[a1Index:]...)</div><div class="line">				break</div><div class="line">			&#125;</div><div class="line">			a2Index++</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	return res</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><a href="https://github.com/fudali113/learn-basic/blob/master/sort/merge/merge.go" target="_blank" rel="external">golang code on github</a></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>虽然归并排序的运行时间是O(NlogN)，但是他合并两个已排序数组到一个附加数组会更占用内存。</p>
-<p>与其他O(NlogN)的流行算法相比，归并排序是比较元素最少的，且运行时间严重依赖于比较元素和在数组(已经临时数组)中移动元素的开销(理论上使用更少内存的算法是可能的，但所得到的算法是复杂的和不实际的)。</p>
-<p>这些开销是于语言相关的(java中泛型数组中的元素是引用类型的，顾移动元素开销不大，所以归并排序是java泛型数组的默认排序方式。</p>
-<p>快速排序作为基础类型的排序方式，java基础类型是值传递的，因为比较与数据移动的开销是类似的，快排使用少得多的数据移动足以补偿那些附加的比较而且还有盈余)。</p>
-<p>在go中也存在相同的问题，所以在不同的输入数据选择不同的排序方式再能得到最好的性能。</p>
-<p>平均运行时间：O(NlogN)<br>最坏运行时间：O(NlogN)<br>是否稳定：稳定</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;归并排序体现了递归分治的策略&lt;br&gt;思想是将数组拆分为两段，在对两段进行想通操作，直到数组元素为1，在对数组进行排序合并&lt;/p&gt;
-&lt;h2 i
     
     </summary>
     
@@ -586,6 +590,42 @@
       <category term="网络" scheme="http://fudali.cc/tags/%E7%BD%91%E7%BB%9C/"/>
     
       <category term="tcp/ip" scheme="http://fudali.cc/tags/tcp-ip/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>排序-归并排序</title>
+    <link href="http://fudali.cc/2017/03/17/merge-sort/"/>
+    <id>http://fudali.cc/2017/03/17/merge-sort/</id>
+    <published>2017-03-16T16:00:00.000Z</published>
+    <updated>2017-03-20T15:24:38.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>归并排序体现了递归分治的策略<br>思想是将数组拆分为两段，在对两段进行想通操作，直到数组元素为1，在对数组进行排序合并</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="go"><a href="#go" class="headerlink" title="go"></a>go</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">package merge</div><div class="line"></div><div class="line">// MergeSort 归并排序</div><div class="line">func MergeSort(array []int) []int &#123;</div><div class="line">	middle := len(array) / 2</div><div class="line">	if middle &lt; 1 &#123;</div><div class="line">		return array</div><div class="line">	&#125;</div><div class="line">	return merge(MergeSort(array[:middle]), MergeSort(array[middle:]))</div><div class="line">&#125;</div><div class="line"></div><div class="line">// merge 合并两个排好序的数组唯一组合两个元素并排好序的数组</div><div class="line">func merge(a1 []int, a2 []int) []int &#123;</div><div class="line">	a1Index := 0</div><div class="line">	a2Index := 0</div><div class="line">	res := make([]int, 0, len(a1)+len(a2))</div><div class="line">	for &#123;</div><div class="line">		if a1[a1Index] &lt;= a2[a2Index] &#123;</div><div class="line">			res = append(res, a1[a1Index])</div><div class="line">			if a1Index == len(a1)-1 &#123;</div><div class="line">				res = append(res, a2[a2Index:]...)</div><div class="line">				break</div><div class="line">			&#125;</div><div class="line">			a1Index++</div><div class="line">		&#125; else &#123;</div><div class="line">			res = append(res, a2[a2Index])</div><div class="line">			if a2Index == len(a1)-1 &#123;</div><div class="line">				res = append(res, a1[a1Index:]...)</div><div class="line">				break</div><div class="line">			&#125;</div><div class="line">			a2Index++</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	return res</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><a href="https://github.com/fudali113/learn-basic/blob/master/sort/merge/merge.go" target="_blank" rel="external">golang code on github</a></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>虽然归并排序的运行时间是O(NlogN)，但是他合并两个已排序数组到一个附加数组会更占用内存。</p>
+<p>与其他O(NlogN)的流行算法相比，归并排序是比较元素最少的，且运行时间严重依赖于比较元素和在数组(已经临时数组)中移动元素的开销(理论上使用更少内存的算法是可能的，但所得到的算法是复杂的和不实际的)。</p>
+<p>这些开销是于语言相关的(java中泛型数组中的元素是引用类型的，顾移动元素开销不大，所以归并排序是java泛型数组的默认排序方式。</p>
+<p>快速排序作为基础类型的排序方式，java基础类型是值传递的，因为比较与数据移动的开销是类似的，快排使用少得多的数据移动足以补偿那些附加的比较而且还有盈余)。</p>
+<p>在go中也存在相同的问题，所以在不同的输入数据选择不同的排序方式再能得到最好的性能。</p>
+<p>平均运行时间：O(NlogN)<br>最坏运行时间：O(NlogN)<br>是否稳定：稳定</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;归并排序体现了递归分治的策略&lt;br&gt;思想是将数组拆分为两段，在对两段进行想通操作，直到数组元素为1，在对数组进行排序合并&lt;/p&gt;
+&lt;h2 i
+    
+    </summary>
+    
+      <category term="算法" scheme="http://fudali.cc/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="golang" scheme="http://fudali.cc/tags/golang/"/>
+    
+      <category term="学习" scheme="http://fudali.cc/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="排序" scheme="http://fudali.cc/tags/%E6%8E%92%E5%BA%8F/"/>
     
   </entry>
   
