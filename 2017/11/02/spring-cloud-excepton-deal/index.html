@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>spring cloud 微服务异常记录与报警 | fudali | do one`s best</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="spring cloud">
+    <meta name="description" content="前言当我们的应用在线上正常运转起来了，在正常情况下我们不需要再担心任何的事情，但是bug总是不可避免的会出现；此时我们就需要一种相关的机制能够发现我们系统中的异常并通知到相关人员，不然等到用户进行反馈时才能知道发生了bug是很影响用户体验的也是不可控的，这两者都是不可接受的。
+介绍我所在的团队目前正在使用spring cloud相关套件进行微服务的开发，所以我的介绍与实践也是在该技术栈下进行，同时">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spring cloud 微服务异常记录与报警">
+<meta property="og:url" content="http://fudali.cc/2017/11/02/spring-cloud-excepton-deal/index.html">
+<meta property="og:site_name" content="fudali">
+<meta property="og:description" content="前言当我们的应用在线上正常运转起来了，在正常情况下我们不需要再担心任何的事情，但是bug总是不可避免的会出现；此时我们就需要一种相关的机制能够发现我们系统中的异常并通知到相关人员，不然等到用户进行反馈时才能知道发生了bug是很影响用户体验的也是不可控的，这两者都是不可接受的。
+介绍我所在的团队目前正在使用spring cloud相关套件进行微服务的开发，所以我的介绍与实践也是在该技术栈下进行，同时">
+<meta property="og:updated_time" content="2017-11-02T10:41:39.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="spring cloud 微服务异常记录与报警">
+<meta name="twitter:description" content="前言当我们的应用在线上正常运转起来了，在正常情况下我们不需要再担心任何的事情，但是bug总是不可避免的会出现；此时我们就需要一种相关的机制能够发现我们系统中的异常并通知到相关人员，不然等到用户进行反馈时才能知道发生了bug是很影响用户体验的也是不可控的，这两者都是不可接受的。
+介绍我所在的团队目前正在使用spring cloud相关套件进行微服务的开发，所以我的介绍与实践也是在该技术栈下进行，同时">
+    
+        <link rel="alternative" href="/atom.xml" title="fudali" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/logo.jpg">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.11">
+    <link rel="apple-touch-icon" sizes="114x114" href="img/logo.jpg">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">fudali</h5>
+          <a href="mailto:fudali113@gmail.com" title="fudali113@gmail.com" class="mail">fudali113@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/fudali113" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">spring cloud 微服务异常记录与报警</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">spring cloud 微服务异常记录与报警</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-11-01T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2017-11-02
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/微服务-监控/">微服务 监控</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#介绍"><span class="post-toc-number">2.</span> <span class="post-toc-text">介绍</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#思路"><span class="post-toc-number">3.</span> <span class="post-toc-text">思路</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#实现"><span class="post-toc-number">4.</span> <span class="post-toc-text">实现</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#开发中的定制"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">开发中的定制</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#日志的储存和报警"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">日志的储存和报警</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-spring-cloud-excepton-deal"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">spring cloud 微服务异常记录与报警</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017年11月02日 0:00" datetime="2017-11-01T16:00:00.000Z"  itemprop="datePublished">2017-11-02</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/微服务-监控/">微服务 监控</a></li></ul>
+
+
+
+            
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>当我们的应用在线上正常运转起来了，在正常情况下我们不需要再担心任何的事情，但是bug总是不可避免的会出现；此时我们就需要一种相关的机制能够发现我们系统中的异常并通知到相关人员，不然等到用户进行反馈时才能知道发生了bug是很影响用户体验的也是不可控的，这两者都是不可接受的。</p>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>我所在的团队目前正在使用spring cloud相关套件进行微服务的开发，所以我的介绍与实践也是在该技术栈下进行，同时可能会使用到elasticsearch。<br>我们使用spring mvc来进行业务开发，feign来做restful接口远程调用框架，zuul作为服务网关来对外开放接口。这个技术栈在使用spring cloud进行开发的团队是非常常见的。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>因为最开始我们就有在网关记录统一的访问日志，并使用filebeat将其同步到elasticsearch以方便后期数据的查询与分析，但是只是这样子是不够的；我们想要直接能够从日志中能够判断是否发生了毕竟明确的异常，我们需要有一个点或者相关的阈值去确定什么情况是异常，可能会有bug，需要进行相关的操作去进行报警。所以我们需要在日志记录上面做一些文章，让我们记录的日志能够有足够有力和准确的信息让我们去判断是不是异常，然后去触发一系列的操作(报警等等…)。<br>经过一定的分析之后我认为异常是一个很好的判断是否有bug的点，因为没有异常不一定没有bug，但是有没有被捕获异常的请求一定是有bug的；所以以此作为切入点，深入思考。</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="开发中的定制"><a href="#开发中的定制" class="headerlink" title="开发中的定制"></a>开发中的定制</h3><p>首先我们的基础架构指定了统一的错误码来对外进行提示，同时在业务层以抛出异常来对外进行提示。<br>我们将它定义为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">public class DomainServerException extends Exception &#123;</div><div class="line">    // 平台定义错误码</div><div class="line">    private int code;</div><div class="line">    // http status</div><div class="line">    private int status;</div><div class="line">    // 具体错误信息，面向开发者的提示， Exception的message用于面向用户的提示</div><div class="line">    private int error;</div><div class="line">    // 相关异常的堆栈信息</div><div class="line">    private int stack;</div><div class="line"></div><div class="line">    public DomainServiceException(int code, String message, Throwable throwable) &#123;</div><div class="line">        super(message, throwable);</div><div class="line">        this.code = code;</div><div class="line">        if (isServerError())</div><div class="line">            this.stack = ExceptionUtils.getStackTrace(throwable);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>其中的stack信息就是为了我们进行异常追踪而添加的字段，当<code>http status为5**</code>或者<code>平台定义错误码为服务器异常</code>的时候会加载相关异常堆栈信息并设值到stack字段。具体是在<code>DomainServiceException</code>构造函数进行或者在<code>spring ErrorController</code>中进行相关设值操作(因为我们使用异常来抛出错误码，所以我们对<code>spring MVC</code>默认的<code>ErrorController</code>进行了定制)。<br>我们<code>ErrorController</code>的返回类型定义为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">public class HttpErrorResponse implements Serializable &#123;</div><div class="line">    private Date timestamp;</div><div class="line">    private Integer status;</div><div class="line">    private String error;</div><div class="line">    private String message;         </div><div class="line">    private String stack;           // 异常堆栈  方便记录同时在前后端调试的时候信息也更加丰富</div><div class="line">    private String exception;       // 异常类型</div><div class="line">    private String path;            // 错误请求路径</div><div class="line">    private Integer errorCode;      // 平台定义错误码</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>对于错误的情况我们抛出<code>DomainServerException</code>或者其他未捕获异常，<code>DomainServerException</code>默认为我们的业务错误，同时也可作为异常错误，但是我们在进行异常错误处理为<code>DomainServerException</code>是会将上层异常堆栈传入构造函数生成<code>DomainServerException</code>异常对象(<code>注意:此模式下一定不要去处理你不知道该怎么处理的异常，如果你处理不了就一直往外抛，ErroController能够正确的处理并记录他然后供报警使用</code>)。<br>此时我们抛出的<code>HttpErrorResponse</code>可能会被两个地方用到:</p>
+<ol>
+<li>服务之间的调用</li>
+<li>zuul转发来的请求</li>
+</ol>
+<ul>
+<li><p>对于第一种情况，因为我们使用<code>feign</code>来进行服务间远程调用，我们重写了<code>ErrorDecoder</code>来进行<code>HttpErrorResponse</code>与<code>DomainServerException</code>或者<code>DomainServerException的子类</code>(通过exception字段来进行类型判断)并向外抛出。级联调用一次类推，最终都会到网关一层进行处理。所以第一种情况最终也会变为第二种情况。</p>
+</li>
+<li><p>对于第二种情况我们，因为我们有错误码的定义并且在正常情况下我们也会返回错误，但是正常的结果却是没有错误码的，所以我们在<code>zuul</code>实现了一个<code>type为“post”的filter来对返回值进行格式化，同时也对老的平台与新的平台进行输出格式化</code>。在这里面我们判断服务返回的内容是否有异常并进行相关的记录(存入相关信息到<code>RequestContext</code>)，最后在统一日志记录Filter(包含正常filter和zuul 异常filter)进行统一记录相关信息。同时因为我们在zuul也写了一些胶水接口，所以我们在Zuul继承了普通服务的ErroController实现了ZuulErrorController同时也会记录异常信息。</p>
+</li>
+</ul>
+<h3 id="日志的储存和报警"><a href="#日志的储存和报警" class="headerlink" title="日志的储存和报警"></a>日志的储存和报警</h3><p>记录怎么样的日志已经确定了，我们使用filebeat来讲日志数据传输到elasticsearch中。现在我们elasticsearch中就有错误码和stack的信息了，很明显，stack信息是很明显的错误信息，紫瑶该字段一出现就表示我们的代码又问题，我们可以根据这个很好的去报警。对于错误码信息，可能会比较复杂，我们需要判断他在某些情况下的一个阈值，当我们在某种情况下相关错误码超过了该阈值就报警(目前该块的应用还需要多思考)<br>对于elasticsearch查询报警的工具有<code>elastalert</code>,但是我对于该工具不是很感冒，同时我也疲于应对python部署那些复杂的依赖，我正在使用golang开发一款功能更简洁，学习成本更低的工具。如果在内部试用的还行应该会进行开源。</p>
+<p><code>未完待续</code></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-11-02T10:41:39.000Z" itemprop="dateUpdated">2017年11月2日 18:41</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="http://fudali.cc">
+            <img src="/img/logo.jpg" alt="fudali">
+            fudali
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring-cloud/">spring cloud</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2017/11/02/spring-cloud-excepton-deal/&title=《spring cloud 微服务异常记录与报警》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2017/11/02/spring-cloud-excepton-deal/&title=《spring cloud 微服务异常记录与报警》 — fudali&source=do one`s best APE" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://fudali.cc/2017/11/02/spring-cloud-excepton-deal/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《spring cloud 微服务异常记录与报警》 — fudali&url=http://fudali.cc/2017/11/02/spring-cloud-excepton-deal/&via=http://fudali.cc" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://fudali.cc/2017/11/02/spring-cloud-excepton-deal/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/05/21/zuul-biz-check/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">zuul业务检查相关模块</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="spring-cloud-excepton-deal" data-title="spring cloud 微服务异常记录与报警" data-url="http://fudali.cc/2017/11/02/spring-cloud-excepton-deal/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'fudali', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.11');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top" style="height:50px">
+        <p>
+            <span>do one`s best APE</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>fudali &copy; 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://fudali.cc/2017/11/02/spring-cloud-excepton-deal/&title=《spring cloud 微服务异常记录与报警》 — fudali&pic=http://fudali.cc/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://fudali.cc/2017/11/02/spring-cloud-excepton-deal/&title=《spring cloud 微服务异常记录与报警》 — fudali&source=do one`s best APE" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://fudali.cc/2017/11/02/spring-cloud-excepton-deal/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《spring cloud 微服务异常记录与报警》 — fudali&url=http://fudali.cc/2017/11/02/spring-cloud-excepton-deal/&via=http://fudali.cc" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://fudali.cc/2017/11/02/spring-cloud-excepton-deal/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJElEQVR42u3aQW7DMAwEwP7/0ynQU4Eizi7lFo00OgVOYmt8IEiRHx/xenytn5+ffft9Pftlfv/bFgYGxtsyHpfreqMr7ASf7A0DA+McxnqQXQnB16/sem8YGBgYSZC93sr1HdoXhIGBgfE3hWubGmJgYGDkRWyS3s2+zXk31OIYGBhvyFhpDPz25z/qb2BgYPxjxmO0krRylgjOdoWBgbE3I29JJqnerM05axhEbwsDA2M7Rr7RvOmYH9glsBevHgMDY1PGStrX/qs9+i8KWgwMjK0Z+dF83rbMRy7yMYsIj4GBsTVjlpzlgxcrIbg9/sPAwNiP0Q46tENjd93zxWEcBgbG1oy8aMy3khe6bZAtno6BgbERI0/g1kfE8lw1v1LksxgYGG/OyFOuPIC26ebSqAcGBsbBjPyRLT65UpS1GBgYWzPyFHDWwsyRKzwMDIzTGOvjEW0boG2XYmBgnMloD/3b4nM9Aa2TQgwMjGMYbdBsw/QsBD/9DQYGxgGM/LB+FkDzQYo8bY18GBgYGzFmgw7JQdtdd8bAwDiZkTcG2sK1TTTbYQsMDIwTGI9ytU3K/MpKcxQDA2NvxkrLsA2a7RHebckiBgbGFoxZQ3E97WvbAxgYGBj5UEWeCCYp4Kx8fTEWhoGBgVEWq7Pisz6Yw8DAwBgdgbWDF0tlMwYGxgGMpIidBcr2/sM2JwYGxtaMlWP9lRbmdaD/FSQGBsb7MT4BeC9Bz1vh+MYAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.11"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.11" async></script>
+
+
+
+
+
+
+
+</body>
+</html>
