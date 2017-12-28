@@ -63,6 +63,6 @@ public class HttpErrorResponse implements Serializable {
 
 ### 日志的储存和报警 ###
 记录怎么样的日志已经确定了，我们使用filebeat来讲日志数据传输到elasticsearch中。现在我们elasticsearch中就有错误码和stack的信息了，很明显，stack信息是很明显的错误信息，紫瑶该字段一出现就表示我们的代码又问题，我们可以根据这个很好的去报警。对于错误码信息，可能会比较复杂，我们需要判断他在某些情况下的一个阈值，当我们在某种情况下相关错误码超过了该阈值就报警(目前该块的应用还需要多思考)
-对于elasticsearch查询报警的工具有`elastalert`,但是我对于该工具不是很感冒，同时我也疲于应对python部署那些复杂的依赖，我正在使用golang开发一款功能更简洁，学习成本更低的工具。如果在内部试用的还行应该会进行开源。
+对于elasticsearch查询报警的工具有[elastalert](https://github.com/fudali113/esalert),但是我对于该工具不是很感冒，同时我也疲于应对python部署那些复杂的依赖，我正在使用golang开发一款功能更简洁，学习成本更低的工具。如果在内部试用的还行应该会进行开源。
 
 `未完待续`

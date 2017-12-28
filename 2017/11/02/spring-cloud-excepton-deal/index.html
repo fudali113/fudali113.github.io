@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="fudali">
 <meta property="og:description" content="前言当我们的应用在线上正常运转起来了，在正常情况下我们不需要再担心任何的事情，但是bug总是不可避免的会出现；此时我们就需要一种相关的机制能够发现我们系统中的异常并通知到相关人员，不然等到用户进行反馈时才能知道发生了bug是很影响用户体验的也是不可控的，这两者都是不可接受的。
 介绍我所在的团队目前正在使用spring cloud相关套件进行微服务的开发，所以我的介绍与实践也是在该技术栈下进行，同时">
-<meta property="og:updated_time" content="2017-11-02T10:41:39.000Z">
+<meta property="og:updated_time" content="2017-11-06T02:39:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="spring cloud 微服务异常记录与报警">
 <meta name="twitter:description" content="前言当我们的应用在线上正常运转起来了，在正常情况下我们不需要再担心任何的事情，但是bug总是不可避免的会出现；此时我们就需要一种相关的机制能够发现我们系统中的异常并通知到相关人员，不然等到用户进行反馈时才能知道发生了bug是很影响用户体验的也是不可控的，这两者都是不可接受的。
@@ -195,7 +195,7 @@
 <li><p>对于第二种情况我们，因为我们有错误码的定义并且在正常情况下我们也会返回错误，但是正常的结果却是没有错误码的，所以我们在<code>zuul</code>实现了一个<code>type为“post”的filter来对返回值进行格式化，同时也对老的平台与新的平台进行输出格式化</code>。在这里面我们判断服务返回的内容是否有异常并进行相关的记录(存入相关信息到<code>RequestContext</code>)，最后在统一日志记录Filter(包含正常filter和zuul 异常filter)进行统一记录相关信息。同时因为我们在zuul也写了一些胶水接口，所以我们在Zuul继承了普通服务的ErroController实现了ZuulErrorController同时也会记录异常信息。</p>
 </li>
 </ul>
-<h3 id="日志的储存和报警"><a href="#日志的储存和报警" class="headerlink" title="日志的储存和报警"></a>日志的储存和报警</h3><p>记录怎么样的日志已经确定了，我们使用filebeat来讲日志数据传输到elasticsearch中。现在我们elasticsearch中就有错误码和stack的信息了，很明显，stack信息是很明显的错误信息，紫瑶该字段一出现就表示我们的代码又问题，我们可以根据这个很好的去报警。对于错误码信息，可能会比较复杂，我们需要判断他在某些情况下的一个阈值，当我们在某种情况下相关错误码超过了该阈值就报警(目前该块的应用还需要多思考)<br>对于elasticsearch查询报警的工具有<code>elastalert</code>,但是我对于该工具不是很感冒，同时我也疲于应对python部署那些复杂的依赖，我正在使用golang开发一款功能更简洁，学习成本更低的工具。如果在内部试用的还行应该会进行开源。</p>
+<h3 id="日志的储存和报警"><a href="#日志的储存和报警" class="headerlink" title="日志的储存和报警"></a>日志的储存和报警</h3><p>记录怎么样的日志已经确定了，我们使用filebeat来讲日志数据传输到elasticsearch中。现在我们elasticsearch中就有错误码和stack的信息了，很明显，stack信息是很明显的错误信息，紫瑶该字段一出现就表示我们的代码又问题，我们可以根据这个很好的去报警。对于错误码信息，可能会比较复杂，我们需要判断他在某些情况下的一个阈值，当我们在某种情况下相关错误码超过了该阈值就报警(目前该块的应用还需要多思考)<br>对于elasticsearch查询报警的工具有<a href="https://github.com/fudali113/esalert" target="_blank" rel="external">elastalert</a>,但是我对于该工具不是很感冒，同时我也疲于应对python部署那些复杂的依赖，我正在使用golang开发一款功能更简洁，学习成本更低的工具。如果在内部试用的还行应该会进行开源。</p>
 <p><code>未完待续</code></p>
 
         </div>
@@ -204,7 +204,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2017-11-02T10:41:39.000Z" itemprop="dateUpdated">2017年11月2日 18:41</time>
+    最后更新时间：<time datetime="2017-11-06T02:39:26.000Z" itemprop="dateUpdated">2017年11月6日 10:39</time>
 </span><br>
 
 
@@ -282,7 +282,14 @@
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/12/28/service-mesh-first/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">初识Service Mesh</h4>
+      </a>
+    </div>
   
 
   

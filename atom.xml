@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://fudali.cc/"/>
-  <updated>2017-11-02T10:41:39.000Z</updated>
+  <updated>2017-12-28T03:20:42.065Z</updated>
   <id>http://fudali.cc/</id>
   
   <author>
@@ -16,11 +16,52 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>初识Service Mesh</title>
+    <link href="http://fudali.cc/2017/12/28/service-mesh-first/"/>
+    <id>http://fudali.cc/2017/12/28/service-mesh-first/</id>
+    <published>2017-12-27T16:00:00.000Z</published>
+    <updated>2017-12-28T03:20:42.065Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><a href="http://www.servicemesh.cn/?/article/21" target="_blank" rel="external">Service Mesh的诞生</a></p>
+<p>软件应用从来都是遵循高内聚低耦合的原则；从互联网刚诞生时的七层网络协议栈的定义，到今天service mesh的诞生；对于微服务，我们更加希望我们的服务实体能够更加的专注于业务逻辑的实现，其他的事我们应该交给更专业的工具去做；</p>
+<h2 id="格局"><a href="#格局" class="headerlink" title="格局"></a>格局</h2><p> <a href="http://www.servicemesh.cn/?/article/25" target="_blank" rel="external">Service Mesh 时代的选边与站队</a></p>
+<p> 目前成熟的已经在生产环境进过验证的有Bouyant(最早提出service mesh概念，由twitter两位工程师创建)公司的<a href="https://github.com/linkerd/linkerd" target="_blank" rel="external">linkerd</a>与lyft的<a href="https://github.com/envoyproxy/envoy" target="_blank" rel="external">envoy</a>,但是目前该两个相对于与kubernets的集成方面需要依赖于 <a href="https://github.com/istio/istio" target="_blank" rel="external">istio</a>(由google，IBM，lyft成立相关研发组研发) 项目(istio由数据平面和控制平面组成，前面提到的两位在istio中都相当于充当着数据平面的位置，由于istio提供灵活的建构，<a href="http://www.servicemesh.cn/?/article/24" target="_blank" rel="external">数据平面与控制平面</a>是通过特定api进行交流的，顾数据平面对istio项目是可以替换的)；由于istio的推出，且Bouyant公司就是为service mesh而生，自己必须要在这个领域占有发言权，顾推出了<a href="https://github.com/runconduit/conduit" target="_blank" rel="external">conduit</a>与istio竞争争取在该领域获取发言权。</p>
+<ul>
+<li>istio 目前0.4版本，还不能在生成环境使用</li>
+<li>conduit 17年12月发布0.1，也还不能在生成环境使用</li>
+</ul>
+<h2 id="对于我们"><a href="#对于我们" class="headerlink" title="对于我们"></a>对于我们</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>由于我们使用了spring cloud技术栈来构建我们的微服务，对于我们的对比其实就是spring cloud 提供的sdk集成方式 与 service mesh 提供的基础设施与具体业务分离的对比。</p>
+<p>对于之前我们的分析，其实可以发现，互联网的发展，最开始的时候都是我们在应用之中做很多的事情让我们的引用支持各种功能来实现我们的业务；最后随着技术的成熟，基础的设施与技术与实际业务独立开来，制定相关的协议和应用相关的工具来实现一样的功能。</p>
+<p>由此我们可以看出，service mesh才应该是微服务的最终形态。</p>
+<h3 id="实施"><a href="#实施" class="headerlink" title="实施"></a>实施</h3><ul>
+<li>因为service mesh的前提是我们最好能够在kubernets里面运行我们的应用，所以需要有kubernets平台</li>
+<li>对于我们应用集成的spring cloud 相关的组件，我们只需要删除相关的依赖，有service mesh去管理我们服务间的调用，我们连我们之前的feign api都是可以复用；所以，我们在平台完整的情况下，迁移的成本非常低</li>
+</ul>
+<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>底层基础设施与业务代码解耦，降低我们开发应用的复杂性，我们可以使用更适合的语言更适合的框架来构建我们应用而不用去管理那一坨复杂的spring cloud依赖</li>
+<li>service mesh还可以给我们带来与应用解耦的流量控制，访问控制，转发策略(结合kunernets在做发布策略的时候应该非常爽)。。。</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;http://www.servicemesh.cn/?/article/21&quot; target=&quot;_blank&quot; rel=&quot;
+    
+    </summary>
+    
+      <category term="微服务 Service Mesh" scheme="http://fudali.cc/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1-Service-Mesh/"/>
+    
+    
+      <category term="Service Mesh" scheme="http://fudali.cc/tags/Service-Mesh/"/>
+    
+  </entry>
+  
+  <entry>
     <title>spring cloud 微服务异常记录与报警</title>
     <link href="http://fudali.cc/2017/11/02/spring-cloud-excepton-deal/"/>
     <id>http://fudali.cc/2017/11/02/spring-cloud-excepton-deal/</id>
     <published>2017-11-01T16:00:00.000Z</published>
-    <updated>2017-11-02T10:41:39.000Z</updated>
+    <updated>2017-11-06T02:39:26.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>当我们的应用在线上正常运转起来了，在正常情况下我们不需要再担心任何的事情，但是bug总是不可避免的会出现；此时我们就需要一种相关的机制能够发现我们系统中的异常并通知到相关人员，不然等到用户进行反馈时才能知道发生了bug是很影响用户体验的也是不可控的，这两者都是不可接受的。</p>
 <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>我所在的团队目前正在使用spring cloud相关套件进行微服务的开发，所以我的介绍与实践也是在该技术栈下进行，同时可能会使用到elasticsearch。<br>我们使用spring mvc来进行业务开发，feign来做restful接口远程调用框架，zuul作为服务网关来对外开放接口。这个技术栈在使用spring cloud进行开发的团队是非常常见的。</p>
@@ -38,7 +79,7 @@
 <li><p>对于第二种情况我们，因为我们有错误码的定义并且在正常情况下我们也会返回错误，但是正常的结果却是没有错误码的，所以我们在<code>zuul</code>实现了一个<code>type为“post”的filter来对返回值进行格式化，同时也对老的平台与新的平台进行输出格式化</code>。在这里面我们判断服务返回的内容是否有异常并进行相关的记录(存入相关信息到<code>RequestContext</code>)，最后在统一日志记录Filter(包含正常filter和zuul 异常filter)进行统一记录相关信息。同时因为我们在zuul也写了一些胶水接口，所以我们在Zuul继承了普通服务的ErroController实现了ZuulErrorController同时也会记录异常信息。</p>
 </li>
 </ul>
-<h3 id="日志的储存和报警"><a href="#日志的储存和报警" class="headerlink" title="日志的储存和报警"></a>日志的储存和报警</h3><p>记录怎么样的日志已经确定了，我们使用filebeat来讲日志数据传输到elasticsearch中。现在我们elasticsearch中就有错误码和stack的信息了，很明显，stack信息是很明显的错误信息，紫瑶该字段一出现就表示我们的代码又问题，我们可以根据这个很好的去报警。对于错误码信息，可能会比较复杂，我们需要判断他在某些情况下的一个阈值，当我们在某种情况下相关错误码超过了该阈值就报警(目前该块的应用还需要多思考)<br>对于elasticsearch查询报警的工具有<code>elastalert</code>,但是我对于该工具不是很感冒，同时我也疲于应对python部署那些复杂的依赖，我正在使用golang开发一款功能更简洁，学习成本更低的工具。如果在内部试用的还行应该会进行开源。</p>
+<h3 id="日志的储存和报警"><a href="#日志的储存和报警" class="headerlink" title="日志的储存和报警"></a>日志的储存和报警</h3><p>记录怎么样的日志已经确定了，我们使用filebeat来讲日志数据传输到elasticsearch中。现在我们elasticsearch中就有错误码和stack的信息了，很明显，stack信息是很明显的错误信息，紫瑶该字段一出现就表示我们的代码又问题，我们可以根据这个很好的去报警。对于错误码信息，可能会比较复杂，我们需要判断他在某些情况下的一个阈值，当我们在某种情况下相关错误码超过了该阈值就报警(目前该块的应用还需要多思考)<br>对于elasticsearch查询报警的工具有<a href="https://github.com/fudali113/esalert" target="_blank" rel="external">elastalert</a>,但是我对于该工具不是很感冒，同时我也疲于应对python部署那些复杂的依赖，我正在使用golang开发一款功能更简洁，学习成本更低的工具。如果在内部试用的还行应该会进行开源。</p>
 <p><code>未完待续</code></p>
 ]]></content>
     
@@ -357,33 +398,6 @@
   </entry>
   
   <entry>
-    <title>linux常用知识</title>
-    <link href="http://fudali.cc/2017/03/20/linux/"/>
-    <id>http://fudali.cc/2017/03/20/linux/</id>
-    <published>2017-03-19T16:00:00.000Z</published>
-    <updated>2017-03-20T09:14:08.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="内核日志"><a href="#内核日志" class="headerlink" title="内核日志"></a>内核日志</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat /var/log/messages</div></pre></td></tr></table></figure>
-<h2 id="linux内存不足时kill进程策略"><a href="#linux内存不足时kill进程策略" class="headerlink" title="linux内存不足时kill进程策略"></a>linux内存不足时kill进程策略</h2><p>OOM_killer是Linux自我保护的方式，在内存不足时将被唤醒，调出<code>/proc/{pid}/oom_score</code>最大者并将之kill掉</p>
-<p>为了保护重要进程不被OOM_killer kill掉，可以配置<code>/proc/{pid}/oom_score_adj</code>,此值为内核在为每个进行打分时的附加值，最后得分等于实际值+该值<br>顾可以使用<code>echo -20 &gt; /proc/{pid}/oom_score_adj</code>为实际值减去20(最后得分越小越不易被杀掉)</p>
-<p>root进程默认获取-30的附加值<br><a href="http://www.vpsee.com/2013/10/how-to-configure-the-linux-oom-killer/" target="_blank" rel="external">详细来源，从源码的角度讲解</a><br><a href="https://github.com/torvalds/linux/blob/master/mm/oom_kill.c#L172-L222" target="_blank" rel="external">计算oom_score的函数linux源码</a></p>
-<p>获取进程oom_score脚本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">for proc in $(find /proc -maxdepth 1 -regex &apos;/proc/[0-9]+&apos;); do</div><div class="line">    printf &quot;%2d %5d %s\n&quot; \</div><div class="line">        &quot;$(cat $proc/oom_score)&quot; \</div><div class="line">        &quot;$(basename $proc)&quot; \</div><div class="line">        &quot;$(cat $proc/cmdline | tr &apos;\0&apos; &apos; &apos; | head -c 50)&quot;</div><div class="line">done 2&gt;/dev/null | sort -nr | head -n 10</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;内核日志&quot;&gt;&lt;a href=&quot;#内核日志&quot; class=&quot;headerlink&quot; title=&quot;内核日志&quot;&gt;&lt;/a&gt;内核日志&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pr
-    
-    </summary>
-    
-      <category term="linux" scheme="http://fudali.cc/categories/linux/"/>
-    
-    
-      <category term="linux" scheme="http://fudali.cc/tags/linux/"/>
-    
-  </entry>
-  
-  <entry>
     <title>排序知识总结</title>
     <link href="http://fudali.cc/2017/03/20/sort/"/>
     <id>http://fudali.cc/2017/03/20/sort/</id>
@@ -421,6 +435,33 @@
   </entry>
   
   <entry>
+    <title>linux常用知识</title>
+    <link href="http://fudali.cc/2017/03/20/linux/"/>
+    <id>http://fudali.cc/2017/03/20/linux/</id>
+    <published>2017-03-19T16:00:00.000Z</published>
+    <updated>2017-03-20T09:14:08.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="内核日志"><a href="#内核日志" class="headerlink" title="内核日志"></a>内核日志</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat /var/log/messages</div></pre></td></tr></table></figure>
+<h2 id="linux内存不足时kill进程策略"><a href="#linux内存不足时kill进程策略" class="headerlink" title="linux内存不足时kill进程策略"></a>linux内存不足时kill进程策略</h2><p>OOM_killer是Linux自我保护的方式，在内存不足时将被唤醒，调出<code>/proc/{pid}/oom_score</code>最大者并将之kill掉</p>
+<p>为了保护重要进程不被OOM_killer kill掉，可以配置<code>/proc/{pid}/oom_score_adj</code>,此值为内核在为每个进行打分时的附加值，最后得分等于实际值+该值<br>顾可以使用<code>echo -20 &gt; /proc/{pid}/oom_score_adj</code>为实际值减去20(最后得分越小越不易被杀掉)</p>
+<p>root进程默认获取-30的附加值<br><a href="http://www.vpsee.com/2013/10/how-to-configure-the-linux-oom-killer/" target="_blank" rel="external">详细来源，从源码的角度讲解</a><br><a href="https://github.com/torvalds/linux/blob/master/mm/oom_kill.c#L172-L222" target="_blank" rel="external">计算oom_score的函数linux源码</a></p>
+<p>获取进程oom_score脚本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">for proc in $(find /proc -maxdepth 1 -regex &apos;/proc/[0-9]+&apos;); do</div><div class="line">    printf &quot;%2d %5d %s\n&quot; \</div><div class="line">        &quot;$(cat $proc/oom_score)&quot; \</div><div class="line">        &quot;$(basename $proc)&quot; \</div><div class="line">        &quot;$(cat $proc/cmdline | tr &apos;\0&apos; &apos; &apos; | head -c 50)&quot;</div><div class="line">done 2&gt;/dev/null | sort -nr | head -n 10</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;内核日志&quot;&gt;&lt;a href=&quot;#内核日志&quot; class=&quot;headerlink&quot; title=&quot;内核日志&quot;&gt;&lt;/a&gt;内核日志&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pr
+    
+    </summary>
+    
+      <category term="linux" scheme="http://fudali.cc/categories/linux/"/>
+    
+    
+      <category term="linux" scheme="http://fudali.cc/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
     <title>排序-快速排序</title>
     <link href="http://fudali.cc/2017/03/18/quick-sort/"/>
     <id>http://fudali.cc/2017/03/18/quick-sort/</id>
@@ -443,6 +484,42 @@
     <summary type="html">
     
       &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;快速排序是实践中一种快速的排序方式；他的平均运行时间是O(NlogN)，最坏运行时间是O(N^2)，但稍加努力可使最坏情形极难出现。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="算法" scheme="http://fudali.cc/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="golang" scheme="http://fudali.cc/tags/golang/"/>
+    
+      <category term="学习" scheme="http://fudali.cc/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="排序" scheme="http://fudali.cc/tags/%E6%8E%92%E5%BA%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>排序-归并排序</title>
+    <link href="http://fudali.cc/2017/03/17/merge-sort/"/>
+    <id>http://fudali.cc/2017/03/17/merge-sort/</id>
+    <published>2017-03-16T16:00:00.000Z</published>
+    <updated>2017-03-20T15:24:38.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>归并排序体现了递归分治的策略<br>思想是将数组拆分为两段，在对两段进行想通操作，直到数组元素为1，在对数组进行排序合并</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="go"><a href="#go" class="headerlink" title="go"></a>go</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">package merge</div><div class="line"></div><div class="line">// MergeSort 归并排序</div><div class="line">func MergeSort(array []int) []int &#123;</div><div class="line">	middle := len(array) / 2</div><div class="line">	if middle &lt; 1 &#123;</div><div class="line">		return array</div><div class="line">	&#125;</div><div class="line">	return merge(MergeSort(array[:middle]), MergeSort(array[middle:]))</div><div class="line">&#125;</div><div class="line"></div><div class="line">// merge 合并两个排好序的数组唯一组合两个元素并排好序的数组</div><div class="line">func merge(a1 []int, a2 []int) []int &#123;</div><div class="line">	a1Index := 0</div><div class="line">	a2Index := 0</div><div class="line">	res := make([]int, 0, len(a1)+len(a2))</div><div class="line">	for &#123;</div><div class="line">		if a1[a1Index] &lt;= a2[a2Index] &#123;</div><div class="line">			res = append(res, a1[a1Index])</div><div class="line">			if a1Index == len(a1)-1 &#123;</div><div class="line">				res = append(res, a2[a2Index:]...)</div><div class="line">				break</div><div class="line">			&#125;</div><div class="line">			a1Index++</div><div class="line">		&#125; else &#123;</div><div class="line">			res = append(res, a2[a2Index])</div><div class="line">			if a2Index == len(a1)-1 &#123;</div><div class="line">				res = append(res, a1[a1Index:]...)</div><div class="line">				break</div><div class="line">			&#125;</div><div class="line">			a2Index++</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	return res</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><a href="https://github.com/fudali113/learn-basic/blob/master/sort/merge/merge.go" target="_blank" rel="external">golang code on github</a></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>虽然归并排序的运行时间是O(NlogN)，但是他合并两个已排序数组到一个附加数组会更占用内存。</p>
+<p>与其他O(NlogN)的流行算法相比，归并排序是比较元素最少的，且运行时间严重依赖于比较元素和在数组(已经临时数组)中移动元素的开销(理论上使用更少内存的算法是可能的，但所得到的算法是复杂的和不实际的)。</p>
+<p>这些开销是于语言相关的(java中泛型数组中的元素是引用类型的，顾移动元素开销不大，所以归并排序是java泛型数组的默认排序方式。</p>
+<p>快速排序作为基础类型的排序方式，java基础类型是值传递的，因为比较与数据移动的开销是类似的，快排使用少得多的数据移动足以补偿那些附加的比较而且还有盈余)。</p>
+<p>在go中也存在相同的问题，所以在不同的输入数据选择不同的排序方式再能得到最好的性能。</p>
+<p>平均运行时间：O(NlogN)<br>最坏运行时间：O(NlogN)<br>是否稳定：稳定</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;归并排序体现了递归分治的策略&lt;br&gt;思想是将数组拆分为两段，在对两段进行想通操作，直到数组元素为1，在对数组进行排序合并&lt;/p&gt;
+&lt;h2 i
     
     </summary>
     
@@ -594,42 +671,6 @@
   </entry>
   
   <entry>
-    <title>排序-归并排序</title>
-    <link href="http://fudali.cc/2017/03/17/merge-sort/"/>
-    <id>http://fudali.cc/2017/03/17/merge-sort/</id>
-    <published>2017-03-16T16:00:00.000Z</published>
-    <updated>2017-03-20T15:24:38.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>归并排序体现了递归分治的策略<br>思想是将数组拆分为两段，在对两段进行想通操作，直到数组元素为1，在对数组进行排序合并</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="go"><a href="#go" class="headerlink" title="go"></a>go</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">package merge</div><div class="line"></div><div class="line">// MergeSort 归并排序</div><div class="line">func MergeSort(array []int) []int &#123;</div><div class="line">	middle := len(array) / 2</div><div class="line">	if middle &lt; 1 &#123;</div><div class="line">		return array</div><div class="line">	&#125;</div><div class="line">	return merge(MergeSort(array[:middle]), MergeSort(array[middle:]))</div><div class="line">&#125;</div><div class="line"></div><div class="line">// merge 合并两个排好序的数组唯一组合两个元素并排好序的数组</div><div class="line">func merge(a1 []int, a2 []int) []int &#123;</div><div class="line">	a1Index := 0</div><div class="line">	a2Index := 0</div><div class="line">	res := make([]int, 0, len(a1)+len(a2))</div><div class="line">	for &#123;</div><div class="line">		if a1[a1Index] &lt;= a2[a2Index] &#123;</div><div class="line">			res = append(res, a1[a1Index])</div><div class="line">			if a1Index == len(a1)-1 &#123;</div><div class="line">				res = append(res, a2[a2Index:]...)</div><div class="line">				break</div><div class="line">			&#125;</div><div class="line">			a1Index++</div><div class="line">		&#125; else &#123;</div><div class="line">			res = append(res, a2[a2Index])</div><div class="line">			if a2Index == len(a1)-1 &#123;</div><div class="line">				res = append(res, a1[a1Index:]...)</div><div class="line">				break</div><div class="line">			&#125;</div><div class="line">			a2Index++</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	return res</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><a href="https://github.com/fudali113/learn-basic/blob/master/sort/merge/merge.go" target="_blank" rel="external">golang code on github</a></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>虽然归并排序的运行时间是O(NlogN)，但是他合并两个已排序数组到一个附加数组会更占用内存。</p>
-<p>与其他O(NlogN)的流行算法相比，归并排序是比较元素最少的，且运行时间严重依赖于比较元素和在数组(已经临时数组)中移动元素的开销(理论上使用更少内存的算法是可能的，但所得到的算法是复杂的和不实际的)。</p>
-<p>这些开销是于语言相关的(java中泛型数组中的元素是引用类型的，顾移动元素开销不大，所以归并排序是java泛型数组的默认排序方式。</p>
-<p>快速排序作为基础类型的排序方式，java基础类型是值传递的，因为比较与数据移动的开销是类似的，快排使用少得多的数据移动足以补偿那些附加的比较而且还有盈余)。</p>
-<p>在go中也存在相同的问题，所以在不同的输入数据选择不同的排序方式再能得到最好的性能。</p>
-<p>平均运行时间：O(NlogN)<br>最坏运行时间：O(NlogN)<br>是否稳定：稳定</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;归并排序体现了递归分治的策略&lt;br&gt;思想是将数组拆分为两段，在对两段进行想通操作，直到数组元素为1，在对数组进行排序合并&lt;/p&gt;
-&lt;h2 i
-    
-    </summary>
-    
-      <category term="算法" scheme="http://fudali.cc/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="golang" scheme="http://fudali.cc/tags/golang/"/>
-    
-      <category term="学习" scheme="http://fudali.cc/tags/%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="排序" scheme="http://fudali.cc/tags/%E6%8E%92%E5%BA%8F/"/>
-    
-  </entry>
-  
-  <entry>
     <title>排序-希尔排序</title>
     <link href="http://fudali.cc/2017/03/15/shell-sort/"/>
     <id>http://fudali.cc/2017/03/15/shell-sort/</id>
@@ -759,58 +800,6 @@
     
     
       <category term="golang" scheme="http://fudali.cc/tags/golang/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>beego upsert 方法原理</title>
-    <link href="http://fudali.cc/2016/12/13/beego-upsert-method/"/>
-    <id>http://fudali.cc/2016/12/13/beego-upsert-method/</id>
-    <published>2016-12-12T16:00:00.000Z</published>
-    <updated>2017-03-18T04:52:13.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
-<li>在beego1.6.1版本orm中并未提供insertOrUpdate，但是自己做项目时遇到了这个需求，顾写了一个自己的实现，暂只支持mysql与postgres。实现原理是数据自带可实现insertorupdate的功能语句。<br>mysql：<strong><code>ON DUPLICATE KEY UPDATE</code></strong><br>postgres : <strong><code>ON CONFLICT DO UPDATE SET</code></strong><br>然后去orm实现中自己拼装sql语句</li>
-</ul>
-<h2 id="code"><a href="#code" class="headerlink" title="code"></a>code</h2><ul>
-<li>好了，亮代码：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div></pre></td><td class="code"><pre><div class="line">func (d *dbBase) InsertOrUpdate(q dbQuerier, mi *modelInfo,ind reflect.Value, tz *time.Location, dn string, args ...string) (int64, error) &#123;</div><div class="line"></div><div class="line">	iouStr := &quot;&quot;</div><div class="line">	mysql := &quot;mysql&quot;</div><div class="line">	postgres := &quot;postgres&quot;</div><div class="line">	argsMap := map[string]string&#123;&#125;</div><div class="line"></div><div class="line">	if dn == mysql &#123;</div><div class="line">		iouStr = &quot;ON DUPLICATE KEY UPDATE&quot;</div><div class="line">	&#125; else if dn == postgres &amp;&amp; len(args) &gt; 0 &#123;</div><div class="line">		args0 = args[0]</div><div class="line">		iouStr = fmt.Sprintf(&quot;ON CONFLICT (%s) DO UPDATE SET&quot;, args0)</div><div class="line">	&#125; else &#123;</div><div class="line">		return 0, fmt.Errorf(&quot;`%s` nonsupport insert or update in beego&quot;, dn)</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	for _, v := range args &#123;</div><div class="line">		kv := strings.Split(v, &quot;=&quot;)</div><div class="line">		if len(kv) == 2 &#123;</div><div class="line">			argsMap[kv[0]] = kv[1]</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	isMulti := false</div><div class="line">	names := make([]string, 0, len(mi.fields.dbcols)-1)</div><div class="line">	Q := d.ins.TableQuote()</div><div class="line">	values, err := d.collectValues(mi, ind, mi.fields.dbcols, true, true, &amp;names, tz)</div><div class="line">	if err != nil &#123;</div><div class="line">		return 0, err</div><div class="line"></div><div class="line">	marks := make([]string, len(names))</div><div class="line">	updateValues := make([]interface&#123;&#125;, 0)</div><div class="line">	updates := make([]string, len(names))</div><div class="line">	var conflitValue interface&#123;&#125;</div><div class="line">	for i, v := range names &#123;</div><div class="line">		marks[i] = &quot;?&quot;</div><div class="line">		valueStr := argsMap[v]</div><div class="line">		if v == args0 &#123;</div><div class="line">			conflitValue = values[i]</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		if valueStr != &quot;&quot; &#123;</div><div class="line">			switch dn &#123;</div><div class="line">			case mysql:</div><div class="line">				updates[i] = v + &quot;=&quot; + valueStr</div><div class="line">				break</div><div class="line">			case postgres:</div><div class="line">				if conflitValue != nil &#123;</div><div class="line">			updates[i] = fmt.Sprintf(&quot;%s=(select %s from %s where %s = ? )&quot;, v, valueStr, mi.table, args[0])</div><div class="line">					updateValues = append(updateValues, conflitValue)</div><div class="line">				&#125; else &#123;</div><div class="line">					return 0, fmt.Errorf(&quot;`%s` must be in front of `%s` in your struct&quot;, args[0], v)</div><div class="line">				&#125;</div><div class="line">				break</div><div class="line">			&#125;</div><div class="line">		&#125; else &#123;</div><div class="line">			updates[i] = v + &quot;=?&quot;</div><div class="line">			updateValues = append(updateValues, values[i])</div><div class="line">		&#125;</div><div class="line"></div><div class="line">	values = append(values, updateValues...)</div><div class="line">	sep := fmt.Sprintf(&quot;%s, %s&quot;, Q, Q)</div><div class="line">	qmarks := strings.Join(marks, &quot;, &quot;)</div><div class="line">	qupdates := strings.Join(updates, &quot;, &quot;)</div><div class="line">	columns := strings.Join(names, sep)</div><div class="line">	multi := len(values) / len(names)</div><div class="line"></div><div class="line">	if isMulti &#123;</div><div class="line">		qmarks = strings.Repeat(qmarks+&quot;), (&quot;, multi-1) + qmarks</div><div class="line">	&#125;</div><div class="line">	query := fmt.Sprintf(&quot;INSERT INTO %s%s%s (%s%s%s) VALUES (%s) %s &quot;+qupdates, Q, mi.table, Q, Q, columns, Q, qmarks, iouStr)</div><div class="line"></div><div class="line">	if isMulti || !d.ins.HasReturningID(mi, &amp;query) &#123;</div><div class="line">		res, err := q.Exec(query, values...)</div><div class="line">		if err == nil &#123;</div><div class="line">			if isMulti &#123;</div><div class="line">				return res.RowsAffected()</div><div class="line">			&#125;</div><div class="line">			return res.LastInsertId()</div><div class="line">		&#125;</div><div class="line">		return 0, err</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	row := q.QueryRow(query, values...)</div><div class="line">	var id int64</div><div class="line">	err = row.Scan(&amp;id)</div><div class="line">	return id, err</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li><p>这就是实现功能的全部逻辑，当然要想在beego orm中使用insertorupdate还有一些其他的工作要做，首先这段代码应该添加在 <strong><code>beego/orm文件夹下的db.go文件中</code></strong></p>
-</li>
-<li><p>然后在 <strong><code>orm.go</code></strong> 文件中添加</p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"> func (o *orm) InsertOrUpdate(md interface&#123;&#125;,colConflitAndArgs ...string) (int64, error) &#123;</div><div class="line"></div><div class="line">	mi, ind := o.getMiInd(md, true)</div><div class="line">	id, err := o.alias.DbBaser.InsertOrUpdate(o.db, mi, ind, o.alias.TZ, o.alias.DriverName, colConflitAndArgs...)</div><div class="line">	if err != nil &#123;</div><div class="line">		return id, err</div><div class="line">		&#125;</div><div class="line">	o.setPk(mi, ind, id)</div><div class="line">	return id, nil</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">再在types.go文件中的type Ormer interface和type dbBaser interface中分别添加</div><div class="line">InsertOrUpdate(md interface&#123;&#125;, colConflitAndArgs ...string) (int64, error) 与</div><div class="line">InsertOrUpdate(dbQuerier, *modelInfo, reflect.Value, *time.Location, string, ...string) (int64, error)</div></pre></td></tr></table></figure>
-<ul>
-<li>好了，现在大功告成了。可以使用InssertOrUpdate功能了<br>列如：</li>
-</ul>
-<h3 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">mysql：</div><div class="line"></div><div class="line">func IOUFinish(all *Finish) int64 &#123;</div><div class="line"></div><div class="line">	db := orm.NewOrm()</div><div class="line">	db.Using(&quot;mysql&quot;)</div><div class="line">	r, e := db.InsertOrUpdate(all, &quot;step=step+1&quot;)</div><div class="line">	if e != nil &#123;</div><div class="line">		fmt.Println(e)</div><div class="line">		return 0</div><div class="line">	&#125;</div><div class="line">	fmt.Println(r)</div><div class="line">	return r</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>这个函数在出入数据时有主键或者唯一键冲突，将执行update操作，其中step列执行+自增操作，其他列按model中的值进行update操作。其中”step=step+1”格式数据可以有多个也可以没有，这种格式只用于自增操作</li>
-</ul>
-<h3 id="postgresql"><a href="#postgresql" class="headerlink" title="postgresql"></a>postgresql</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">postgres：</div><div class="line"></div><div class="line">func IOUFinish(all *Finish) int64 &#123;</div><div class="line"></div><div class="line">	db := orm.NewOrm()</div><div class="line">	db.Using(&quot;postgres&quot;)</div><div class="line">	r, e := db.InsertOrUpdate(all,&quot;confilctColumnName&quot; &quot;step=step+1&quot;)</div><div class="line">	if e != nil &#123;</div><div class="line">		fmt.Println(e)</div><div class="line">		return 0</div><div class="line">	&#125;</div><div class="line">	fmt.Println(r)</div><div class="line">	return r</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>当操作postgres数据库是，必须在model后的第一个参数指定你预期的冲突列的列名(由于实现此功能的sql语句需要且数据库版本必须大于9.5，因为实现的语句由9.5版本推出)，其他与mysql一致。</li>
-</ul>
-<p>提示：在使用自增操作是最好不要自增主键或者唯一键，可能会引起错误。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;在beego1.6.1版本orm中并未提供insertOrUpdate，但是自己做项目时遇到了这个需求，顾写了一个自己的实现，暂
-    
-    </summary>
-    
-      <category term="开源项目" scheme="http://fudali.cc/categories/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/"/>
-    
-    
-      <category term="golang" scheme="http://fudali.cc/tags/golang/"/>
-    
-      <category term="beego" scheme="http://fudali.cc/tags/beego/"/>
     
   </entry>
   
